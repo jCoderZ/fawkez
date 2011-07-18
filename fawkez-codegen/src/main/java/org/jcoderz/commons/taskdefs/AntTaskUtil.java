@@ -192,10 +192,10 @@ public final class AntTaskUtil
          * Windows command line size is limited, so we render up to
          * PACKET_SIZE files at once.
          */
-        List dotPackets = createPackets(dotFiles);
-        for (Iterator packetIter = dotPackets.iterator(); packetIter.hasNext();)
+        List<File[]> dotPackets = createPackets(dotFiles);
+        for (Iterator<File[]> packetIter = dotPackets.iterator(); packetIter.hasNext();)
         {
-            File[] dotPacket = (File[]) packetIter.next();
+            File[] dotPacket = packetIter.next();
             final DotTask dot = new DotTask();
             dot.setProject(task.getProject());
             dot.setTaskName("dot");
@@ -223,10 +223,10 @@ public final class AntTaskUtil
          * Windows command line size is limited, so we render up to
          * PACKET_SIZE files at once.
          */
-        List gnuplotPackets = createPackets(dotFiles);
-        for (Iterator packetIter = gnuplotPackets.iterator(); packetIter.hasNext();)
+        List<File[]> gnuplotPackets = createPackets(dotFiles);
+        for (Iterator<File[]> packetIter = gnuplotPackets.iterator(); packetIter.hasNext();)
         {
-            File[] gnuplotPacket = (File[]) packetIter.next();
+            File[] gnuplotPacket = packetIter.next();
             final GnuplotTask dot = new GnuplotTask();
             dot.setProject(task.getProject());
             dot.setTaskName("gnuplot");
@@ -236,9 +236,9 @@ public final class AntTaskUtil
         }
     }
 
-    private static List createPackets (File[] dotFiles)
+    private static List<File[]> createPackets (File[] dotFiles)
     {
-        List result = new ArrayList();
+        List<File[]> result = new ArrayList<File[]>();
         for (int i = 0; i < (dotFiles.length / PACKET_SIZE) + 1; i++)
         {
             final File[] packet;

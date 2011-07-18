@@ -135,11 +135,11 @@ public final class AppInfoTask
          }
          if (handler.hasWarningMessages())
          {
-            final List messages = handler.getWarningMessages();
-            for (final Iterator iterator = messages.iterator();
+            final List<String> messages = handler.getWarningMessages();
+            for (final Iterator<String> iterator = messages.iterator();
                   iterator.hasNext();)
             {
-               final String msg = (String) iterator.next();
+               final String msg = iterator.next();
                log(msg, Project.MSG_WARN);
             }
          }

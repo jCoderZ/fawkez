@@ -34,7 +34,6 @@ package org.jcoderz.commons.taskdefs;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;

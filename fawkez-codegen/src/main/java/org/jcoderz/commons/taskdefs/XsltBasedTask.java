@@ -445,7 +445,8 @@ public abstract class XsltBasedTask
         }
     }
 
-    private Class loadClass (String classname)
+    @SuppressWarnings("rawtypes")
+	private Class loadClass (String classname)
         throws ClassNotFoundException
     {
         final Class result;

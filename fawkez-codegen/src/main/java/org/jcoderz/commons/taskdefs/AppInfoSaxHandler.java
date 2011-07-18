@@ -84,7 +84,7 @@ class AppInfoSaxHandler
    private int mCurrentGrpId = 0;
    private int mCurrentMsgId = 0;
 
-   private final List mWarningMessages = new ArrayList();
+   private final List<String> mWarningMessages = new ArrayList<String>();
 
    private final StringBuffer mBuffer = new StringBuffer();
    private boolean mCaptureCharacters = false;
@@ -250,7 +250,7 @@ class AppInfoSaxHandler
     * Returns a list&lt;String&gt; of warning messages.
     * @return a list&lt;String&gt; of warning messages.
     */
-   public List getWarningMessages ()
+   public List<String> getWarningMessages ()
    {
       return mWarningMessages;
    }
@@ -362,17 +362,17 @@ class AppInfoSaxHandler
 
       public boolean contains (int id)
       {
-         return mMap.containsKey(new Integer(id));
+         return mMap.containsKey(id);
       }
 
       public NamedMap getApp (int id)
       {
-         return (NamedMap) mMap.get(new Integer(id));
+         return (NamedMap) mMap.get(id);
       }
 
       public void registerApplication (int id, String appName)
       {
-         mMap.put(new Integer(id), new NamedMap(appName));
+         mMap.put(id, new NamedMap(appName));
       }
 
       public void addApplication (int id, String appName)
@@ -390,7 +390,7 @@ class AppInfoSaxHandler
 
       public NamedMap getGrp (int id)
       {
-         return (NamedMap) mMap.get(new Integer(id));
+         return (NamedMap) mMap.get(id);
       }
 
       public void addGroup (int id, String groupName)
@@ -399,12 +399,12 @@ class AppInfoSaxHandler
          if (contains(id))
          {
             final String registeredGrpName
-                  = ((NamedMap) mMap.get(new Integer(id))).getName();
+                  = ((NamedMap) mMap.get(id)).getName();
             throw new AppInfoException("The group " + groupName
                   + " with the id " + id
                   + " is already assigned to " + registeredGrpName + ".");
          }
-         mMap.put(new Integer(id), new NamedMap(groupName));
+         mMap.put(id, new NamedMap(groupName));
       }
 
       public void addMessage (int id, String messageName)
@@ -412,12 +412,12 @@ class AppInfoSaxHandler
       {
          if (contains(id))
          {
-            final String registeredMsgName = (String) mMap.get(new Integer(id));
+            final String registeredMsgName = (String) mMap.get(id);
             throw new AppInfoException("The message " + messageName
                   + " with the id " + id
                   + " is already assigned to " + registeredMsgName + ".");
          }
-         mMap.put(new Integer(id), messageName);
+         mMap.put(id, messageName);
 
       }
 
