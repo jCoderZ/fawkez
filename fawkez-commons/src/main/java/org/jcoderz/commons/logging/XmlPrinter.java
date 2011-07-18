@@ -39,7 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.logging.LogRecord;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -298,7 +297,7 @@ public final class XmlPrinter
          }
          else if (key == LogRecord.class)
          {
-            rc = mJaxbFactory.createLogRecordType();
+            rc = mJaxbFactory.createLogRecord();
          }
          else if (key == FrameType.class)
          {
