@@ -48,8 +48,8 @@ public final class BusinessImpact
    private static int sNextOrdinal = 0;
 
    /** Maps a string representation to an enumerated value. */
-   private static final Map
-      FROM_STRING = new HashMap();
+   private static final Map<String, BusinessImpact>
+      FROM_STRING = new HashMap<String, BusinessImpact>();
 
    /** The BusinessImpact Critical. */
    public static final BusinessImpact CRITICAL
@@ -92,14 +92,14 @@ public final class BusinessImpact
             };
 
    /** Immutable list of the BusinessImpacts. */
-   public static final List VALUES
+   public static final List<BusinessImpact> VALUES
          = Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));
 
    /**
     * Immutable map using the name string as key holding the
     * BusinessImpacts as values.
     */
-   public static final Map VALUE_MAP
+   public static final Map<String, BusinessImpact> VALUE_MAP
          = Collections.unmodifiableMap(FROM_STRING);
 
    /** Assign a ordinal to this business impact */

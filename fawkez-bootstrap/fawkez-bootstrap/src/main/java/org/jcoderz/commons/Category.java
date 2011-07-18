@@ -48,8 +48,8 @@ public final class Category
    private static int sNextOrdinal = 0;
 
    /** Maps a string representation to an enumerated value. */
-   private static final Map
-      FROM_STRING = new HashMap();
+   private static final Map<String, Category>
+      FROM_STRING = new HashMap<String, Category>();
 
    /** The Category Audit. */
    public static final Category AUDIT
@@ -92,14 +92,14 @@ public final class Category
             };
 
    /** Immutable list of the Categorys. */
-   public static final List VALUES
+   public static final List<Category> VALUES
          = Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));
 
    /**
     * Immutable map using the name string as key holding the
     * Categorys as values.
     */
-   public static final Map VALUE_MAP
+   public static final Map<String, Category> VALUE_MAP
          = Collections.unmodifiableMap(FROM_STRING);
 
    /** Assign a ordinal to this category */
