@@ -39,8 +39,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -60,25 +58,6 @@ public final class ThrowableUtil
    private static final int BOOLEAN_GETTER_METHOD_PREFIX_LENGTH
        = BOOLEAN_GETTER_METHOD_PREFIX.length();
    
-   private static final String CLASSNAME = ThrowableUtil.class.getName();
-   private static final Logger logger = Logger.getLogger(CLASSNAME);
-
-   static
-   {
-      try
-      {
-         Throwable.class.getDeclaredMethod("getCause", new Class[0]);
-         Throwable.class.getDeclaredMethod("initCause",
-                  new Class[] {Throwable.class});
-      }
-      catch (Exception ex)
-      {
-         // Warning, cause this should not fail with JDK > 1.4
-         logger.log(Level.WARNING, "Could not initialize, will run without.",
-               ex);
-      }
-   }
-
    private ThrowableUtil ()
    {
       // NO Instances
@@ -167,41 +146,5 @@ public final class ThrowableUtil
            IoUtil.close(sw);
        }
        return sw.toString();
-   }
-
-   static Method findGetCauseMethod (final Method[] methods)
-   {
-      Method theGetCauseMethod = null;
-      for (int i = 0; i < methods.length; i++)
-      {
-         if (methods[i].getDeclaringClass() == Throwable.class)
-         {
-            continue;
-         }
-         final int modifier = methods[i].getModifiers();
-         if (methods[i].getParameterTypes().length == 0
-             && Modifier.isPublic(modifier)
-             && !Modifier.isStatic(modifier)
-             && Throwable.class.isAssignableFrom(methods[i].getReturnType()))
-         {
-             // if the method is called getCause, assume it does 
-             // what it is named FIXES #76
-             if (methods[i].getName().equals("getCause"))
-             {
-                 theGetCauseMethod = methods[i];
-                 break;
-             }
-            if (theGetCauseMethod != null)
-            {
-               // 2nd hit, safety first
-               logger.fine("Found 2 matching methods "  + theGetCauseMethod
-                     + " or " + methods[i] + ".");
-               theGetCauseMethod = null;
-               break;
-            }
-            theGetCauseMethod = methods[i];
-         }
-      }
-      return theGetCauseMethod;
    }
 }
