@@ -32,6 +32,7 @@
  */
 package org.jcoderz.commons.logging;
 
+import java.text.Format;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -129,11 +130,11 @@ public abstract class BasicLogLineFormat
     * @return List filled with formats for each selected field. Might be empty,
     * never null.
     */
-   protected static List getBasicFormatList (
+   protected static List<Format> getBasicFormatList (
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = new ArrayList();
+      final List<Format> formatList = new ArrayList<Format>();
       if (ignoreOptions || options.displayTimestamp())
       {
          // date
