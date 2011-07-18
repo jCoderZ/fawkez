@@ -50,7 +50,6 @@ import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.ValidationEventLocator;
 
 import org.jcoderz.commons.ArgumentMalformedException;
-import org.jcoderz.commons.RteLogMessage;
 import org.xml.sax.InputSource;
 
 
@@ -353,13 +352,13 @@ public final class JaxbUtil
                      = (ArgumentMalformedException) e.getLinkedException();
                sb.append("The Argument ");
                sb.append(getParameter(
-                     ame, RteLogMessage.ArgumentMalformed.PARAM_ARGUMENT_NAME));
+                     ame, "ARGUMENT_NAME"));
                sb.append(" with the value '");
                sb.append(getParameter(ame,
-                     RteLogMessage.ArgumentMalformed.PARAM_ARGUMENT_VALUE));
+            		   "ARGUMENT_VALUE"));
                sb.append("' is malformed. ");
                sb.append(getParameter(
-                     ame, RteLogMessage.ArgumentMalformed.PARAM_HINT));
+                     ame, "HINT"));
             }
             else
             {
