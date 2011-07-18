@@ -34,22 +34,11 @@ package org.jcoderz.commons.taskdefs;
 
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Properties;
 
-import javax.xml.transform.ErrorListener;
-import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
@@ -58,10 +47,7 @@ import org.apache.tools.ant.Task;
 import org.apache.xerces.util.XMLCatalogResolver;
 import org.jcoderz.commons.util.IoUtil;
 import org.jcoderz.commons.util.StringUtil;
-import org.jcoderz.commons.util.XmlUtil;
 import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -72,14 +58,6 @@ import org.xml.sax.SAXException;
 public abstract class XsltBasedTask
     extends Task
 {
-    /** System property for the XML Parser Configuration (Xalan2). */
-    private static final String XML_PARSER_CONFIGURATION_PROPERTY =
-        "org.apache.xerces.xni.parser.XMLParserConfiguration";
-
-    /** Xalan2 XML Parser Configuration w/ XInclude support. */
-    private static final String XML_PARSER_CONFIG_WITH_XINCLUDE =
-        "org.apache.xerces.parsers.XIncludeParserConfiguration";
-
     /** The fawkeZ VERSION file. */
     private static final String FAWKEZ_VERSION_FILE =
         "/org/jcoderz/commons/VERSION";
@@ -225,6 +203,29 @@ public abstract class XsltBasedTask
             }
             log(e.getMessage(), Project.MSG_ERR);
         }
+    }
+
+    /**
+     * Returns the VERSION file properties.
+     *
+     * @return the VERSION file properties.
+     * @throws IOException if the VERSION file cannot be found or read.
+     */
+    private Properties getFawkezVersionProperties ()
+        throws IOException
+    {
+        final Properties props = new Properties();
+        final InputStream in 
+            = XsltBasedTask.class.getResourceAsStream(FAWKEZ_VERSION_FILE);
+        try
+        {
+            props.load(in);
+        }
+        finally
+        {
+            IoUtil.close(in);
+        }
+        return props;
     }
 
     /**
@@ -393,241 +394,18 @@ public abstract class XsltBasedTask
     void transform ()
         throws BuildException
     {
-        StreamResult out = null;
         try
         {
-            final String xmlParserConfig
-                = System.getProperty(XML_PARSER_CONFIGURATION_PROPERTY);
-            if (!XML_PARSER_CONFIG_WITH_XINCLUDE.equals(xmlParserConfig))
-            {
-                System.setProperty(
-                    XML_PARSER_CONFIGURATION_PROPERTY,
-                    XML_PARSER_CONFIG_WITH_XINCLUDE);
-                log("Using XML Parser configuration "
-                    + XML_PARSER_CONFIG_WITH_XINCLUDE, Project.MSG_VERBOSE);
-            }
-            // Xalan2 transformer is required,
-            // that why we explicit use this factory
-            final TransformerFactory factory
-                = (TransformerFactory)
-                    (loadClass(
-                        "org.apache.xalan.processor.TransformerFactoryImpl")
-                            .newInstance());
-
-            factory.setURIResolver(new JarArchiveUriResolver(this));
-            final StreamSource source = getXslFileAsSource();
-            final Transformer transformer
-                = factory.newTransformer(source);
-            setAdditionalTransformerParameters(transformer);
-            transformer.setParameter("outdir", mDestDir != null ? mDestDir
-                .getAbsolutePath() : "");
-            final Source xml = getInAsStreamSource();
-            out = XmlUtil.createStreamResult(mOutFile);
-            transformer.setErrorListener(new MyErrorListener());
-            transformer.transform(xml, out);
-        }
-        catch (Exception e)
-        {
-            throw new BuildException("Error during transformation: " + e, e);
+        	XsltBase.transform(mInFile, mXslFile, mDestDir, mOutFile, mResolveExternalEntities);
         }
         finally
         {
-            if (out != null)
-            {
-                IoUtil.close(out.getOutputStream());
-            }
             if (mClassLoader != null)
             {
                 mClassLoader.resetThreadContextLoader();
                 mClassLoader.cleanup();
                 mClassLoader = null;
             }
-        }
-    }
-
-    @SuppressWarnings("rawtypes")
-	private Class loadClass (String classname)
-        throws ClassNotFoundException
-    {
-        final Class result;
-        if (getClass().getClassLoader() instanceof AntClassLoader)
-        {
-            mClassLoader = (AntClassLoader) getClass().getClassLoader();
-            mClassLoader.setThreadContextLoader();
-            result = Class.forName(classname, true, mClassLoader);
-            log("Loading '" + classname + "' via " + mClassLoader,
-                Project.MSG_VERBOSE);
-        }
-        else // if (mClassPath == null)
-        {
-            result = Class.forName(classname);
-            log("No ant-classloader found to load '" + classname + "',"
-                + "using 'normal' Class.forName(classname).",
-                Project.MSG_VERBOSE);
-        }
-        return result;
-    }
-
-    private StreamSource getXslFileAsSource ()
-    {
-        final StreamSource result;
-        final InputStream xslStream
-            = XsltBasedTask.class.getResourceAsStream(mXslFile);
-        if (xslStream == null)
-        {
-            try
-            {
-                final File file = new File(mXslFile);
-                final InputStream xslFile = new FileInputStream(file);
-                result = new StreamSource(xslFile);
-                result.setSystemId(file.toURI().toASCIIString());
-            }
-            catch (FileNotFoundException e)
-            {
-                throw new BuildException("Cannot locate stylesheet "
-                    + mXslFile, e);
-            }
-        }
-        else
-        {
-            result = new StreamSource(xslStream);
-            final URL url = XsltBasedTask.class.getResource(mXslFile);
-            if (url != null)
-            {
-                try
-                {
-                    result.setSystemId(url.toURI().toASCIIString());
-                }
-                catch (URISyntaxException ex)
-                {
-                    log("Failed to set systemId. Got " + ex,
-                            Project.MSG_VERBOSE);
-                }
-            }
-        }
-        return result;
-    }
-    
-    /**
-     * Instantiates xml resolver for xerces xml parser.
-     * 
-     * If xml-resolver.jar is available on the boot classpath of ant, the 
-     * implementation of an xml catalog resolver will be returned otherwise
-     * the dummy resolver implementation will be provided 
-     * 
-     * @return EntityResolver entity resolver
-     */
-    private EntityResolver getEntityResolver()
-    {
-        EntityResolver resolver = new DummyEntityResolver(this);
-        try 
-        {
-            String [] catalogs = {"src/xml/catalog.xml"};
-            System.getProperties().put("xml.catalog.verbosity", "1000");
-            
-            log("Instantiating xml catalog resolver .", Project.MSG_INFO);
-            // Create catalog resolver and set a catalog list.
-            XMLCatalogResolver xmlResolver = new XMLCatalogResolver();
-            
-            xmlResolver.setPreferPublic(false);
-            xmlResolver.setCatalogList(catalogs);
-            resolver = xmlResolver;
-        }
-        catch (NoClassDefFoundError e)
-        {
-            // The most secure way to check for non-existence of the CatalogReader
-            // class is within ant class loaders is to catch the NoClassDefFoundError.
-            log("Class CatalogReader (xml-resolver.jar) could not be found " +
-            		" within bootstrap classpath. No entity resolver is " + 
-            		" available, setting dummy resolver.", Project.MSG_WARN);
-        }
-        
-        return resolver;
-    }
-
-    /**
-     * @return a resource stream from in file.
-     * @throws FileNotFoundException
-     */
-    Source getInAsStreamSource ()
-    {
-        final Source result;
-        if (!mResolveExternalEntities)
-        {
-            final org.xml.sax.XMLReader reader;
-            try
-            {      
-                EntityResolver resolver = getEntityResolver();
-                
-                // reader = XMLReaderFactory.createXMLReader(
-                // "org.apache.xerces.parsers.SAXParser");
-                reader = org.xml.sax.helpers.XMLReaderFactory.createXMLReader();
-                reader.setEntityResolver(resolver);
-                result = new SAXSource(reader, new InputSource(
-                    new FileInputStream(mInFile)));
-            }
-            catch (SAXException e)
-            {
-                throw new BuildException("Cannot create SAX XML Reader: " + e,
-                    e);
-            }
-            catch (FileNotFoundException e)
-            {
-                throw new BuildException("Ups, cannot open file: " + e, e);
-            }
-        }
-        else
-        {
-            result = new StreamSource(mInFile);
-        }
-        return result;
-    }
-
-    /**
-     * Returns the VERSION file properties.
-     *
-     * @return the VERSION file properties.
-     * @throws IOException if the VERSION file cannot be found or read.
-     */
-    private Properties getFawkezVersionProperties ()
-        throws IOException
-    {
-        final Properties props = new Properties();
-        final InputStream in 
-            = XsltBasedTask.class.getResourceAsStream(FAWKEZ_VERSION_FILE);
-        try
-        {
-            props.load(in);
-        }
-        finally
-        {
-            IoUtil.close(in);
-        }
-        return props;
-    }
-
-    private static class MyErrorListener
-        implements ErrorListener
-    {
-        /** {@inheritDoc} */
-        public void warning (TransformerException arg0)
-            throws TransformerException
-        {
-            throw arg0;
-        }
-
-        /** {@inheritDoc} */
-        public void error (TransformerException arg0)
-            throws TransformerException
-        {
-            throw arg0;
-        }
-
-        /** {@inheritDoc} */
-        public void fatalError (TransformerException arg0)
-            throws TransformerException
-        {
-            throw arg0;
         }
     }
 }

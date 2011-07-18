@@ -34,8 +34,6 @@ package org.jcoderz.commons.taskdefs;
 
 import java.io.StringReader;
 
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Task;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
@@ -48,22 +46,9 @@ import org.xml.sax.InputSource;
 public final class DummyEntityResolver
       implements EntityResolver
 {
-   private final Task mTask;
-
-   DummyEntityResolver (Task task)
-   {
-      mTask = task;
-   }
-
    /** {@inheritDoc} */
    public InputSource resolveEntity (String publicId, String systemId)
    {
-      if (mTask != null)
-      {
-         mTask.log("WARNING: Returning empty input source for entity: "
-               + "w/ public id: " + publicId
-               + ", system id: " + systemId, Project.MSG_VERBOSE);
-      }
       return new InputSource(new StringReader(""));
    }
 }

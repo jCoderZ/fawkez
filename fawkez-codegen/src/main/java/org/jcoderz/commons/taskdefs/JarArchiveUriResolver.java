@@ -38,9 +38,6 @@ import javax.xml.transform.Source;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Task;
-
 /**
  * This class is used to resolve URIs from the Jar Archive.
  *
@@ -49,16 +46,6 @@ import org.apache.tools.ant.Task;
 final class JarArchiveUriResolver
       implements URIResolver
 {
-   private final Task mTask;
-
-   /**
-    * @param task
-    */
-   public JarArchiveUriResolver (Task task)
-   {
-      mTask = task;
-   }
-
    /** {@inheritDoc} */
    public Source resolve (String href, String base)
    {
@@ -73,8 +60,6 @@ final class JarArchiveUriResolver
       {
          result = null;
       }
-      mTask.log("URI resolver href: '" + href + "' -> " + result,
-            Project.MSG_VERBOSE);
       return result;
    }
 
