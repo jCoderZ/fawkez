@@ -46,5 +46,8 @@ public class AssertionFailedException
     {
         super(message);
     }
-
+    public String getParameter (String parameter)
+    {
+    	return "";
+    }
 }

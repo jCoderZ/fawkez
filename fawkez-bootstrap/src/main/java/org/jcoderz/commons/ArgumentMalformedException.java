@@ -69,4 +69,8 @@ public class ArgumentMalformedException
     {
         return new ArrayList<String>();
     }
+    public List<String> getParameterNames ()
+    {
+    	return new ArrayList<String>();
+    }
 }
