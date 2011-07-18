@@ -86,7 +86,7 @@ public class FixLengthFormat
     *
     */
    private static final class Padding
-         implements Comparable, Serializable
+         implements Comparable<Padding>, Serializable
    {
       private static final long serialVersionUID = 3258410642577831730L;
 
@@ -105,9 +105,9 @@ public class FixLengthFormat
       }
 
       /** {@inheritDoc} */
-      public int compareTo (Object o)
+      public int compareTo (Padding o)
       {
-         return mOrdinal - ((Padding) o).mOrdinal;
+         return mOrdinal - o.mOrdinal;
       }
    }
 

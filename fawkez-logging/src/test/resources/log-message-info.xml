@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  **
+  ** This file is maintained by amandel (Andreas Mandel),
+  ** mgriffel (Michael Griffel) and amessner (Albrecht Messner).
+  **
+  ** PLEASE do not modify this file without approval from
+  ** the maintainers!
+  **
+  -->
+<!DOCTYPE messages [
+   <!ELEMENT messages (application+)>
+   <!ELEMENT application (group+)>
+   <!ATTLIST application
+      id CDATA #REQUIRED
+      name CDATA #REQUIRED
+      short-name CDATA #REQUIRED
+      package CDATA #REQUIRED>
+   <!ELEMENT group (message+)>
+   <!ATTLIST group
+      id CDATA #REQUIRED
+      name CDATA #REQUIRED
+      short-name CDATA #REQUIRED
+      package CDATA #REQUIRED>
+   <!ELEMENT message (text, solution?)>
+   <!ATTLIST message
+      id CDATA #REQUIRED
+      name CDATA #REQUIRED
+      level ( OFF 
+            | SEVERE 
+            | WARNING 
+            | INFO 
+            | CONFIG 
+            | FINE 
+            | FINER 
+            | FINEST
+            | ALL ) "OFF"
+       business-impact ( CRITICAL
+            | MAJOR
+            | MIDDLE
+            | MINOR
+            | NONE
+            | UNDEFINED ) "UNDEFINED">
+   <!ELEMENT text (#PCDATA)>
+   <!ELEMENT solution (#PCDATA)>
+]>
+
+<messages>
+   <application 
+      id="1" 
+      name="FawkeZ" 
+      short-name="FWK"
+      package="org.jcoderz.commons">
+   <!-- =============================================
+        Test Messages (don't use them; may be removed in future!)
+        ============================================= -->
+      <group 
+         id="255" 
+         name="Test Messages" 
+         short-name="TST"
+         package="org.jcoderz.commons">
+         <message 
+            id="65536" 
+            name="TEST_MESSAGE">
+            <text>
+               This is a test message and should not be used in a
+               production environment. The parameter foo is set to 
+               ''{FOO}''. Now it''s {NOW,DATE}.
+            </text>
+            <solution>
+               This is the solution of the test message.
+            </solution>
+         </message>
+         <message 
+            id="65535" 
+            name="TEST_MESSAGE">
+            <text>
+               This is an other test message and should not be used 
+			   in a production environment.
+            </text>
+            <solution>
+               This is the solution of the 2nd test message.
+            </solution>
+         </message>
+      </group>   
+   </application>
+</messages>

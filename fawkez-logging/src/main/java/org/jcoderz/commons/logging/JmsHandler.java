@@ -155,9 +155,9 @@ public class JmsHandler
          extends Formatter
    {
       /** A PrintWriter is used by the XmlPrinter. */
-      private final ThreadLocal mPrintWriters = new ThreadLocal();
+      private final ThreadLocal<PrintWriter> mPrintWriters = new ThreadLocal<PrintWriter>();
       /** A CharWriter is used by the PrintWriter. */
-      private final ThreadLocal mCharWriters = new ThreadLocal();
+      private final ThreadLocal<CharArrayWriter> mCharWriters = new ThreadLocal<CharArrayWriter>();
 
       private final XmlPrinter mXmlPrinter;
       private final DisplayOptions mDisplayOptions;
@@ -184,7 +184,7 @@ public class JmsHandler
 
       private PrintWriter getPrintWriter ()
       {
-         PrintWriter rc = (PrintWriter) mPrintWriters.get();
+         PrintWriter rc = mPrintWriters.get();
          if (rc == null)
          {
             final CharArrayWriter cw = getCharWriter();
@@ -196,7 +196,7 @@ public class JmsHandler
 
       private CharArrayWriter getCharWriter ()
       {
-         CharArrayWriter rc = (CharArrayWriter) mCharWriters.get();
+         CharArrayWriter rc = mCharWriters.get();
          if (rc == null)
          {
             rc = new CharArrayWriter();

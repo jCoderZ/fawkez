@@ -1,0 +1,84 @@
+<!-- =============================================
+  Test Service
+  ============================================= -->
+<app:app-info xmlns:app="http://www.jcoderz.org/app-info-v1.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+  <application
+      id="100"
+      name="Testcase"
+      short-name="TCS"
+      package="org.jcoderz.commons.test">
+     <group id="1" name="Test Service" short-name="TSS"
+      package="org.jcoderz.commons.test"
+      base-exception="org.jcoderz.commons.BaseException"
+      base-runtime-exception="org.jcoderz.commons.BaseRuntimeException"
+      service="NONE">
+      <message id="3" name="FUNNY_RUNTIME"
+        level="INFO"
+        business-impact="UNDEFINED"
+        base-exception="org.jcoderz.commons.test.TestServiceRuntimeException">
+        <text>Generic technical issue in the caused by '{CAUSE_TEXT}'.</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="4" name="IMPLIED_PARAMETERS"
+        level="INFO"
+        base-exception="org.jcoderz.commons.test.TestServiceRuntimeException">
+        <text>This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}.</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="5" name="IMPLIED_PARAMETERS_LOG"
+        level="INFO">
+        <text>This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}.</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="6" name="IMPLIED_PARAMETERS2"
+        level="INFO"
+        base-exception="org.jcoderz.commons.test.TestServiceRuntimeException">
+        <text>{TEST} This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}.</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="7" name="IMPLIED_PARAMETERS_LOG2"
+        level="INFO">
+        <text>{TEST} This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}.</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="8" name="IMPLIED_PARAMETERS3"
+        level="INFO"
+        base-exception="org.jcoderz.commons.test.TestServiceRuntimeException">
+        <text>This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}. {TEST}</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+      <message id="9" name="IMPLIED_PARAMETERS_LOG3"
+        level="INFO">
+        <text>This error has the id {:_TRACKING_NUMBER} occured on
+          Thread {:_THREAD_ID} named {:_THREAD_NAME}. Please note that the
+        nested exception was {:_CAUSE}.{TEST}</text>
+        <description>
+          Not real fun!
+        </description>
+      </message>
+    </group>
+  </application>
+</app:app-info>
