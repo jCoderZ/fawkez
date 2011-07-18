@@ -32,6 +32,9 @@
  */
 package org.jcoderz.commons;
 
+import java.util.List;
+import java.util.Set;
+
 public class AssertionFailedException
         extends RuntimeException
 {
@@ -46,8 +49,13 @@ public class AssertionFailedException
     {
         super(message);
     }
-    public String getParameter (String parameter)
+    public List<String> getParameter (String name)
     {
-    	return "";
+       return null;
+    }
+
+    public Set<String> getParameterNames ()
+    {
+       return null;
     }
 }

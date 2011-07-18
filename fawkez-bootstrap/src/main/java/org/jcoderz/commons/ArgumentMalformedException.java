@@ -34,6 +34,7 @@ package org.jcoderz.commons;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Dummy implementation of the ArgumentMalfromedException.
@@ -67,10 +68,11 @@ public class ArgumentMalformedException
 
     public List<String> getParameter (String name)
     {
-        return new ArrayList<String>();
+       return null;
     }
-    public List<String> getParameterNames ()
+
+    public Set<String> getParameterNames ()
     {
-    	return new ArrayList<String>();
+       return null;
     }
 }
