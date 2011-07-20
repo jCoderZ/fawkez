@@ -200,7 +200,7 @@ public class LoggableImpl
    /**
     * list of parameter for this exception The list is not thread save!
     */
-   private final Map mParameters = new HashMap();
+   private final Map<String, List<Serializable>> mParameters = new HashMap<String, List<Serializable>>();
 
    /**
     * Remember the ERROR_RESPONSE_ID. Intention is to log this id with the
@@ -572,21 +572,21 @@ public class LoggableImpl
     */
    public final void addParameter (String name, Serializable value)
    {
-      List values = (List) mParameters.get(name);
+      List<Serializable> values = mParameters.get(name);
       if (values == null)
       {
-         values = new ArrayList();
+         values = new ArrayList<Serializable>();
          mParameters.put(name, values);
       }
       values.add(value);
    }
 
    /** {@inheritDoc} */
-   public List getParameter (String name)
+   public List<Serializable> getParameter (String name)
    {
-      final List values = (List) mParameters.get(name);
+      final List<Serializable> values = (List<Serializable>) mParameters.get(name);
 
-      final List result;
+      final List<Serializable> result;
       if (values != null)
       {
          result = Collections.unmodifiableList(values);
@@ -599,7 +599,7 @@ public class LoggableImpl
    }
 
    /** {@inheritDoc} */
-   public Set getParameterNames ()
+   public Set<String> getParameterNames ()
    {
       return Collections.unmodifiableSet(mParameters.keySet());
    }

@@ -32,11 +32,10 @@
  */
 package org.jcoderz.commons.util;
 
-import javax.xml.bind.JAXBException;
-
 import junit.framework.TestCase;
 
 import org.jcoderz.commons.ArgumentMalformedException;
+import org.jcoderz.commons.Loggable;
 import org.xml.sax.SAXException;
 
 /**
@@ -46,22 +45,6 @@ import org.xml.sax.SAXException;
 public class ThrowableUtilTest
 extends TestCase
 {
-    /** Test the fixChaining method. */
-    public void testFixChaining ()
-    {
-        final RuntimeException in = new RuntimeException("in");
-        final SAXException sax
-        = new org.xml.sax.SAXParseException("SAX", null, in);
-        final JAXBException jaxb = new JAXBException(sax);
-        final RuntimeException out = new RuntimeException("Outer", jaxb);
-
-        assertEquals("1st nesting level unexpected", jaxb, out.getCause());
-        assertEquals("2nd nesting level unexpected (pre chain)",
-                null, jaxb.getCause());
-        assertEquals("3rd nesting level unexpected (pre chain)",
-                null, sax.getCause());
-    }
-
     /** Test {@link ThrowableUtil#collectNestedData(Loggable)}. */
     public void testCollectNestedData ()
     {

@@ -63,7 +63,7 @@ public abstract class LogMessageInfoImpl
    private final Level mLogLevel;
    private final String mMessagePattern;
    private final String mSolution;
-   private final List mParameters;
+   private final List<String> mParameters;
    private final BusinessImpact mBusinessImpact;
    private final Category mCategory;
    private final String mApplicationName;
@@ -163,7 +163,7 @@ public abstract class LogMessageInfoImpl
              while (i.hasNext())
              {
                 final String parameterName = (String) i.next();
-                final List parameterValues = (List) parameters.get(parameterName);
+                final List<?> parameterValues = (List<?>) parameters.get(parameterName);
                 if (parameterValues == null || parameterValues.isEmpty())
                 {
                    parameter.add(null);
@@ -205,7 +205,7 @@ public abstract class LogMessageInfoImpl
    }
 
    /** {@inheritDoc} */
-   public final List getParameterList ()
+   public final List<String> getParameterList ()
    {
       return mParameters;
    }
