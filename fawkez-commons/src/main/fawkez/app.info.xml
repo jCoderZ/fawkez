@@ -295,51 +295,5 @@
    </message>
 </group>
 
-      <!-- =============================================
-        Test Messages (don't use them; may be removed in future!)
-        ============================================= -->
-      <group
-         id="255"
-         name="Test Messages"
-         short-name="TST"
-         package="org.jcoderz.commons"
-         service="NONE">
-         <message
-            id="65536"
-            name="TEST_MESSAGE"
-            level="java.util.logging.Level.INFO">
-            <text>
-               This is a test message and should not be used in a
-               production environment. The parameter foo is set to
-               ''{FOO}''. Now it''s
-               {java.util.Date:NOW,date}. Time
-               {java.util.Date:NOW,time}.
-            </text>
-            <solution>
-               This is the solution of the test message.
-            </solution>
-         </message>
-         <message
-            id="65535"
-            name="TEST_AUDIT_MESSAGE"
-            level="INFO"
-            category="AUDIT">
-            <text>
-               This is a test audit event and should not be used in a
-               production environment.
-            </text>
-         </message>
-         <configEntry furtherChangeRestricted="true">
-            <key>testKey</key>
-            <description>
-               This is a test key.
-            </description>
-            <type>String</type>
-            <serializeMethod></serializeMethod>
-            <deserializeMethod></deserializeMethod>
-            <defaultValue>test value</defaultValue>
-            <roles>FawkezAdmin</roles>
-         </configEntry>
-      </group>
    </application>
 </app:app-info>
