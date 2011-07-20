@@ -40,14 +40,14 @@ import org.jcoderz.commons.TestCase;
 
 /**
  * JUnit test for the Ant task
- * {@link org.jcoderz.commons.taskdefs.SimpleTypeGenerator}.
+ * {@link org.jcoderz.commons.taskdefs.SimpleTypesTask}.
  *
  * @author Michael Griffel
  */
 public class SimpleTypeGeneratorTest
       extends TestCase
 {
-   private SimpleTypeGenerator mGenerator;
+   private SimpleTypesTask mGenerator;
    private File mDestDir;
 
    /** {@inheritDoc} */
@@ -56,9 +56,9 @@ public class SimpleTypeGeneratorTest
    {
       super.setUp();
       mDestDir =  LogMessageGeneratorTest.mkdir("build/test");
-      final File in = new File(getBaseDir(), "test/xml/simple-types.xml");
+      final File in = new File(getBaseDir(), "src/test/resources/simple-types.xml");
       final File out = new File(mDestDir, "simple-types.out");
-      final SimpleTypeGenerator g = new SimpleTypeGenerator();
+      final SimpleTypesTask g = new SimpleTypesTask();
       g.setDestdir(mDestDir);
       g.setFailonerror(false);
       g.setForce(true);

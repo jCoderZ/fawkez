@@ -40,7 +40,7 @@ package org.jcoderz.commons.taskdefs;
  *
  * @author Michael Griffel
  */
-public final class SimpleTypeGenerator
+public final class SimpleTypesTask
       extends XsltBasedTask
 {
    /** The default stylesheet name. */

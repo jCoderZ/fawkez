@@ -1,5 +1,5 @@
 /*
- * $Id: JarArchiveUriResolver.java 1011 2008-06-16 17:57:36Z amandel $
+ * $Id: DummyEntityResolver.java 1011 2008-06-16 17:57:36Z amandel $
  *
  * Copyright 2006, The jCoderZ.org Project. All rights reserved.
  *
@@ -30,37 +30,25 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.jcoderz.commons.taskdefs;
+package org.jcoderz.commons.util;
 
-import java.io.InputStream;
+import java.io.StringReader;
 
-import javax.xml.transform.Source;
-import javax.xml.transform.URIResolver;
-import javax.xml.transform.stream.StreamSource;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 
 /**
- * This class is used to resolve URIs from the Jar Archive.
+ * Dummy Entity Resolver.
+ * This entity resolver construct an empty input source and return that.
  *
  * @author Michael Griffel
  */
-final class JarArchiveUriResolver
-      implements URIResolver
+public final class DummyEntityResolver
+      implements EntityResolver
 {
    /** {@inheritDoc} */
-   public Source resolve (String href, String base)
+   public InputSource resolveEntity (String publicId, String systemId)
    {
-      final InputStream in = JarArchiveUriResolver.class.getResourceAsStream(
-            href);
-      final Source result;
-      if (in != null)
-      {
-         result = new StreamSource(in);
-      }
-      else
-      {
-         result = null;
-      }
-      return result;
+      return new InputSource(new StringReader(""));
    }
-
 }

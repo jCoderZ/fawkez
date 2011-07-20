@@ -1,4 +1,4 @@
-package org.jcoderz.commons.taskdefs;
+package org.jcoderz.commons.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +19,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.xerces.util.XMLCatalogResolver;
+import org.jcoderz.commons.taskdefs.XsltBasedTask;
 import org.jcoderz.commons.util.IoUtil;
 import org.jcoderz.commons.util.XmlUtil;
 import org.xml.sax.EntityResolver;

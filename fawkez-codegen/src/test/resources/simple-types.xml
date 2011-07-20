@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<simpleTypes>
+
+<!-- ===============================================================
+     TYPE-SAFE ENUMERATIONS
+     =============================================================== -->
+   <typeSafeEnumerations>
+      <enumeration
+         classname="Color"
+         package="org.jcoderz.commons">
+         <value>blue</value>
+         <value>red</value>
+         <value>yellow</value>
+      </enumeration>
+   </typeSafeEnumerations>
+
+      <enumeration
+         classname="TestEnum"
+         package="org.jcoderz.commons.types.samples"
+         user-type="string">
+         <value>Clubs</value>
+         <value>Diamonds</value>
+         <value>Hearts</value>
+         <value>Spades</value>
+      </enumeration>
+
+      <enumeration
+         classname="TestEnumAsString"
+         package="org.jcoderz.commons.types.samples"
+         user-type="string">
+         <value>Clubs</value>
+         <value>Diamonds</value>
+         <value>Hearts</value>
+         <value>Spades</value>
+      </enumeration>
+
+      <enumeration
+         classname="TestRoles"
+         package="org.jcoderz.commons.types.samples"
+         user-type="string">
+         <value description="Experts">FOO.R10021</value>
+         <value description="Guests">FOO.R10022</value>
+      </enumeration>
+
+      <enumeration
+         classname="TestEnumAsNumeric"
+         package="org.jcoderz.commons.types.samples"
+         user-type="numeric">
+         <value>Clubs</value>
+         <value>Diamonds</value>
+         <value>Hearts</value>
+         <value>Spades</value>
+      </enumeration>
+
+      <enumeration
+         classname="TestEnumExpliciteValue"
+         package="org.jcoderz.commons.types.samples"
+         user-type="numeric">
+         <value numeric="1">Clubs</value>
+         <value numeric="2">Diamonds</value>
+         <value numeric="4">Hearts</value>
+         <value numeric="8">Spades</value>
+      </enumeration>
+
+     <enumeration
+         classname="TestEnumWiredText"
+         package="org.jcoderz.commons.types.samples"
+         user-type="string">
+         <value>Zues (1)</value>
+         <value symbol="TEST">Strange!</value>
+         <value>5.7.2.6 / 12</value>
+      </enumeration>
+
+<!-- ===============================================================
+     RESTRICTED STRINGS
+     =============================================================== -->
+   <restrictedStrings>
+      <restrictedString
+         classname="FooString"
+         package="org.jcoderz.commons"
+         min-length="1"
+         max-length="10"
+         user-type="true">
+         <constant
+            name="CONSTANT_VALUE"
+            value="foo"
+            comment="Additional Constant defined in the XML document."/>
+      </restrictedString>
+   </restrictedStrings>
+
+<!-- ===============================================================
+     RESTRICTED LONG
+     =============================================================== -->
+   <restrictedLongs>
+      <restrictedLong
+         classname="FooLong"
+         package="org.jcoderz.commons"
+         min-value="1"
+         max-value="10">
+         <constant
+            name="CONSTANT_VALUE"
+            value="5"
+            comment="Additional Constant defined in the XML document."/>
+      </restrictedLong>
+      <restrictedLong
+         classname="SampleLong"
+         package="org.jcoderz.commons.types.samples"
+         min-value="1"
+         max-value="10"
+         user-type="numeric">
+         <constant
+            name="CONSTANT_VALUE"
+            value="5"
+            comment="Additional Constant defined in the XML document."/>
+      </restrictedLong>
+   </restrictedLongs>
+
+<!-- ===============================================================
+     REGEX STRINGS
+     =============================================================== -->
+   <regexStrings>
+      <regexString
+         classname="RegexString"
+         package="org.jcoderz.commons">
+         <regex>foo|bar|buz</regex>
+      </regexString>
+   </regexStrings>
+
+<!-- ===============================================================
+     VALUE OBJECTS
+     =============================================================== -->
+   <valueObjects>
+      <valueObject
+         classname="SampleValueObject"
+         baseclass="SampleValueObjectBase"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false" >
+        <member name="test value"
+          type="long"/>
+      </valueObject>
+      <valueObject
+         classname="SampleValueObjectBase"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false" >
+        <member name="test value base"
+          type="long"/>
+      </valueObject>
+      <valueObject
+         classname="FooValueObject"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false" >
+         <description>The Foo is documented here!</description>
+         <xdoclet>
+           <hibernate.class
+             table="FooTable" dynamic-update="true"/>
+           <hibernate.cache usage="read-only"/>
+         </xdoclet>
+         <member
+            name="Id"
+            type="long">
+           <decription>unique identifier for Foo</decription>
+           <xdoclet>
+             <hibernate.id
+               generator-class="native"
+               unsaved-value="-1"/>
+           </xdoclet>
+         </member>
+         <member
+            name="Creation Date"
+            type="org.jcoderz.commons.types.Date">
+            creation date of Buz
+         </member>
+         <member
+            name="Participants"
+            type="java.util.List"
+            initial-value="new java.util.ArrayList()"
+            final="true">List of all Merchants
+         </member>
+      </valueObject>
+      <valueObject
+         classname="BarValueObject"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false" >
+         <description>The Bar is documented here!</description>
+         <member
+            name="Id"
+            type="long">
+           <decription>unique identifier for Foo</decription>
+         </member>
+         <member
+            name="Creation Date"
+            type="org.jcoderz.commons.types.Date"
+            final="true">
+            creation date of Buz
+         </member>
+      </valueObject>
+      <valueObject
+         classname="CopyValueSampleObject"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false" >
+         <description>Class to test the 'copyValue functionality</description>
+         <member
+            name="modification date"
+            type="java.util.Date"
+            copyValue="clone">
+           <decription>Sample value copied via clone</decription>
+         </member>
+         <member
+            name="sample bar"
+            type="BarValueObject"
+            copyValue="constructor"
+            final="true">
+           <decription>Sample value copied via copy constructor</decription>
+         </member>
+      </valueObject>
+      <!--
+      <valueObject
+         classname="Settlement"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false">
+         <description>The Settlement.</description>
+         <member
+            name="Amount"
+            type="org.jcoderz.commons.types.PrecisionAmount">
+            amount of this settlement
+         </member>
+         <member
+            name="Settlement Date"
+            type="org.jcoderz.commons.types.Date">
+            date of this settlement
+         </member>
+         <member
+            name="Settlement State"
+            type="SettlementState">
+            state of this settlement
+         </member>
+         <member
+            name="Payor"
+            type="org.jcoderz.commons.types.ParticipantId">
+            payor of this settlement
+         </member>
+         <member
+            name="Payee"
+            type="org.jcoderz.commons.types.ParticipantId">
+            payee of this settlement
+         </member>
+      </valueObject> -->
+   </valueObjects>
+
+  <fixPointNumbers>
+    <fixPointNumber
+         classname="SampleFixPoint"
+         package="org.jcoderz.commons.types.samples"
+         min-value="-100.50"
+         fraction-digits="2"
+         total-digits="5"
+         user-type="true">
+         <constant
+            name="ZERO"
+            value="0.00"
+            comment="The ZERO instance."/>
+         <constant
+            name="CONSTANT_VALUE"
+            value="5.12"
+            comment="Additional Constant defined in the XML document."/>
+    </fixPointNumber>
+    <fixPointNumber
+      classname="TestFixPoint"
+      package="org.jcoderz.commons.types.samples"
+      min-value="-9999999.999"
+      max-value="9999999.999"
+      fraction-digits="3"
+      total-digits="10"
+      user-type="true">
+    </fixPointNumber>
+    <fixPointNumber
+      classname="TestFixPointTwo"
+      package="org.jcoderz.commons.types.samples"
+      min-value="-9999999.99999"
+      max-value="9999999.99999"
+      fraction-digits="5"
+      total-digits="12"
+      user-type="true">
+    </fixPointNumber>
+
+  </fixPointNumbers>
+  
+  
+  <!--  Test the implements feature: -->
+  <enumeration
+     classname="TaggedColor"
+     package="org.jcoderz.commons.types"
+     implements="org.jcoderz.commons.types.TestTaggerInterface">
+     <value>blue</value>
+     <value>red</value>
+     <value>yellow</value>
+  </enumeration>
+  <restrictedString
+      classname="TaggedFooString"
+      package="org.jcoderz.commons.types"
+      min-length="1" max-length="10"
+      implements="org.jcoderz.commons.types.TestTaggerInterface">
+  </restrictedString>
+  <valueObject
+     classname="TaggedSampleValueObject"
+     baseclass="org.jcoderz.commons.types.samples.SampleValueObjectBase"
+     package="org.jcoderz.commons.types"
+     serializable="true"
+     final="false" 
+    implements="org.jcoderz.commons.types.TestTaggerInterface">
+    <member name="test value"
+      type="long"/>
+  </valueObject>
+  <valueObject
+     classname="TaggedPlainSampleValueObject"
+     package="org.jcoderz.commons.types"
+     final="final" 
+     implements="org.jcoderz.commons.types.TestTaggerInterface">
+     <member name="test value" type="long"/>
+     <member name="test value boolean" type="boolean"/>
+     <member name="test value boolean object" type="Boolean"/>
+  </valueObject>
+  <valueObject
+     classname="TaggedSerializableSampleValueObject"
+     package="org.jcoderz.commons.types"
+     implements="org.jcoderz.commons.types.TestTaggerInterface">
+     <member name="test value" type="long"/>
+     <member name="test value boolean" type="boolean"/>
+     <member name="test value boolean object" type="Boolean"/>
+  </valueObject>
+  
+</simpleTypes>

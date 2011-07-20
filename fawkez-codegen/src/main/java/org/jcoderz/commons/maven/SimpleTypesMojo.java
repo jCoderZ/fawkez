@@ -7,20 +7,41 @@ import java.io.IOException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
+/**
+ * @goal simpletypes
+ *
+ * @author mrumpf
+ *
+ */
 public class SimpleTypesMojo
     extends AbstractMojo
 {
     /**
      * Location of the file.
-     * @parameter expression="${project.build.directory}"
-     * @required
+     * @parameter expression="${project.build.sourceDirectory}"
      */
-    private File outputDirectory;
+    private File destDirectory;
+
+    /** The XSL stylesheet file. */
+    private String mXslFile = null;
+
+    /** The Input XML document (log message info file) to be used. */
+    private File mInFile = null;
+
+    /** The Output file. */
+    private File mOutFile = null;
+
+    /** force output of target files even if they already exist. */
+    private boolean mForce = false;
+
+    /** terminate ant build on error. */
+    private boolean mFailOnError = false;
+
 
     public void execute()
         throws MojoExecutionException
     {
-        File f = outputDirectory;
+        File f = destDirectory;
 
         if ( !f.exists() )
         {

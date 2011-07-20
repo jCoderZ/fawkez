@@ -47,6 +47,7 @@ import org.apache.tools.ant.Task;
 import org.apache.xerces.util.XMLCatalogResolver;
 import org.jcoderz.commons.util.IoUtil;
 import org.jcoderz.commons.util.StringUtil;
+import org.jcoderz.commons.util.XsltBase;
 import org.xml.sax.EntityResolver;
 
 
