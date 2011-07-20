@@ -60,7 +60,7 @@ public class LogFormatterOutputTest
     */
    public void testLogEvent ()
    {
-      TstLogMessage.TestMessage.log("foo", Date.now().toUtilDate());
+      TssLogMessage.ImpliedParametersLog3.log("foo");
    }
 
    /**
@@ -77,7 +77,7 @@ public class LogFormatterOutputTest
     */
    public void testLogException ()
    {
-      TstLogMessage.TestMessage.log("foo", Date.now().toUtilDate(),
+      TssLogMessage.ImpliedParametersLog3.log("foo",
             new Exception("This is the top level exception"));
    }
 

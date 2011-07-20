@@ -95,7 +95,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>target/generated-fawkez-test</source>
+								<source>${project.build.directory}/generated-fawkez-test</source>
 							</sources>
 						</configuration>
 					</execution>

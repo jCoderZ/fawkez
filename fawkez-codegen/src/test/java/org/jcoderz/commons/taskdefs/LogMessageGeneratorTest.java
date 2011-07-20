@@ -81,7 +81,7 @@ public class LogMessageGeneratorTest
       mGenerator.execute();
 
       final File testFile = new File(mDestDir,
-            "org/jcoderz/commons/TstLogMessage.java");
+            "org/jcoderz/commons/TssLogMessage.java");
       assertTrue("Generated Java File " + testFile + " exists",
             testFile.exists());
    }
