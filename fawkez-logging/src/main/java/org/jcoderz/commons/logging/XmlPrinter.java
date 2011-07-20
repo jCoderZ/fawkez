@@ -43,6 +43,7 @@ import java.util.TimeZone;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.pool.BaseKeyedPoolableObjectFactory;
 import org.apache.commons.pool.impl.StackKeyedObjectPool;
@@ -66,7 +67,7 @@ public final class XmlPrinter
    private static final class LogRecordTypesObjectPool
          extends StackKeyedObjectPool
    {
-      private LogRecordType borrowLogRecordType ()
+      private LogRecordType borrowLogRecord ()
             throws LoggingException
       {
          try
@@ -76,19 +77,6 @@ public final class XmlPrinter
          catch (Exception ex)
          {
             throw new LoggingException("Error borrowing LogRecordType", ex);
-         }
-      }
-
-      private LogRecordType borrowLogRecord ()
-            throws LoggingException
-      {
-         try
-         {
-            return (LogRecordType) borrowObject(LogRecord.class);
-         }
-         catch (Exception ex)
-         {
-            throw new LoggingException("Error borrowing LogRecord", ex);
          }
       }
 
@@ -235,12 +223,12 @@ public final class XmlPrinter
          }
       }
 
-      private Calendar borrowCalendar ()
+      private XMLGregorianCalendar borrowCalendar ()
             throws LoggingException
       {
          try
          {
-            return (Calendar) borrowObject(Calendar.class);
+            return (XMLGregorianCalendar) borrowObject(XMLGregorianCalendar.class);
          }
          catch (Exception ex)
          {
@@ -248,7 +236,7 @@ public final class XmlPrinter
          }
       }
 
-      private void returnCalendar (final Calendar cal)
+      private void returnCalendar (final XMLGregorianCalendar cal)
             throws LoggingException
       {
          try
@@ -295,10 +283,6 @@ public final class XmlPrinter
          {
             rc = mJaxbFactory.createLogRecordType();
          }
-         else if (key == LogRecord.class)
-         {
-            rc = mJaxbFactory.createLogRecord();
-         }
          else if (key == FrameType.class)
          {
             rc = mJaxbFactory.createFrameType();
@@ -342,7 +326,7 @@ public final class XmlPrinter
       public void activateObject (Object key, Object xmlObj)
             throws LoggingException
       {
-         if ((key == LogRecordType.class) || (key == LogRecord.class))
+         if (key == LogRecordType.class)
          {
             final LogRecordType logRecord = (LogRecordType) xmlObj;
 
@@ -395,7 +379,7 @@ public final class XmlPrinter
       public void passivateObject (Object key, Object jaxbObj)
             throws LoggingException
       {
-         if ((key == LogRecordType.class) || (key == LogRecord.class))
+         if (key == LogRecordType.class)
          {
             passivateLogRecord((LogRecordType) jaxbObj);
          }
@@ -533,7 +517,7 @@ public final class XmlPrinter
          logRecord.setSymbol(null);
          logRecord.setTrackingNumber(null);
 
-         final Calendar cal = logRecord.getTimestamp();
+         final XMLGregorianCalendar cal = logRecord.getTimestamp();
          logRecord.setTimestamp(null);
 
          final StacktraceType stack = logRecord.getStacktrace();
@@ -642,16 +626,12 @@ public final class XmlPrinter
          {
             if (! logEntry.isExceptionItem())
             {
-               final LogRecordType currentRecord;
+               LogRecordType currentRecord = null;
 
                if (rootRecord == null)
                {
                   currentRecord = mXmlObjectsPool.borrowLogRecord();
                   rootRecord = currentRecord;
-               }
-               else
-               {
-                  currentRecord = mXmlObjectsPool.borrowLogRecordType();
                }
                fillLogRecord(currentRecord, logEntry);
 
@@ -700,7 +680,9 @@ public final class XmlPrinter
 
       // the timestamp object is set when the log record is borrowed from the
       // pool
-      logRecord.getTimestamp().setTime(entry.getTimestamp().toUtilDate());
+      Calendar c = Calendar.getInstance();
+      c.setTime(entry.getTimestamp().toUtilDate());
+      logRecord.getTimestamp().setTime(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), c.get(Calendar.SECOND));
 
       logRecord.setTrackingNumber(entry.getTrackingNumber());
 
@@ -712,10 +694,8 @@ public final class XmlPrinter
       logRecord.setThreadName(entry.getThreadName());
       logRecord.setMessage(entry.getMessage());
       logRecord.setSolution(entry.getSolution());
-      logRecord.setBusinessImpact(
-            entry.getBusinessImpact().toString());
-      logRecord.setCategory(
-            entry.getCategory().toString());
+      logRecord.setBusinessImpact(BusinessImpactEnumType.valueOf(entry.getBusinessImpact().toString()));
+      logRecord.setCategory(CategoryEnumType.valueOf(entry.getCategory().toString()));
 
       logRecord.setMessage(entry.getMessage());
 
@@ -786,7 +766,7 @@ public final class XmlPrinter
          final StacktraceType stack,
          final LogItem entry)
    {
-      for (final Iterator iter = entry.getStackTraceLines().iterator();
+      for (final Iterator<StackTraceInfo> iter = entry.getStackTraceLines().iterator();
             iter.hasNext(); )
       {
          final StackTraceInfo info = (StackTraceInfo) iter.next();

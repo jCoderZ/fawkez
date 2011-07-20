@@ -48,6 +48,7 @@ import junit.framework.TestCase;
 
 import org.jcoderz.commons.LogEvent;
 import org.jcoderz.commons.Loggable;
+import org.jcoderz.commons.test.TssLogMessage;
 import org.jcoderz.commons.util.Constants;
 
 
@@ -165,7 +166,7 @@ public class FormatTest
     */
    public void testLogMessage ()
    {
-      final Loggable loggable = new LogEvent(TstLogMessage.TEST_MESSAGE);
+      final Loggable loggable = new LogEvent(TssLogMessage.FUNNY_RUNTIME);
       loggable.addParameter("Param1", "foo");
       loggable.addParameter("DateNow", new Date());
       final LogRecord record = new LogRecord(Level.INFO, "LogMessage Test");
