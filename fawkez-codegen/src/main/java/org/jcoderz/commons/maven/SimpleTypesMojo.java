@@ -33,24 +33,21 @@ public class SimpleTypesMojo extends AbstractMojo {
 	/**
 	 * The destination directory.
 	 * 
-	 * @parameter 
-	 *            default-value="${project.build.directory}/generated-fawkez"
+	 * @parameter default-value="${project.build.directory}/generated-fawkez"
 	 */
 	private File destDirectory;
 
 	/**
 	 * The destination directory.
 	 * 
-	 * @parameter 
-	 *            default-value="src/main/fawkez"
+	 * @parameter default-value="src/main/fawkez"
 	 */
 	private File sourceDirectory;
 
 	/**
 	 * The XSL stylesheet file.
 	 * 
-	 * @parameter default-value=
-	 *            "simple-types.xsl"
+	 * @parameter default-value= "generate-simple-types.xsl"
 	 */
 	private String xslFile = null;
 
@@ -72,36 +69,25 @@ public class SimpleTypesMojo extends AbstractMojo {
 	 * Force output of target files even if they already exist.
 	 */
 	private boolean force = false;
-/*
-	public void setIncludes(String[] includes) {
-		mIncludes = includes;
-	}
 
-	public void setExcludes(String[] excludes) {
-		mExcludes = excludes;
-	}
-*/
-	
-	// TODO: http://code.hammerpig.com/search-for-files-in-directory-using-wildcards-in-java.html
+	// TODO:
+	// http://code.hammerpig.com/search-for-files-in-directory-using-wildcards-in-java.html
 	public void execute() throws MojoExecutionException {
-		getLog().info("directory=" + project.getBuild().getDirectory());
-		getLog().info("destDirectory=" + destDirectory);
-		getLog().info("sourceDirectory=" + sourceDirectory);
-
 		List<File> files = findFiles(sourceDirectory, includePattern);
-		for (File file : files)
-		{
-		  XsltBase.transform(file, xslFile, destDirectory, null, false);
+		for (File file : files) {
+			XsltBase.transform(file, xslFile, destDirectory, new File(project
+					.getBuild().getDirectory(), "simple-types.log"), false);
 		}
 	}
+
 	private List<File> findFiles(File dir, String pattern) {
-		  List<File> files = new ArrayList<File>();
-		  for (File file : dir.listFiles()) {
-		    if (file.getName().endsWith((pattern))) {
-		      files.add(file);
-		    }
-		  }
-		  return files;
+		List<File> files = new ArrayList<File>();
+		for (File file : dir.listFiles()) {
+			if (file.getName().endsWith((pattern))) {
+				files.add(file);
+			}
 		}
+		return files;
+	}
 
 }
