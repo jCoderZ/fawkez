@@ -5,6 +5,9 @@
 	<artifactId>fawkez-codegen</artifactId>
 	<packaging>maven-plugin</packaging>
 	<version>1.0-SNAPSHOT</version>
+	<description>This package contains the Maven code generator plugin and the Ant task definitions for the
+	SimpleType- and the AppInfo-Generators.</description>
+	<url>http://www.jcoderz.org/fawkez/</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mavenVersion>2.0</mavenVersion>
@@ -51,6 +54,12 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.jcoderz.fawkez</groupId>
+            <artifactId>fawkez-bootstrap</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
