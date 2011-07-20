@@ -7,37 +7,6 @@
      =============================================================== -->
    <typeSafeEnumerations>
       <enumeration
-         classname="RelationType"
-         package="org.jcoderz.phoenix.dependency">
-         <description>
-           Enumeration that describes the kind of dependency
-           that one type has with an other.
-         </description>
-         <value 
-           description="This class is derived from the other class">Derived</value>
-         <value 
-           description="This class implements from the other interface">Implements</value>
-         <value 
-           description="This class uses the other as generic type.">Generic Type</value>
-         <value
-            description="This class has a static member of the other type.">Static Member</value>
-         <value
-            description="Instances of this class have a outer class relation ship to the other type.">Outer Class</value>
-         <value
-            description="Instances of this class have a member of the other type.">Member</value>
-         <value
-            description="The other class is used as a argument in a static method of this class.">Static Argument</value>
-         <value
-            description="The other class is used as a argument in a method of this class.">Argument</value>
-         <value
-            description="The other class is used as field in a static method of this class.">Static Field</value>
-         <value
-            description="The other class is used as field in a method of this class.">Field</value>
-         <value
-            description="The other class is used in a unused import in this class.">Unused Import</value>
-      </enumeration>
-
-      <enumeration
          classname="BusinessImpact"
          package="org.jcoderz.commons">
          <value>Critical</value>
@@ -60,61 +29,6 @@
       </enumeration>
 
       <enumeration
-         classname="ReportInterval"
-         package="org.jcoderz.phoenix.report">
-         <value
-            description="Single builds">Build</value>
-         <value>Day</value>
-         <value>Week</value>
-         <value>Month</value>
-         <value
-            description="Select old findings, not listed before.">Old</value>
-      </enumeration>
-
-      <enumeration
-         classname="ReportLevel"
-         package="org.jcoderz.phoenix.report">
-         <value>prod</value>
-         <value>misc</value>
-         <value>test</value>
-      </enumeration>
-
-      <enumeration
-         classname="ReportFormat"
-         package="org.jcoderz.phoenix.report">
-         <value>sourceDirectory</value>
-         <value>jcoderz</value>
-         <value>checkstyle</value>
-         <value>jcoverage</value>
-         <value>findbugs</value>
-         <value>pmd</value>
-         <value>cpd</value>
-         <value>cobertura</value>
-         <value>emma</value>
-         <value>generic</value>
-      </enumeration>
-
-      <enumeration
-         classname="OutputFormat"
-         package="org.jcoderz.phoenix.report">
-         <value>xml</value>
-         <value>html</value>
-      </enumeration>
-
-      <!--enumeration  more methods!
-         classname="Severity"
-         package="org.jcoderz.phoenix.report">
-         <value>filtered</value>
-         <value>false-positive</value>
-         <value>ok</value>
-         <value>info</value>
-         <value>coverage</value>
-         <value>cpd</value>
-         <value>warning</value>
-         <value>error</value>
-      </enumeration-->
-
-      <enumeration
          classname="HttpConnectionState"
          package="org.jcoderz.commons.connector.http.transport">
          <value>connection not established</value>
@@ -123,56 +37,6 @@
          <value>connection released</value>
          <value>connection closed</value>
       </enumeration>
-
-      <enumeration
-         classname="JiraState"
-         package="org.jcoderz.commons.types">
-         <value>Submitted</value>
-         <value>InfoRequested</value>
-         <value>Postponed</value>
-         <value>Assigned</value>
-         <value>Rejected</value>
-         <value>Opened</value>
-         <value>Resolved</value>
-         <value>Accepted</value>
-         <value>Closed</value>
-         <state name="start" type="start">
-            <transition target="Submitted" name="Submit"/>
-         </state>
-         <state name="Submitted">
-            <transition target="Postponed" name="Postpone"/>
-            <transition target="Assigned" name="Assign"/>
-            <transition target="Rejected" name="Reject"/>
-         </state>
-         <state name="InfoRequested">
-            <transition target="Closed" name="Close"/>
-            <transition target="Submitted" name="Resubmit"/>
-         </state>
-         <state name="Postponed">
-            <transition target="Assigned" name="Assign"/>
-         </state>
-         <state name="Assigned">
-            <transition target="Opened" name="Open"/>
-         </state>
-         <state name="Rejected">
-            <transition target="Closed" name="Close"/>
-         </state>
-         <state name="Opened">
-            <transition target="InfoRequested" name="Info Request"/>
-            <transition target="Postponed" name="Postpone"/>
-            <transition target="Assigned" name="Re-Assign"/>
-            <transition target="Rejected" name="Reject"/>
-            <transition target="Resolved" name="Resolve"/>
-         </state>
-         <state name="Resolved">
-            <transition target="Accepted" name="Accept"/>
-         </state>
-         <state name="Accepted">
-            <transition target="Closed" name="Close"/>
-         </state>
-         <state name="Closed"/>
-      </enumeration>
-
 
    </typeSafeEnumerations>
 
@@ -192,49 +56,12 @@
          min-length="15"
          max-length="255">
       </restrictedString>
-      <restrictedString
-         classname="Origin"
-         package="org.jcoderz.phoenix.report"
-         min-length="1"
-         max-length="15"
-         regex="[A-Za-z0-9]*">
-         <constant 
-            name="PMD" value="PMD"
-            comment="PMD findings report http://pmd.sf.net/"/>"
-         <constant 
-            name="CPD" value="CPD"
-            comment="Copy &amp; Paste report http://pmd.sf.net/"/>"
-         <constant 
-            name="CHECKSTYLE" value="Checkstyle"
-            comment="Checkstyle findings report http://checkstyle.sf.net/"/>"
-         <constant 
-            name="FINDBUGS" value="Findbugs"
-            comment="Findbugs findings report http://findbugs.sf.net/"/>"
-         <constant 
-            name="COVERAGE" value="Coverage"
-            comment="Emma http://emma.sf.net or Cobertura http://cobertura.sf.net
-                     coverage report."/>"
-         <constant 
-            name="JAVA_DOC" value="JavaDoc"
-            comment="JavaDoc messages http://java.sun.com/j2se/javadoc/."/>"
-         <constant 
-            name="SYSTEM" value="System"
-            comment="jcoderz report merger system errors."/>"
-      </restrictedString>
-
    </restrictedStrings>
 
 <!-- ===============================================================
      RESTRICTED LONGS
      =============================================================== -->
    <restricted-longs>
-       <restrictedLong
-         classname="RestrictedLong"
-         package="org.jcoderz.commons.test"
-         min-value="15"
-         max-value="255">
-         <constants name="SPECIAL" comment="Very Special Value" value="15"/>
-      </restrictedLong>
    </restricted-longs>
    
    
@@ -242,86 +69,5 @@
      VALUE OBJECTS
      =============================================================== -->
    <valueObjects>
-      <valueObject
-         classname="Relation"
-         package="org.jcoderz.phoenix.dependency"
-         serializable="true"
-         final="true" >
-        <member name="type" type="RelationType">
-          <description>
-            The type of this relation.
-          </description>
-        </member>
-        <member name="source line" type="int">
-          <description>
-            The source line creating the relationship.
-          </description>
-        </member>
-        <member name="source symbol" type="String">
-          <description>
-            The symbol that creates the relation ship.
-          </description>
-        </member>
-        <member name="clazz" type="Clazz">
-          <description>
-            The class where this relation points to.
-          </description>
-        </member>
-        <member name="method" type="String">
-          <description>
-            The method where this relation points to. (might be null)
-          </description>
-        </member>
-        <member name="field" type="String">
-          <description>
-            The field where this relation points to. (might be null)
-          </description>
-        </member>
-        <member name="line" type="int">
-          <description>
-            The field where this relation points to. (might be null)
-          </description>
-        </member>
-      </valueObject>
-      <valueObject
-         classname="Clazz"
-         package="org.jcoderz.phoenix.dependency"
-         serializable="true">
-        <member name="qualified name" type="String" final="true">
-          <description>
-            The qualified name of this class.
-          </description>
-        </member>
-        <member name="source file name" 
-            type="String"
-            identity-independent="true">
-          <description>
-            Source file where this class is defined in.
-          </description>
-        </member>
-        <member name="package name" type="String" identity-independent="true">
-          <description>
-            Name of the package where this class belongs to.
-          </description>
-        </member>
-        <member name="relations" type="java.util.Map&lt;String,java.util.Set&lt;Relation&gt;&gt;"
-           initial-value="new java.util.HashMap&lt;String,java.util.Set&lt;Relation&gt;&gt;()"
-           final="true"
-           identity-independent="true">
-          <description>
-            The map of relations of this class key is the relation target.
-          </description>
-        </member>
-        <member name="lowlink" 
-            type="int"
-            identity-independent="true"
-            initial-value="-1">
-        </member>
-        <member name="index" 
-            type="int"
-            identity-independent="true"
-            initial-value="-1">
-        </member>
-      </valueObject>
    </valueObjects>   
 </simpleTypes>

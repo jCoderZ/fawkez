@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  **
+  ** This file is maintained by amandel (Andreas Mandel),
+  ** mgriffel (Michael Griffel) and amessner (Albrecht Messner).
+  **
+  ** PLEASE do not modify this file without approval from
+  ** the maintainers!
+  **
+  -->
+<app:app-info xmlns:app="http://www.jcoderz.org/app-info-v1.0"
+         xmlns:xi="http://www.w3.org/2001/XInclude">
+   <application
+      id="1"
+      name="FawkeZ"
+      short-name="FWK"
+      package="org.jcoderz.commons">
+
+<!-- =============================================
+     Runtime Errors
+     ============================================= -->
+<group
+   id="1"
+   name="Runtime Error"
+   short-name="RTE"
+   package="org.jcoderz.commons"
+   base-exception="org.jcoderz.commons.BaseRuntimeException">
+   <message
+      id="1"
+      name="INTERNAL_ERROR"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.RuntimeErrorException">
+      <text>
+         The system encountered an unexpected condition, or contains
+         a software bug. Details: {TECHNICAL_DESCRIPTION}.
+      </text>
+      <solution>
+         Review the log file to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+
+   <message
+      id="2"
+      name="ARGUMENT_MALFORMED"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.BaseRuntimeException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. Detailed description: {HINT}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+
+   <message
+      id="3"
+      name="ASSERTION_FAILED"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.BaseRuntimeException">
+      <text>
+         Assertion failed. A condition is tested
+         and found to be false. Message: {MESSAGE}.
+      </text>
+      <solution>
+         .
+      </solution>
+   </message>
+
+   <message
+      id="4"
+      name="INCONSISTENT_DATABASE"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.BaseRuntimeException">
+      <text>
+         A value read from the database was invalid.
+         The database value {Serializable:ARGUMENT_VALUE} of column
+         {COLUMN} in table {TABLE} could not be converted into
+         the java type {TYPE}. Possibly the database has been
+         modified manually, or the software that wrote the database
+         contains a bug.
+      </text>
+      <solution>
+         Correct the value in the database if modified manually.
+      </solution>
+   </message>
+
+   <message
+      id="5"
+      name="REMOTE_CALL_FAILURE"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.RuntimeErrorException">
+      <text>
+         The call to a internal remote object failed.
+      </text>
+      <solution>
+         Review the log file to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+
+   <message
+      id="6"
+      name="DATABASE_INTEGRITY_ERROR"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.InconsistentDatabaseException">
+      <text>
+         While accessing table {TABLE}, the following problem was
+         encountered: {PROBLEM}.
+      </text>
+      <solution>
+         Review the log file to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+
+   <message
+      id="7"
+      name="DATABASE_ACCESS_FAILED"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.RuntimeErrorException">
+      <text>
+         The system encountered an exception while accessing a database.
+      </text>
+      <solution>
+         Review the log file to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+   <message
+      id="8"
+      name="ARGUMENT_MAX_LENGTH_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The length of the Value
+         ({Integer:ARGUMENT_LENGTH}) exceeds the allowed maximum length
+         ({Integer:MAX_LENGTH}) for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="9"
+      name="ARGUMENT_MIN_LENGTH_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The length of the Value
+         ({Integer:ARGUMENT_LENGTH}) is below the allowed minimum length
+         ({Integer:MIN_LENGTH}) for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="10"
+      name="ARGUMENT_MAX_VALUE_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The value
+         exceeds the allowed maximum ({Number:MAX_VALUE})
+         for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="11"
+      name="ARGUMENT_MIN_VALUE_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The value
+         is below {Number:MIN_VALUE}, the allowed minimum
+         for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="12"
+      name="ARGUMENT_PATTERN_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The value
+         does not match the restrictive pattern
+         ''{String:PATTERN}'' for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="13"
+      name="ARGUMENT_FRACTION_DIGITS_VIOLATION"
+      level="WARNING"
+      base-exception="org.jcoderz.commons.ArgumentMalformedException">
+      <text>
+         The given argument is at least partly malformed.
+         Argument ''{ARGUMENT_NAME}'' cannot be set to
+         value ''{Serializable:ARGUMENT_VALUE}''. The value
+         has {Number:ARGUMENT_FRACTION_DIGITS} fraction digits and
+         exceeds the allowed maximum {Number:MAX_FRACTION_DIGITS}
+         for {Class:ARGUMENT_CLASS}.
+      </text>
+      <solution>
+         Supply a correct value for the argument.
+      </solution>
+   </message>
+   <message
+      id="14"
+      name="UNEXPECTED_EXCEPTION"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.BaseRuntimeException">
+      <text>
+         An exeption occured that was not expected in the current
+         code.
+      </text>
+      <solution>
+         .
+      </solution>
+   </message>
+   <message
+      id="15"
+      name="EXCEPTION_CREATED"
+      level="FINE">
+      <text>
+        An Exception with symbol {SYMBOL} has been created.
+        Exception Message is: {MESSAGE}
+      </text>
+      <solution>
+        This fact is just written for the records here for the records. There is
+        normally no action needed. This is just for debugging purposes.
+      </solution>
+   </message>
+   <message
+      id="16"
+      name="RUNTIME_EXCEPTION_CREATED"
+      level="FINE">
+      <text>
+        An RuntimeException with symbol {SYMBOL} has been created.
+        Exception Message is: {MESSAGE}
+      </text>
+      <solution>
+        This fact is just written for the records here for the records. There is
+        normally no action needed. This is just for debugging purposes.
+      </solution>
+   </message>
+</group>
+<!-- =============================================
+     Common Messages
+     ============================================= -->
+<group
+   id="2"
+   name="Common Error"
+   short-name="CMN"
+   package="org.jcoderz.commons">
+   <message
+      id="1"
+      name="ENTITY_NOT_FOUND"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.BaseException">
+      <text>
+         A database entry in table {TABLE} was not found.
+         No rows were returned when executing the
+         finder method ''{FINDER}'' with the argument(s)
+         ''{Serializable:ARGUMENTS}'' on entity bean {ENTITY}.
+      </text>
+      <solution>
+         Review the log file to determine if the usage of the
+         Administration Tool led to the error. Create the requested value
+         prior to using the Administration Tool or change the query used for
+         retrieving the value via the Adminstration Tool.
+      </solution>
+   </message>
+</group>
+<!-- =============================================
+     Connector (file/http)
+     ============================================= -->
+<group
+   id="6"
+   name="Connector"
+   short-name="CON"
+   package="org.jcoderz.commons.connector"
+   base-exception="org.jcoderz.commons.BaseException"
+   base-runtime-exception="org.jcoderz.commons.BaseRuntimeException"
+   service="NONE">
+   <message
+      id="1"
+      name="CONNECTION_REQUEST_FAILED"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.connector.ConnectorException"
+      business-impact="UNDEFINED"
+      category="TECHNICAL">
+      <text>
+         Failure whilst sending a request to {org.jcoderz.commons.types.Url:url}.
+      </text>
+      <solution>
+         Review the nested exception(s) to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+   <message
+      id="2"
+      name="CONNECTION_RESPONSE_FAILED"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.connector.ConnectorException"
+      business-impact="UNDEFINED"
+      category="TECHNICAL">
+      <text>
+         Failure whilst receiving a response from {org.jcoderz.commons.types.Url:url}.
+      </text>
+      <solution>
+         Review the nested exception(s) to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+   <message
+      id="3"
+      name="CONNECTION_TIMEOUT_ERROR"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.connector.ConnectorException"
+      business-impact="UNDEFINED"
+      category="TECHNICAL">
+      <text>
+         Connection timeout whilst waiting for response from {org.jcoderz.commons.types.Url:url}.
+         Previous failures are {String:failures}.
+      </text>
+      <solution>
+         Review the nested exception(s) to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+   <message
+      id="4"
+      name="CREATING_CONNECTOR_FAILED"
+      level="SEVERE"
+      base-exception="org.jcoderz.commons.connector.ConnectionRequestFailedException"
+      business-impact="UNDEFINED"
+      category="TECHNICAL">
+      <text>
+         Creating a container managed http connection failed to {org.jcoderz.commons.types.Url:url}.
+      </text>
+      <solution>
+         Review the nested exception(s) to determine the problem that led
+         to the error condition.
+      </solution>
+   </message>
+   <message
+      id="5"
+      name="INITIALIZING_SSL_FAILED"
+      level="SEVERE"
+      category="SECURITY"
+      base-exception="org.jcoderz.commons.BaseRuntimeException">
+      <text>
+         Initializing SSL for outgoing connections failed with reason {String:reason}.
+      </text>
+      <solution>
+         Check the keystore in use. If appropriate set a new ssl keystore for the
+         system via Administration Tool command 'setSslCertificateStore'.
+      </solution>
+   </message>
+
+   <configEntry furtherChangeRestricted="false">
+      <key>sslKeyAlias</key>
+      <description>
+         The name of the key used for SSL connections
+         established by the http connector.
+         This key is stored in the keystore defined by the
+         Signature Service as is located in the table SIG_KEYSTORE.
+      </description>
+      <type>String</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>ssl</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>sslKeyAliasPassword</key>
+      <description>
+         The password of the key used for SSL connections
+         established by the connector.
+         See also configuration entry "sslKeyAlias".
+      </description>
+      <type>String</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>sslssl</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>amountOfTriesForwardingRequest</key>
+      <description>
+         The number of attempts the http connector performs to connect
+         the specified target system.
+         This value is valid for all connector retry settings.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>int</type>
+      <serializeMethod>toString</serializeMethod>
+      <deserializeMethod>valueOf</deserializeMethod>
+      <defaultValue>3</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>connectTimeoutInMilliSeconds</key>
+      <description>
+         The timeout for creating connections to target systems used by
+         the http connector in milliseconds.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+         See also T-NR-P-104.
+         Check also readTimeoutInMilliSeconds if you
+         change this value.
+      </description>
+      <type>int</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>6000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>readTimeoutInMilliSeconds</key>
+      <description>
+         The timeout for reading response messages from target systems used
+         by the http connector in milliseconds.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+         See also T-NR-P-104.
+         Check also connectTimeoutInMilliSeconds if you change this value.
+      </description>
+      <type>int</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>6000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>connectionErrorRetryDelayInMilliSeconds</key>
+      <description>
+         The delay in milliseconds before retry getting managed connection
+        after a ResourceException whilst getConnection.
+      </description>
+      <type>int</type>
+      <serializeMethod>toString</serializeMethod>
+      <deserializeMethod>valueOf</deserializeMethod>
+      <defaultValue>1000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpClientErrorResendDelayInMilliSeconds</key>
+      <description>
+         The delay in milliseconds before resending request
+         after an http client error (4xx).
+         See also httpClientErrorResendFlag and
+         amountOfTriesForwardingRequest.
+         Keep in mind that the requesting (client) system also has a
+         timeout, waiting for the answer. The value for this timeout
+         currently defaults to 6 seconds.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>int</type>
+      <serializeMethod>toString</serializeMethod>
+      <deserializeMethod>valueOf</deserializeMethod>
+      <defaultValue>1000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpServerErrorResendDelayInMilliSeconds</key>
+      <description>
+         The delay in milliseconds before resending request
+         after an http server error (5xx).
+         The delay is to give the target system the chance to recover from
+         an error situation.
+         See also httpServerErrorResendFlag and
+         amountOfTriesForwardingRequest.
+         Keep in mind that the requesting (client) system also has a
+         timeout, waiting for the answer. The value for this timeout
+         currently defaults to 6 seconds.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>int</type>
+      <serializeMethod>toString</serializeMethod>
+      <deserializeMethod>valueOf</deserializeMethod>
+      <defaultValue>1000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpReadTimeoutErrorResendDelayInMilliSeconds</key>
+      <description>
+         The delay in milliseconds before resending request
+         after a timeout reading the response.
+         The delay is to give the target system the chance to recover from
+         an error situation.
+         See also httpReadTimeoutErrorResendFlag and
+         amountOfTriesForwardingRequest.
+         Keep in mind that the requesting (client) system also has a
+         timeout, waiting for the answer. The value for this timeout
+         currently defaults to 6 seconds.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>int</type>
+      <serializeMethod>toString</serializeMethod>
+      <deserializeMethod>valueOf</deserializeMethod>
+      <defaultValue>1000</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpClientErrorResendFlag</key>
+      <description>
+         Flag indicating resend of message after http client error (4xx).
+         See also httpClientErrorResendDelayInMilliSeconds and
+         amountOfTriesForwardingRequest.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>boolean</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>false</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpServerErrorResendFlag</key>
+      <description>
+         Flag indicating resend of message after http server error (5xx).
+         See also httpServerErrorResendDelayInMilliSeconds and
+         amountOfTriesForwardingRequest.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>boolean</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>true</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="false">
+      <key>httpReadTimeoutErrorResendFlag</key>
+      <description>
+         Flag indicating resend of message after timeout reading
+         the response.
+         See also httpReadTimeoutErrorResendDelayInMilliSeconds and
+         amountOfTriesForwardingRequest.
+         If this value is changed it will be taken into account for new
+         connections (not pooled connections).
+      </description>
+      <type>boolean</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>true</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+   <configEntry furtherChangeRestricted="true">
+      <key>fileTempDir</key>
+      <description>
+         The temporary-file directory to be used by the File System Connector.
+      </description>
+      <type>String</type>
+      <serializeMethod></serializeMethod>
+      <deserializeMethod></deserializeMethod>
+      <defaultValue>/tmp</defaultValue>
+      <roles>Admin</roles>
+   </configEntry>
+
+</group>
+
+      <!-- =============================================
+        Test Messages (don't use them; may be removed in future!)
+        ============================================= -->
+      <group
+         id="255"
+         name="Test Messages"
+         short-name="TST"
+         package="org.jcoderz.commons"
+         service="NONE">
+         <message
+            id="65536"
+            name="TEST_MESSAGE"
+            level="java.util.logging.Level.INFO">
+            <text>
+               This is a test message and should not be used in a
+               production environment. The parameter foo is set to
+               ''{FOO}''. Now it''s
+               {java.util.Date:NOW,date}. Time
+               {java.util.Date:NOW,time}.
+            </text>
+            <solution>
+               This is the solution of the test message.
+            </solution>
+         </message>
+         <message
+            id="65535"
+            name="TEST_AUDIT_MESSAGE"
+            level="INFO"
+            category="AUDIT">
+            <text>
+               This is a test audit event and should not be used in a
+               production environment.
+            </text>
+         </message>
+         <configEntry furtherChangeRestricted="true">
+            <key>testKey</key>
+            <description>
+               This is a test key.
+            </description>
+            <type>String</type>
+            <serializeMethod></serializeMethod>
+            <deserializeMethod></deserializeMethod>
+            <defaultValue>test value</defaultValue>
+            <roles>FawkezAdmin</roles>
+         </configEntry>
+      </group>
+   </application>
+</app:app-info>
