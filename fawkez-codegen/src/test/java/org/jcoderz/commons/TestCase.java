@@ -40,11 +40,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.logging.Handler;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import junit.framework.Assert;
 import junit.framework.TestSuite;
-
-import org.jcoderz.commons.util.LoggingUtils;
 
 /**
  * Base class for a JUnit test that provides additional utility methods.
@@ -72,7 +73,20 @@ public abstract class TestCase
    // sets all loggers to Level.ALL
    static
    {
-      LoggingUtils.setGlobalHandlerLogLevel(Level.ALL);
+      final Handler[] handlers = Logger.getLogger("").getHandlers();
+      for (int index = 0; index < handlers.length; index++)
+      {
+          try
+          {
+              handlers[index].setLevel(Level.ALL);
+          }
+          catch (Exception e) // Might be a security exception...
+          {
+              System.err.println(
+                  "Failed to change loglevel for Handler '"
+                      + handlers[index] + "'.");
+          }
+      }
    }
 
    /**

@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
 
 import javax.xml.transform.Transformer;
 
@@ -45,8 +46,6 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.xerces.util.XMLCatalogResolver;
-import org.jcoderz.commons.util.IoUtil;
-import org.jcoderz.commons.util.StringUtil;
 import org.jcoderz.commons.util.XsltBase;
 import org.xml.sax.EntityResolver;
 
@@ -224,7 +223,18 @@ public abstract class XsltBasedTask
         }
         finally
         {
-            IoUtil.close(in);
+            if (in != null)
+            {
+               try
+               {
+                  in.close();
+               }
+               catch (IOException x)
+               {
+            	   log("Error while closing " + InputStream.class.getName() + ": "
+            	            + in.getClass().getName() + ".close(): " + x, Project.MSG_ERR);
+               }
+            }
         }
         return props;
     }
@@ -267,7 +277,7 @@ public abstract class XsltBasedTask
     {
         final String xercesVersion = org.apache.xerces.impl.Version
             .getVersion();
-        if (StringUtil.contains(xercesVersion, ("2.6.2")))
+        if (xercesVersion != null && xercesVersion.indexOf("2.6.2") >= 0)
         {
             task.log("Found " + xercesVersion + " on classpath.",
                 Project.MSG_WARN);

@@ -3,9 +3,13 @@ package org.jcoderz.commons.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.transform.ErrorListener;
@@ -20,8 +24,6 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.tools.ant.BuildException;
 import org.apache.xerces.util.XMLCatalogResolver;
 import org.jcoderz.commons.taskdefs.XsltBasedTask;
-import org.jcoderz.commons.util.IoUtil;
-import org.jcoderz.commons.util.XmlUtil;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -55,14 +57,25 @@ public class XsltBase {
 			transformer.setParameter("outdir",
 					destDir != null ? destDir.getAbsolutePath() : "");
 			final Source xml = getInAsStreamSource("src/xml/catalog.xml", inFile, resolveExternalEntities);
-			out = XmlUtil.createStreamResult(outFile);
+
+			out = new StreamResult(outFile);
+	        // set the stream directly to avoid issues with blanks in the filename.
+	        out.setOutputStream(new FileOutputStream(outFile));
 			transformer.setErrorListener(new MyErrorListener());
 			transformer.transform(xml, out);
 		} catch (Exception e) {
 			throw new BuildException("Error during transformation: " + e, e);
 		} finally {
 			if (out != null) {
-				IoUtil.close(out.getOutputStream());
+			         try
+			         {
+			            out.getOutputStream().close();
+			         }
+			         catch (IOException x)
+			         {
+//			             logger.log(Level.FINE, "Error while closing " + OutputStream.class.getName() + ": "
+//			                     + out.getOutputStream().getClass().getName() + ".close()", x);
+			         }
 			}
 		}
 
