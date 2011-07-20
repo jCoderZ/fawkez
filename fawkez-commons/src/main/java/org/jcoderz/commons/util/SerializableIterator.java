@@ -51,18 +51,18 @@ import java.util.NoSuchElementException;
  *
  * @author Albrecht Messner
  */
-public final class SerializableIterator
-      implements Iterator, Serializable
+public final class SerializableIterator<T>
+      implements Iterator<T>, Serializable
 {
    static final long serialVersionUID = 1L;
 
-   private final List mItems;
+   private final List<T> mItems;
    private int mNextIndex = 0;
 
 
-   private SerializableIterator (Collection c)
+   private SerializableIterator (Collection<T> c)
    {
-      mItems = new ArrayList();
+      mItems = new ArrayList<T>();
       mItems.addAll(c);
    }
 
@@ -74,7 +74,7 @@ public final class SerializableIterator
     *       created. All elements in the collection must be serializable.
     * @return a serializable iterator over the given collection
     */
-   public static SerializableIterator fromCollection (Collection collection)
+   public static SerializableIterator<?> fromCollection (Collection<?> collection)
    {
       Assert.notNull(collection, "collection");
       return new SerializableIterator(collection);
@@ -113,7 +113,7 @@ public final class SerializableIterator
    }
 
    /** {@inheritDoc} */
-   public Object next ()
+   public T next ()
    {
       if (mNextIndex >= mItems.size())
       {

@@ -256,7 +256,7 @@ public final class DbUtil
    {
       try
       {
-         final Class driverClass
+         final Class<?> driverClass
                = Class.forName(ORACLE_DRIVER_CLASSNAME);
          final Driver driverObject = (Driver) driverClass.newInstance();
          DriverManager.registerDriver(driverObject);

@@ -55,11 +55,11 @@ import org.jcoderz.commons.util.HashCodeUtil;
  * @author Andreas Mandel
  */
 public final class Date
-      implements Comparable, Serializable
+      implements Comparable<Date>, Serializable
 {
    /** Date Formater to use for DATE_TIME_FORMAT_WITH_MILLIS format. */
-   public static final ThreadLocal DATE_TIME_FORMAT_WITH_MILLIS_FORMATER
-         = new ThreadLocal()
+   public static final ThreadLocal<?> DATE_TIME_FORMAT_WITH_MILLIS_FORMATER
+         = new ThreadLocal<Object>()
          {
             /**
              * Thread local date formater.
@@ -77,8 +77,8 @@ public final class Date
          };
 
    /** Date Formater to use for DATE_TIME_FORMAT format. */
-   public static final ThreadLocal DATE_TIME_FORMAT_FORMATER
-         = new ThreadLocal()
+   public static final ThreadLocal<?> DATE_TIME_FORMAT_FORMATER
+         = new ThreadLocal<Object>()
          {
             /**
              * Thread local date formater.
@@ -526,10 +526,9 @@ public final class Date
      * @exception NullPointerException if the argument is <code>null</code>.
      * @see     java.lang.Comparable
      */
-   public int compareTo (Object o)
+   public int compareTo (Date other)
          throws NullPointerException, ClassCastException
    {
-      final Date other = ((Date) o);
       int result = 0;
 
       if (before(other))

@@ -135,8 +135,8 @@ public final class JmsUtil
       }
    }
 
-   private static void logCloseFailedWarningMessage (Class resource,
-         Class clazz, JMSException x)
+   private static void logCloseFailedWarningMessage (Class<?> resource,
+         Class<?> clazz, JMSException x)
    {
       logger.log(Level.FINE, "Error while closing " + resource.getName() + ": "
             + clazz.getName() + ".close()", x);

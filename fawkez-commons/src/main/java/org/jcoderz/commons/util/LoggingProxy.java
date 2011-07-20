@@ -86,6 +86,7 @@ public final class LoggingProxy
     * @return a logging proxy for the obj, if the log level for that
     *       object is FINER or finest, the object itself otherwise
     */
+   @SuppressWarnings("rawtypes")
    public static Object getProxy (Object obj)
    {
       final String classname = obj.getClass().getName();
@@ -97,8 +98,8 @@ public final class LoggingProxy
          // collect all interfaces implemented by this objects class and
          // its super classes
          //  Note: Ne do not add super-interfaces here....
-         final Set interfaces = new HashSet();
-         Class currentClass = obj.getClass();
+         final Set<Class> interfaces = new HashSet<Class>();
+         Class<?> currentClass = obj.getClass();
          while (currentClass != null)
          {
             interfaces.addAll(Arrays.asList(currentClass.getInterfaces()));

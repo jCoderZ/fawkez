@@ -445,7 +445,7 @@ public final class IoUtil
 
 
    private static void logCloseFailedWarningMessage (
-         Class resource, Class clazz, IOException x)
+         Class<?> resource, Class<?> clazz, IOException x)
    {
       logger.log(Level.FINE, "Error while closing " + resource.getName() + ": "
             + clazz.getName() + ".close()", x);

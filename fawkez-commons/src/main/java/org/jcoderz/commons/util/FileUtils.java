@@ -286,9 +286,9 @@ public final class FileUtils
     * @return a list of files matching the given <code>pattern</code>
     *         under <code>path</code>.
     */
-   public static List findFile (File path, String pattern)
+   public static List<File> findFile (File path, String pattern)
    {
-      final List ret = new ArrayList();
+      final List<File> ret = new ArrayList<File>();
 
       // Check whether the path exists
       if (!path.exists())
@@ -303,7 +303,7 @@ public final class FileUtils
       return ret;
    }
 
-   private static void findFile (File file, String pattern, List found)
+   private static void findFile (File file, String pattern, List<File> found)
    {
       if (file.isDirectory())
       {

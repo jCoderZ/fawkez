@@ -63,6 +63,7 @@ public class DbUtilTest
     * closed correctly.
     * @throws Exception if the testcase fails
     */
+   @SuppressWarnings("rawtypes")
    public void testCloseObject ()
          throws Exception
    {
@@ -314,7 +315,8 @@ public class DbUtilTest
       /**
        *
        */
-      public void resetExecuteBatchCalled ()
+      @SuppressWarnings("unused")
+	  public void resetExecuteBatchCalled ()
       {
          mExecuteBatchCalled = false;
       }
@@ -330,7 +332,8 @@ public class DbUtilTest
       /**
        * @return Returns the clearBatchCalled.
        */
-      public boolean isClearBatchCalled ()
+      @SuppressWarnings("unused")
+	  public boolean isClearBatchCalled ()
       {
          return mClearBatchCalled;
       }
@@ -338,7 +341,8 @@ public class DbUtilTest
       /**
        *
        */
-      public void resetClearBatchCalled ()
+      @SuppressWarnings("unused")
+	  public void resetClearBatchCalled ()
       {
          mClearBatchCalled = false;
       }

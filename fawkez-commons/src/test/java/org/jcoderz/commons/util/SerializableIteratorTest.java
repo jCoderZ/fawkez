@@ -40,7 +40,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -82,7 +81,7 @@ public class SerializableIteratorTest
       final String[] testData = new String[] {"a", "b", "c"};
       final SerializableIterator si = SerializableIterator.fromArray(testData);
 
-      final List testDataAsList = new ArrayList(Arrays.asList(testData));
+      final List<String> testDataAsList = new ArrayList<String>(Arrays.asList(testData));
 
       for (int i = 0; i < testData.length; i++)
       {
@@ -105,13 +104,13 @@ public class SerializableIteratorTest
 
    public void testWithCollection ()
    {
-      final Set hs = new HashSet();
+      final Set<String> hs = new HashSet<String>();
       hs.add("gandalf");
       hs.add("frodo");
       hs.add("bilbo");
       hs.add("aragorn");
 
-      final Iterator it = SerializableIterator.fromCollection(hs);
+      final SerializableIterator it = SerializableIterator.fromCollection(hs);
       while (it.hasNext())
       {
          final String s = (String) it.next();

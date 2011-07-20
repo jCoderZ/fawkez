@@ -79,8 +79,8 @@ public final class JarUtils
         throws IOException
     {
         final JarFile archiveFile = new JarFile(archive);
-        final List archiveEntries = Collections.list(archiveFile.entries());
-        for (final Iterator iterator = archiveEntries.iterator(); iterator
+        final List<JarEntry> archiveEntries = Collections.list(archiveFile.entries());
+        for (final Iterator<JarEntry> iterator = archiveEntries.iterator(); iterator
             .hasNext();)
         {
             InputStream in = null;

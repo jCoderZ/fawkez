@@ -40,11 +40,11 @@ import java.util.NoSuchElementException;
  *
  * @author Andreas Mandel
  */
-public final class EmptyIterator
-      implements Iterator
+public final class EmptyIterator<T>
+      implements Iterator<T>
 {
    /** The constant no state EmptyIterator. */
-   public static final Iterator EMPTY_ITERATOR = new EmptyIterator();
+   public static final Iterator<Object> EMPTY_ITERATOR = new EmptyIterator<Object>();
 
    /**
     * No instances use the EMPTY_ITERATOR constant.
@@ -77,7 +77,7 @@ public final class EmptyIterator
     * {@inheritDoc}
     * @throws NoSuchElementException always.
     */
-   public Object next ()
+   public T next ()
        throws NoSuchElementException
    {
       throw new NoSuchElementException();
