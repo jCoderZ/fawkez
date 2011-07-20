@@ -53,6 +53,7 @@ public class XsltBase {
 			final Transformer transformer = factory.newTransformer(source);
 			transformer.setParameter("outdir",
 					destDir != null ? destDir.getAbsolutePath() : "");
+			// TODO: use another mechanism to resolve entities
 			final Source xml = getInAsStreamSource("src/xml/catalog.xml", inFile, resolveExternalEntities);
 
 			out = new StreamResult(outFile);

@@ -20,8 +20,8 @@
 <xsl:output method="text"
             encoding="UTF-8"/>
 
-<xsl:param name="application-short-name" select="."/>
-<xsl:param name="application-name" select="."/>
+<xsl:param name="application-short-name" select="//application/@short-name"/>
+<xsl:param name="application-name" select="//application/@name"/>
 <xsl:param name="outdir" select="'.'"/>
 <!--
    If set log messages are generated that allow the usage of a custom logger
