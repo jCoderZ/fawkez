@@ -44,7 +44,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import junit.framework.Assert;
 import junit.framework.TestSuite;
 
 /**
@@ -164,7 +163,7 @@ public abstract class TestCase
      * @throws RuntimeException if testClass is written incorrectly and does
      * not have the approriate constructor.
      **/
-   public static TestSuite getSuite (Class testClass)
+   public static TestSuite getSuite (Class<?> testClass)
          throws RuntimeException, IllegalArgumentException
    {
       if (!TestCase.class.isAssignableFrom(testClass))
@@ -175,10 +174,10 @@ public abstract class TestCase
       final TestSuite suite = new TestSuite();
       try
       {
-         final Constructor constructor
+         final Constructor<?> constructor
                = testClass.getConstructor(new Class[] {});
-         final List testCaseNames = getTestCaseNames();
-         for (final Iterator testCases = testCaseNames.iterator();
+         final List<String> testCaseNames = getTestCaseNames();
+         for (final Iterator<String> testCases = testCaseNames.iterator();
                   testCases.hasNext();)
          {
             final String testCaseName = (String) testCases.next();
@@ -205,7 +204,7 @@ public abstract class TestCase
     * @throws NullPointerException if the TEST_CASES property
     * isn't set
     **/
-   private static List getTestCaseNames ()
+   private static List<String> getTestCaseNames ()
          throws NullPointerException
    {
       if (System.getProperty(TEST_METHODS) == null)
@@ -213,7 +212,7 @@ public abstract class TestCase
          throw new NullPointerException(
                "Property <" + TEST_METHODS + "> is not set");
       }
-      final List testCaseNames = new ArrayList();
+      final List<String> testCaseNames = new ArrayList<String>();
       final String testCases = System.getProperty(TEST_METHODS);
       final StringTokenizer tokenizer
             = new StringTokenizer(testCases, DELIMITER);

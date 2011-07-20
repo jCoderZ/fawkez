@@ -37,7 +37,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Level;
 
 import javax.xml.transform.Transformer;
 
@@ -45,9 +44,7 @@ import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
-import org.apache.xerces.util.XMLCatalogResolver;
 import org.jcoderz.commons.util.XsltBase;
-import org.xml.sax.EntityResolver;
 
 
 /**

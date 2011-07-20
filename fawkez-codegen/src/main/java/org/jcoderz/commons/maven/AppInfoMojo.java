@@ -43,26 +43,32 @@ public class AppInfoMojo extends AbstractMojo {
 	 */
 	private String includePattern;
 
+	/**
+	 * The source folder with the simple type XML definitions.
+	 * 
+	 * @parameter
+	 */
+	private File sourceDirectory;
+
+	/**
+	 * The destination folder where the generated code will be written to.
+	 * 
+	 * @parameter
+	 */
+	private File destinationDirectory;
+
 	// TODO:
 	// http://code.hammerpig.com/search-for-files-in-directory-using-wildcards-in-java.html
 	public void execute() throws MojoExecutionException {
-		processFolder("main");
-		processFolder("test");
-	}
-
-	private void processFolder (String category)
-	{
-		File sourceDirectory = new File(project.getBasedir(), "src" + File.separator + category + File.separator + "fawkez");
-		File destDirectory = new File(project.getBuild().getDirectory(), "generated-fawkez-" + category);
-		if (!destDirectory.exists())
+		if (!destinationDirectory.exists())
 		{
-			destDirectory.mkdirs();
+			destinationDirectory.mkdirs();
 		}
 		List<File> files = findFiles(sourceDirectory, includePattern);
 		for (File file : files) {
-			String log = file.getName() + "-" + category + ".log";
-			getLog().info("" + file.getName() + " -> " + destDirectory.getName());
-			XsltBase.transform(file, xslFile, destDirectory, new File(project
+			String log = file.getName() + ".log";
+			getLog().info("" + file.getName() + " -> " + destinationDirectory.getName());
+			XsltBase.transform(file, xslFile, destinationDirectory, new File(project
 					.getBuild().getDirectory(), log), false);
 		}
 	}
