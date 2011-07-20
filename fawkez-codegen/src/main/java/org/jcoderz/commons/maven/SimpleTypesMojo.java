@@ -1,79 +1,107 @@
 package org.jcoderz.commons.maven;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
+import org.jcoderz.commons.util.XsltBase;
 
 /**
+ * The simple type task generates Java classes from an XML file.
+ * 
  * @goal simpletypes
- *
+ * @phase generate-sources
+ * @requiresDependencyResolution compile
+ * 
  * @author mrumpf
- *
+ * 
  */
-public class SimpleTypesMojo
-    extends AbstractMojo
-{
-    /**
-     * Location of the file.
-     * @parameter expression="${project.build.sourceDirectory}"
-     */
-    private File destDirectory;
+public class SimpleTypesMojo extends AbstractMojo {
+	/**
+	 * <i>Maven Internal</i>: Project to interact with.
+	 * 
+	 * @parameter default-value="${project}"
+	 * @required
+	 * @readonly
+	 */
+	private MavenProject project;
 
-    /** The XSL stylesheet file. */
-    private String mXslFile = null;
+	/**
+	 * The destination directory.
+	 * 
+	 * @parameter 
+	 *            default-value="${project.build.directory}/generated-fawkez"
+	 */
+	private File destDirectory;
 
-    /** The Input XML document (log message info file) to be used. */
-    private File mInFile = null;
+	/**
+	 * The destination directory.
+	 * 
+	 * @parameter 
+	 *            default-value="src/main/fawkez"
+	 */
+	private File sourceDirectory;
 
-    /** The Output file. */
-    private File mOutFile = null;
+	/**
+	 * The XSL stylesheet file.
+	 * 
+	 * @parameter default-value=
+	 *            "simple-types.xsl"
+	 */
+	private String xslFile = null;
 
-    /** force output of target files even if they already exist. */
-    private boolean mForce = false;
+	/**
+	 * An include pattern for the simple type definition files.
+	 * 
+	 * @parameter default-value=".type.xml"
+	 */
+	private String includePattern;
 
-    /** terminate ant build on error. */
-    private boolean mFailOnError = false;
+	/**
+	 * A set of file patterns to exclude from the zip.
+	 * 
+	 * @parameter default-value=""
+	 */
+	private String excludePattern;
 
+	/**
+	 * Force output of target files even if they already exist.
+	 */
+	private boolean force = false;
+/*
+	public void setIncludes(String[] includes) {
+		mIncludes = includes;
+	}
 
-    public void execute()
-        throws MojoExecutionException
-    {
-        File f = destDirectory;
+	public void setExcludes(String[] excludes) {
+		mExcludes = excludes;
+	}
+*/
+	
+	// TODO: http://code.hammerpig.com/search-for-files-in-directory-using-wildcards-in-java.html
+	public void execute() throws MojoExecutionException {
+		getLog().info("directory=" + project.getBuild().getDirectory());
+		getLog().info("destDirectory=" + destDirectory);
+		getLog().info("sourceDirectory=" + sourceDirectory);
 
-        if ( !f.exists() )
-        {
-            f.mkdirs();
-        }
+		List<File> files = findFiles(sourceDirectory, includePattern);
+		for (File file : files)
+		{
+		  XsltBase.transform(file, xslFile, destDirectory, null, false);
+		}
+	}
+	private List<File> findFiles(File dir, String pattern) {
+		  List<File> files = new ArrayList<File>();
+		  for (File file : dir.listFiles()) {
+		    if (file.getName().endsWith((pattern))) {
+		      files.add(file);
+		    }
+		  }
+		  return files;
+		}
 
-        File touch = new File( f, "touch.txt" );
-
-        FileWriter w = null;
-        try
-        {
-            w = new FileWriter( touch );
-
-            w.write( "touch.txt" );
-        }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( "Error creating file " + touch, e );
-        }
-        finally
-        {
-            if ( w != null )
-            {
-                try
-                {
-                    w.close();
-                }
-                catch ( IOException e )
-                {
-                    // ignore
-                }
-            }
-        }
-    }
 }
