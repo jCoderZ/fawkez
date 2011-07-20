@@ -50,12 +50,6 @@
          min-length="1"
          max-length="1024">
        </restrictedString>
-       <restrictedString
-         classname="ConfigurationKey"
-         package="org.jcoderz.commons.config"
-         min-length="15"
-         max-length="255">
-      </restrictedString>
    </restrictedStrings>
 
 <!-- ===============================================================

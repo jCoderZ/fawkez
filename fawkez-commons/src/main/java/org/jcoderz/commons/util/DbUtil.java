@@ -324,6 +324,7 @@ public final class DbUtil
       }
    }
 
+   @SuppressWarnings("unused")
    private static final class LimitedBatchSizePreparedStatement
 // FIXME: does not work with JDK1.6.0     implements PreparedStatement
    {
@@ -371,7 +372,7 @@ public final class DbUtil
          internalExecuteBatch();
 
          int totalBatchSize = 0;
-         for (final Iterator it = mResultList.iterator(); it.hasNext(); )
+         for (final Iterator<int[]> it = mResultList.iterator(); it.hasNext(); )
          {
             final int[] updateResult = (int[]) it.next();
             totalBatchSize += updateResult.length;
@@ -379,7 +380,7 @@ public final class DbUtil
 
          final int[] result = new int[totalBatchSize];
          int offset = 0;
-         for (final Iterator it = mResultList.iterator(); it.hasNext(); )
+         for (final Iterator<int[]> it = mResultList.iterator(); it.hasNext(); )
          {
             final int[] updateResult = (int[]) it.next();
             System.arraycopy(

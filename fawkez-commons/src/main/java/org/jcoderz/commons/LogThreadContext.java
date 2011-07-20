@@ -49,11 +49,11 @@ import org.jcoderz.commons.util.ObjectUtil;
  */
 public final class LogThreadContext
 {
-    private static final ThreadLocal TREAD_CONTEXT = new ThreadLocal()
+    private static final ThreadLocal<Map<String, String>> TREAD_CONTEXT = new ThreadLocal<Map<String, String>>()
     {
-        protected Object initialValue ()
+        protected Map<String, String> initialValue ()
         {
-            return new HashMap();
+            return new HashMap<String, String>();
         }
     };
     
@@ -107,8 +107,8 @@ public final class LogThreadContext
      * @return the underlying map that is used to store context 
      * parameters of the current thread.
      */
-    public static Map/*<String,String>*/ get ()
+    public static Map<String,String> get ()
     {
-        return (Map) TREAD_CONTEXT.get();
+        return (Map<String, String>) TREAD_CONTEXT.get();
     }
 }

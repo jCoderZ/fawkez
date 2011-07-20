@@ -159,7 +159,7 @@ public abstract class LogMessageInfoImpl
 
           if (parameters != null && !getParameterList().isEmpty())
           {
-             final Iterator i = getParameterList().iterator();
+             final Iterator<String> i = getParameterList().iterator();
              while (i.hasNext())
              {
                 final String parameterName = (String) i.next();
