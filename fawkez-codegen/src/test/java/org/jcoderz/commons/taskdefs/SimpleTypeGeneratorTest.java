@@ -56,7 +56,7 @@ public class SimpleTypeGeneratorTest
    {
       super.setUp();
       mDestDir =  LogMessageGeneratorTest.mkdir("build/test");
-      final File in = new File(getBaseDir(), "src/test/resources/simple-types.xml");
+      final File in = new File(getBaseDir(), "src/test/fawkez/simple.type.xml");
       final File out = new File(mDestDir, "simple-types.out");
       final SimpleTypesTask g = new SimpleTypesTask();
       g.setDestdir(mDestDir);

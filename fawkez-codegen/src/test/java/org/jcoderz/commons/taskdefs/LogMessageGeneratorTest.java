@@ -57,7 +57,7 @@ public class LogMessageGeneratorTest
    {
       super.setUp();
       mDestDir =  mkdir("build/test");
-      final File in = new File(getBaseDir(), "src/test/resources/log-message-info.xml");
+      final File in = new File(getBaseDir(), "src/test/fawkez/log-message.info.xml");
       final File out = new File(mDestDir, "log-message-info.out");
       final LogMessageGenerator g = new LogMessageGenerator();
       g.setApplication("FawkeZ");
