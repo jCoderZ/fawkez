@@ -31,20 +31,6 @@ public class SimpleTypesMojo extends AbstractMojo {
 	private MavenProject project;
 
 	/**
-	 * The destination directory.
-	 * 
-	 * @parameter default-value="${project.build.directory}/generated-fawkez"
-	 */
-	private File destDirectory;
-
-	/**
-	 * The destination directory.
-	 * 
-	 * @parameter default-value="src/main/fawkez"
-	 */
-	private File sourceDirectory;
-
-	/**
 	 * The XSL stylesheet file.
 	 * 
 	 * @parameter default-value= "generate-simple-types.xsl"
@@ -73,10 +59,23 @@ public class SimpleTypesMojo extends AbstractMojo {
 	// TODO:
 	// http://code.hammerpig.com/search-for-files-in-directory-using-wildcards-in-java.html
 	public void execute() throws MojoExecutionException {
+		processFolder("main");
+		processFolder("test");
+	}
+
+	private void processFolder (String category)
+	{
+		File sourceDirectory = new File(project.getBasedir(), "src" + File.separator + category + File.separator + "fawkez");
+		File destDirectory = new File(project.getBuild().getDirectory(), "generated-fawkez-" + category);
+		if (!destDirectory.exists())
+		{
+			destDirectory.mkdirs();
+		}
 		List<File> files = findFiles(sourceDirectory, includePattern);
 		for (File file : files) {
+			String log = file.getName() + "-" + category + ".log";
 			XsltBase.transform(file, xslFile, destDirectory, new File(project
-					.getBuild().getDirectory(), "simple-types.log"), false);
+					.getBuild().getDirectory(), log), false);
 		}
 	}
 
@@ -89,5 +88,4 @@ public class SimpleTypesMojo extends AbstractMojo {
 		}
 		return files;
 	}
-
 }
