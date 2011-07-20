@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<simpleTypes>
+
+<!-- ===============================================================
+     RESTRICTED LONGS
+     =============================================================== -->
+   <restricted-longs>
+       <restrictedLong
+         classname="RestrictedLong"
+         package="org.jcoderz.commons.test"
+         min-value="15"
+         max-value="255">
+         <constants name="SPECIAL" comment="Very Special Value" value="15"/>
+      </restrictedLong>
+   </restricted-longs>
+   
+</simpleTypes>
