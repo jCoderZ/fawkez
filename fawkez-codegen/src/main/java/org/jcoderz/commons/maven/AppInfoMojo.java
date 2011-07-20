@@ -12,14 +12,14 @@ import org.jcoderz.commons.util.XsltBase;
 /**
  * The simple type task generates Java classes from an XML file.
  * 
- * @goal simpletypes
+ * @goal appinfo
  * @phase generate-sources
  * @requiresDependencyResolution compile
  * 
  * @author mrumpf
  * 
  */
-public class SimpleTypesMojo extends AbstractMojo {
+public class AppInfoMojo extends AbstractMojo {
 	/**
 	 * <i>Maven Internal</i>: Project to interact with.
 	 * 
@@ -32,14 +32,14 @@ public class SimpleTypesMojo extends AbstractMojo {
 	/**
 	 * The XSL stylesheet file.
 	 * 
-	 * @parameter default-value= "generate-simple-types.xsl"
+	 * @parameter default-value= "generate-log-message-info.xsl"
 	 */
 	private String xslFile = null;
 
 	/**
 	 * An include pattern for the simple type definition files.
 	 * 
-	 * @parameter default-value=".type.xml"
+	 * @parameter default-value="app.info.xml"
 	 */
 	private String includePattern;
 
@@ -61,6 +61,7 @@ public class SimpleTypesMojo extends AbstractMojo {
 		List<File> files = findFiles(sourceDirectory, includePattern);
 		for (File file : files) {
 			String log = file.getName() + "-" + category + ".log";
+			getLog().info("" + file.getName() + " -> " + destDirectory.getName());
 			XsltBase.transform(file, xslFile, destDirectory, new File(project
 					.getBuild().getDirectory(), log), false);
 		}

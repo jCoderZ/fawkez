@@ -6,10 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.transform.ErrorListener;
@@ -23,7 +21,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.xerces.util.XMLCatalogResolver;
-import org.jcoderz.commons.taskdefs.XsltBasedTask;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -83,7 +80,7 @@ public class XsltBase {
 
 	private static StreamSource getXslFileAsSource(String xsl) {
 		final StreamSource result;
-		final InputStream xslStream = XsltBasedTask.class
+		final InputStream xslStream = XsltBase.class
 				.getResourceAsStream(xsl);
 		if (xslStream == null) {
 			try {
@@ -96,7 +93,7 @@ public class XsltBase {
 			}
 		} else {
 			result = new StreamSource(xslStream);
-			final URL url = XsltBasedTask.class.getResource(xsl);
+			final URL url = XsltBase.class.getResource(xsl);
 			if (url != null) {
 				try {
 					result.setSystemId(url.toURI().toASCIIString());
