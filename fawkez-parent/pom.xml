@@ -29,6 +29,24 @@
     </scm>
     <issueManagement>
         <system>trac</system>
-        <url>http://www.jcoderz.org/fawkez/</url>
+        <url>http://www.jcoderz.org/fawkez</url>
     </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>jcoderz-repo</id>
+            <name>jCoderZ Maven Repository</name>
+            <url>${secretRepositoryHost}/repos/maven2</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>jcoderz-snapshot</id>
+            <name>jCoderZ Snapshots</name>
+            <url>${secretRepositoryHost}/repos/maven2-snapshot</url>
+            <layout>default</layout>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
