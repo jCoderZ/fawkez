@@ -584,8 +584,7 @@ public final class XmlPrinter
          mJaxbContext = JAXBContext
                .newInstance("org.jcoderz.commons.logging");
          mMarshaller = mJaxbContext.createMarshaller();
-         mMarshaller.setProperty("jaxb.formatted.output",
-               Boolean.valueOf(true));
+         mMarshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
       }
       catch (JAXBException ex)
       {
