@@ -94,6 +94,6 @@
         <groupId>org.jcoderz.fawkez</groupId>
         <artifactId>fawkez-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../fawkez-parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 </project>

@@ -8,10 +8,10 @@
     <description>This is the Maven base project for the FawkeZ modules.</description>
     <url>http://www.jcoderz.org/fawkez/</url>
     <modules>
-        <module>../fawkez-bootstrap</module>
-        <module>../fawkez-commons</module>
-        <module>../fawkez-logging</module>
-        <module>../fawkez-codegen</module>
+        <module>fawkez-bootstrap</module>
+        <module>fawkez-commons</module>
+        <module>fawkez-logging</module>
+		<module>fawkez-codegen</module>
     </modules>
     <build>
         <plugins>
@@ -69,6 +69,20 @@
         <system>trac</system>
         <url>http://www.jcoderz.org/fawkez</url>
     </issueManagement>
+    <repositories>
+        <repository>
+            <id>jcoderz-snapshot</id>
+            <name>jCoderZ Snapshots</name>
+            <url>http://www.jcoderz.org/repos/maven2-snapshot</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>jcoderz-repo</id>
+            <name>jCoderZ Maven Repository</name>
+            <url>http://www.jcoderz.org/repos/maven2</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 
     <distributionManagement>
         <repository>
