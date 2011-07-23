@@ -1,16 +1,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jcoderz.fawkez</groupId>
-	<artifactId>fawkez-parent</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<description>This is the Maven base project for the FawkeZ modules.</description>
-	<url>http://www.jcoderz.org/fawkez/</url>
-	<modules>
-		<module>../fawkez-bootstrap</module>
-		<module>../fawkez-commons</module>
-		<module>../fawkez-logging</module>
-		<module>../fawkez-codegen</module>
-	</modules>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jcoderz.fawkez</groupId>
+    <artifactId>fawkez-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>This is the Maven base project for the FawkeZ modules.</description>
+    <url>http://www.jcoderz.org/fawkez/</url>
+    <modules>
+        <module>../fawkez-bootstrap</module>
+        <module>../fawkez-commons</module>
+        <module>../fawkez-logging</module>
+        <module>../fawkez-codegen</module>
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <name>fawkez-parent</name>
+    <organization>
+        <name>jCoderZ</name>
+        <url>http://www.jcoderz.org/</url>
+    </organization>
+    <scm>
+        <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</developerConnection>
+        <connection>scm:svn:http://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</connection>
+        <tag>HEAD</tag>
+        <url>http://www.jcoderz.org/fawkez/browser/trunk-ng/fawkez-parent</url>
+    </scm>
+    <issueManagement>
+        <system>trac</system>
+        <url>http://www.jcoderz.org/fawkez/</url>
+    </issueManagement>
 </project>
