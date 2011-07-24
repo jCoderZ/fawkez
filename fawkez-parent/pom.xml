@@ -8,10 +8,10 @@
     <description>This is the Maven base project for the FawkeZ modules.</description>
     <url>http://www.jcoderz.org/fawkez/</url>
     <modules>
-        <module>fawkez-bootstrap</module>
-        <module>fawkez-commons</module>
-        <module>fawkez-logging</module>
-		<module>fawkez-codegen</module>
+        <module>../fawkez-bootstrap</module>
+        <module>../fawkez-commons</module>
+        <module>../fawkez-logging</module>
+		<module>../fawkez-codegen</module>
     </modules>
     <build>
         <plugins>
@@ -61,7 +61,7 @@
     </organization>
     <scm>
         <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</developerConnection>
-        <connection>scm:svn:http://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</connection>
+        <connection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</connection>
         <tag>HEAD</tag>
         <url>http://www.jcoderz.org/fawkez/browser/trunk-ng/fawkez-parent</url>
     </scm>
