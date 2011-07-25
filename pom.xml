@@ -93,7 +93,7 @@
             <layout>default</layout>
         </repository>
         <snapshotRepository>
-            <uniqueVersion>true</uniqueVersion>
+            <uniqueVersion>false</uniqueVersion>
             <id>jcoderz-snapshot</id>
             <name>jCoderZ Snapshots</name>
             <url>${secretRepositoryHost}/repos/maven2-snapshot</url>
