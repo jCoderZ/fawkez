@@ -45,9 +45,9 @@ import java.util.Set;
 public class ArgumentMalformedException
         extends RuntimeException
 {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ArgumentMalformedException (String param, String value, String hint, 
+    public ArgumentMalformedException (String param, String value, String hint, 
             Throwable cause)
     {
         super(generateMessage(param, value, hint), cause);
@@ -58,11 +58,11 @@ public class ArgumentMalformedException
         super(generateMessage(param, value, hint));
     }
     
-    private static String generateMessage (String param, String value, String hint)
-    {
-        return "The given argument is at least partly malformed. " 
-        + "Argument '" + param + "' cannot be set to " 
-        + "value '" + value + "'. Detailed description: " + hint + ".";
+    private static String generateMessage(
+            String param, String value, String hint) {
+        return "The given argument is at least partly malformed. "
+                + "Argument '" + param + "' cannot be set to "
+                + "value '" + value + "'. Detailed description: " + hint + ".";
     }
 
     public List<String> getParameter (String name)
