@@ -60,8 +60,8 @@
         <url>http://www.jcoderz.org/</url>
     </organization>
     <scm>
-        <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</developerConnection>
-        <connection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</connection>
+        <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/</developerConnection>
+        <connection>scm:svn:https://www.jcoderz.org/svn/fawkez/</connection>
         <tag>HEAD</tag>
         <url>http://www.jcoderz.org/fawkez/browser/trunk-ng/fawkez-parent</url>
     </scm>

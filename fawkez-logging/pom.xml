@@ -102,8 +102,8 @@
       <url>http://www.jcoderz.org/</url>
    </organization>
    <scm>
-      <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-logging/</developerConnection>
-      <connection>scm:svn:http://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-logging/</connection>
+      <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/</developerConnection>
+      <connection>scm:svn:http://www.jcoderz.org/svn/fawkez/</connection>
       <tag>HEAD</tag>
       <url>http://www.jcoderz.org/fawkez/browser/trunk-ng/fawkez-logging</url>
    </scm>
