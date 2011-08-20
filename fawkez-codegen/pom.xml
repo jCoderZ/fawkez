@@ -4,7 +4,7 @@
     <groupId>org.jcoderz.fawkez</groupId>
     <artifactId>fawkez-codegen</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <description>This package contains the Maven code generator plugin and the Ant task definitions for the
 	SimpleType- and the AppInfo-Generators.</description>
     <url>http://www.jcoderz.org/fawkez/</url>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.jcoderz.fawkez</groupId>
             <artifactId>fawkez-bootstrap</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>2.0.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -90,10 +90,4 @@
         <system>trac</system>
         <url>http://www.jcoderz.org/fawkez/</url>
     </issueManagement>
-    <parent>
-        <groupId>org.jcoderz.fawkez</groupId>
-        <artifactId>fawkez-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
 </project>
