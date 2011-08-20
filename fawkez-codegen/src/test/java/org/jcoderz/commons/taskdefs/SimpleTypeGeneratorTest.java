@@ -55,7 +55,7 @@ public class SimpleTypeGeneratorTest
          throws Exception
    {
       super.setUp();
-      mDestDir =  LogMessageGeneratorTest.mkdir("build/test");
+      mDestDir =  LogMessageGeneratorTest.mkdir("target/test-generated");
       final File in = new File(getBaseDir(), "src/test/fawkez/simple.type.xml");
       final File out = new File(mDestDir, "simple-types.out");
       final SimpleTypesTask g = new SimpleTypesTask();
