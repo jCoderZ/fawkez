@@ -826,8 +826,8 @@ public final class <xsl:value-of select="$classname"/>
    private static int sNextOrdinal = 0;
 
    /** Maps a string representation to an enumerated value. */
-   private static final Map
-      FROM_STRING = new HashMap();
+   private static final Map&lt;String, <xsl:value-of select="$classname"/>>
+      FROM_STRING = new HashMap&lt;String, <xsl:value-of select="$classname"/>>();
 <xsl:for-each select="$values"><xsl:variable name="constant-name"><xsl:call-template name="pic-symbolic-name"><xsl:with-param
       name="value" select="."/></xsl:call-template></xsl:variable><xsl:if test="$numeric">
    /** Numeric representation for <xsl:value-of select="$classname"/><xsl:text> </xsl:text><xsl:value-of select="."/>. */
@@ -1057,7 +1057,7 @@ import java.io.Serializable;
  * @author generated via stylesheet
  */
 public final class <xsl:value-of select="$classname"/>
-      implements Serializable, org.jcoderz.commons.RestrictedString, Comparable<xsl:if test="$implements">,
+      implements Serializable, org.jcoderz.commons.RestrictedString, Comparable&lt;Object&gt;<xsl:if test="$implements">,
             <xsl:value-of select="$implements"/></xsl:if>
 {
    /**
