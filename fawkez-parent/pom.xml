@@ -24,8 +24,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<VERSION_NUMBER>2.0.0-SNAPSHOT</VERSION_NUMBER>
 		<svnRepoBase>https://www.jcoderz.org/svn/fawkez</svnRepoBase>
-        <releaseRepoUrl>scpexe://www.jcoderz.org:7357/repos/maven2</releaseRepoUrl>
-        <snapshotRepoUrl>scpexe://www.jcoderz.org:7357/repos/maven2-snapshot</snapshotRepoUrl>
+        <releaseRepoUrl>${secretRepositoryHost}/repos/maven2</releaseRepoUrl>
+        <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
 		<deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
 		<isRelease>true</isRelease>
 	</properties>
