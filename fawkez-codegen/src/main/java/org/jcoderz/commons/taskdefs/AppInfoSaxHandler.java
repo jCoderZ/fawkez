@@ -347,7 +347,7 @@ class AppInfoSaxHandler
 
    private static class NamedMap
    {
-      private final Map mMap = new HashMap();
+      private final Map<Integer, Object> mMap = new HashMap<Integer, Object>();
       private final String mName;
 
       public NamedMap (String name)
@@ -442,6 +442,7 @@ class AppInfoSaxHandler
          super(msg);
       }
 
+      @SuppressWarnings("unused")
       public AppInfoException (String msg, Throwable cause)
       {
          super(msg, cause);
