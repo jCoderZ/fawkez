@@ -21,17 +21,21 @@
 	</modules>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	    <!-- This mus be overwritten from external to deploy to jcoderz.org -->
+	    <secretRepositoryHost>file:/C:/</secretRepositoryHost>
+	    <!-- This must be overwritten from external to do a release build, instead of a snapshot build -->
 		<VERSION_NUMBER>2.0.0-SNAPSHOT</VERSION_NUMBER>
+
 		<svnRepoBase>https://www.jcoderz.org/svn/fawkez</svnRepoBase>
         <releaseRepoUrl>${secretRepositoryHost}/repos/maven2</releaseRepoUrl>
         <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
 		<deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
 		<isRelease>true</isRelease>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<scm>
-  		<developerConnection>scm:svn:${svnRepoBase}/trunk-ng/</developerConnection>
+  		<developerConnection>scm:svn:${svnRepoBase}</developerConnection>
 		<connection>scm:svn:${svnRepoBase}/trunk-ng/</connection>
 	</scm>
 
