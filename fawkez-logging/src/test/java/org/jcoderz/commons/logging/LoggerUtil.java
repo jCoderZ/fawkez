@@ -156,8 +156,8 @@ public final class LoggerUtil
       final LogItem item,
       final Loggable loggable)
    {
-      final Set epNames = item.getParameterNames();
-      final Set lpNames = loggable.getParameterNames();
+      final Set<String> epNames = item.getParameterNames();
+      final Set<?> lpNames = loggable.getParameterNames();
 
       Assert.assertFalse("No parameters for loggable set, but log element "
             + "has parameters: " + epNames,
@@ -180,7 +180,7 @@ public final class LoggerUtil
          {
             epNamesIsEmpty = true;
          }
-         for (final Iterator iter = lpNames.iterator(); iter.hasNext(); )
+         for (final Iterator<?> iter = lpNames.iterator(); iter.hasNext(); )
          {
             final String name = (String) iter.next();
             if (! name.startsWith(LogItem.INTERNAL_PARAMETER_PREFIX))
@@ -189,8 +189,8 @@ public final class LoggerUtil
                      + name, ! epNamesIsEmpty);
                Assert.assertTrue("Item must contain parameter " + name,
                      epNames.contains(name));
-               final List eparams = item.getParameterValues(name);
-               final List lparams = loggable.getParameter(name);
+               final List<?> eparams = item.getParameterValues(name);
+               final List<?> lparams = loggable.getParameter(name);
                Assert.assertEquals("The parameter values must match for "
                      + name, eparams, lparams);
             }

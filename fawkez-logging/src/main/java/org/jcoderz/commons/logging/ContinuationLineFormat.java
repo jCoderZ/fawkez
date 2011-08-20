@@ -32,6 +32,7 @@
  */
 package org.jcoderz.commons.logging;
 
+import java.text.Format;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -66,7 +67,9 @@ public abstract class ContinuationLineFormat
    private static final String LOGLINE_FORMAT_PATTERN
          = "{0} {1}";
 
+   @SuppressWarnings("unused")
    private final int mNumParameters;
+   @SuppressWarnings("unused")
    private final String mLogFormatPattern;
 
 
@@ -102,11 +105,11 @@ public abstract class ContinuationLineFormat
     * @return List filled with formats for each selected field. Might be empty,
     * never null.
     */
-   protected static List getBasicFormatList (
+   protected static List<Format> getBasicFormatList (
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = new ArrayList();
+      final List<Format> formatList = new ArrayList<Format>();
       if (ignoreOptions || options.displayThreadId())
       {
          // thread id
@@ -135,7 +138,7 @@ public abstract class ContinuationLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       setTrackingIds(trackingIdSequence);
 
@@ -217,7 +220,7 @@ public abstract class ContinuationLineFormat
     *
     * @param trackingIds The sequence of tracking ids to dump.
     */
-   protected final void setTrackingIds (final List trackingIds)
+   protected final void setTrackingIds (final List<String> trackingIds)
    {
       setParameter(TRACKINGID_INDEX, trackingIds);
    }
@@ -227,8 +230,10 @@ public abstract class ContinuationLineFormat
     *
     * @return Sequence of tracking ids of parsed log line.
     */
-   protected final List getTrackingIds ()
+   protected final List<String> getTrackingIds ()
    {
-      return (List) getParameter(TRACKINGID_INDEX);
+	   @SuppressWarnings("unchecked")
+       List<String> result = (List<String>) getParameter(TRACKINGID_INDEX);
+	   return result;
    }
 }

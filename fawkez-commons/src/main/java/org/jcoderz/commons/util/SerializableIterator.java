@@ -74,10 +74,10 @@ public final class SerializableIterator<T>
     *       created. All elements in the collection must be serializable.
     * @return a serializable iterator over the given collection
     */
-   public static SerializableIterator<?> fromCollection (Collection<?> collection)
+   public static SerializableIterator<Object> fromCollection (Collection<Object> collection)
    {
       Assert.notNull(collection, "collection");
-      return new SerializableIterator(collection);
+      return new SerializableIterator<Object>(collection);
    }
 
    /**
@@ -88,10 +88,10 @@ public final class SerializableIterator<T>
     *       created. All elements in the array must be serializable.
     * @return a new iterator from the given array.
     */
-   public static SerializableIterator fromArray (Object[] array)
+   public static SerializableIterator<Object> fromArray (Object[] array)
    {
       Assert.notNull(array, "array");
-      return new SerializableIterator(Arrays.asList(array));
+      return new SerializableIterator<Object>(Arrays.asList(array));
    }
 
    /**

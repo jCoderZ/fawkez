@@ -45,7 +45,7 @@ import java.util.logging.Level;
 public class LevelFilter
       implements Filter
 {
-   private final Set mAllowedLevels;
+   private final Set<Level> mAllowedLevels;
 
    /**
     * Creates a new instance of this and sets the logging levels, which will
@@ -55,12 +55,12 @@ public class LevelFilter
     * @param levels The list storing passable logger levels in their textual
     * representation.
     */
-   public LevelFilter (final List levels)
+   public LevelFilter (final List<String> levels)
    {
-      mAllowedLevels = new HashSet();
+      mAllowedLevels = new HashSet<Level>();
       if (levels != null)
       {
-         for (final Iterator iter = levels.iterator(); iter.hasNext(); )
+         for (final Iterator<String> iter = levels.iterator(); iter.hasNext(); )
          {
             final Level level
                   = Level.parse((String) iter.next());

@@ -32,6 +32,7 @@
  */
 package org.jcoderz.commons;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -147,7 +148,7 @@ public abstract class LogMessageInfoImpl
    }
 
    /** {@inheritDoc} */
-   public final StringBuffer formatMessage (Map parameters, StringBuffer buffer)
+   public final StringBuffer formatMessage (Map<String, List<Serializable>> parameters, StringBuffer buffer)
    {
        final StringBuffer result
            = buffer != null ? buffer : new StringBuffer();
@@ -155,7 +156,7 @@ public abstract class LogMessageInfoImpl
        {
           final MessageFormat formatter = new MessageFormat(getMessagePattern());
 
-          final List parameter = new ArrayList();
+          final List<Object> parameter = new ArrayList<Object>();
 
           if (parameters != null && !getParameterList().isEmpty())
           {

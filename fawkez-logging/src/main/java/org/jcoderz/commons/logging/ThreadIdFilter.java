@@ -43,7 +43,7 @@ import java.util.Set;
 public final class ThreadIdFilter
       implements Filter
 {
-   private final Set mAllowedThreadIds;
+   private final Set<Long> mAllowedThreadIds;
 
    /**
     * Creates a new instance of this and sets the thread ids, which will pass
@@ -52,9 +52,9 @@ public final class ThreadIdFilter
     *
     * @param threadIds The list storing passable thread ids as Long values.
     */
-   public ThreadIdFilter (final List threadIds)
+   public ThreadIdFilter (final List<Long> threadIds)
    {
-      mAllowedThreadIds = new HashSet(threadIds);
+      mAllowedThreadIds = new HashSet<Long>(threadIds);
    }
 
    /** {@inheritDoc} */

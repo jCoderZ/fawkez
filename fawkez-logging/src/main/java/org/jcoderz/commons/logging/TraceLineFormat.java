@@ -105,7 +105,7 @@ public class TraceLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter)
    {
@@ -174,7 +174,7 @@ public class TraceLineFormat
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = getBasicFormatList(options, ignoreOptions);
+      final List<Format> formatList = getBasicFormatList(options, ignoreOptions);
       if (ignoreOptions || options.displaySourceClass()
             || options.displaySourceMethod())
       {

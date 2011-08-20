@@ -99,8 +99,6 @@ public abstract class LogLineFormat
 
    private static final int NUMBER_OF_SOURCE_ELEMENTS = 2;
 
-   private final LogLineType mLogLineType;
-
    private Object [] mLineItems;
 
    private final MessageFormat mMessageFormat;
@@ -111,10 +109,10 @@ public abstract class LogLineFormat
     *
     */
    public static final class LogLineType
-         implements Comparable
+         implements Comparable<Object>
    {
       private static int sOrdinal = 0;
-      private static final Map TYPE_CODE_MAPPING = new HashMap();
+      private static final Map<Character, LogLineType> TYPE_CODE_MAPPING = new HashMap<Character, LogLineType>();
 
       private final int mOrdinal;
 
@@ -173,7 +171,7 @@ public abstract class LogLineFormat
          final MessageFormat format,
          final int numberOfArguments)
    {
-      mLogLineType = type;
+      //UNUSED: mLogLineType = type;
       mMessageFormat = format;
       mLineItems = new Object[numberOfArguments];
    }
@@ -196,7 +194,7 @@ public abstract class LogLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter);
 

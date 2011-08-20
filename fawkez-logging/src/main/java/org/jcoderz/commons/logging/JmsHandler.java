@@ -117,12 +117,12 @@ public class JmsHandler
     * JMS specification a session and the resources it provides must be used by
     * only one thread.
     */
-   private final ThreadLocal mJmsSessions = new ThreadLocal();
+   private final ThreadLocal<QueueSession> mJmsSessions = new ThreadLocal<QueueSession>();
 
    /**
     * Stores the jms queue sender for the current thread.
     */
-   private final ThreadLocal mJmsSenders = new ThreadLocal();
+   private final ThreadLocal<QueueSender> mJmsSenders = new ThreadLocal<QueueSender>();
 
    /**
     * When closing this handler, all sessions have to be closed (closing a
@@ -131,7 +131,7 @@ public class JmsHandler
     * sessions and will store WeakReferences to allow a session being garbage
     * collected if the corresponding thread dies.
     */
-   private final List mAllSessions = new ArrayList();
+   private final List<WeakReference<QueueSession>> mAllSessions = new ArrayList<WeakReference<QueueSession>>();
 
    private final LogManager mManager = LogManager.getLogManager();
 
@@ -246,8 +246,8 @@ public class JmsHandler
       {
          while (! mAllSessions.isEmpty())
          {
-            final WeakReference ref = (WeakReference) mAllSessions.remove(0);
-            final QueueSession session = (QueueSession) ref.get();
+            final WeakReference<QueueSession> ref = (WeakReference<QueueSession>) mAllSessions.remove(0);
+            final QueueSession session = ref.get();
             if (session != null)
             {
                try
@@ -324,7 +324,7 @@ public class JmsHandler
          try
          {
             AccessController.doPrivileged(
-                  new PrivilegedExceptionAction()
+                  new PrivilegedExceptionAction<Object>()
                   {
                      public Object run ()
                            throws SecurityException,
@@ -365,7 +365,7 @@ public class JmsHandler
          try
          {
             AccessController.doPrivileged(
-                  new PrivilegedExceptionAction()
+                  new PrivilegedExceptionAction<Object>()
                   {
                      public Object run ()
                            throws SecurityException,
@@ -447,7 +447,7 @@ public class JmsHandler
          try
          {
             rc = (QueueSender) AccessController.doPrivileged(
-                  new PrivilegedExceptionAction()
+                  new PrivilegedExceptionAction<Object>()
                   {
                      public Object run ()
                            throws JMSException
@@ -486,7 +486,7 @@ public class JmsHandler
          mJmsSessions.set(session);
          synchronized (mAllSessions)
          {
-            mAllSessions.add(new WeakReference(session));
+            mAllSessions.add(new WeakReference<QueueSession>(session));
          }
          rc = session;
       }

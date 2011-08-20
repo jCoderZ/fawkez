@@ -34,10 +34,10 @@ package org.jcoderz.commons;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import junit.framework.TestCase;
 
 import org.jcoderz.commons.test.TssLogMessage;
-import org.jcoderz.commons.types.Date;
 import org.xml.sax.SAXException;
 
 

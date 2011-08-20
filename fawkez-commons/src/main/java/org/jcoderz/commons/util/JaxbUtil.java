@@ -33,6 +33,7 @@
  package org.jcoderz.commons.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -410,11 +411,11 @@ public final class JaxbUtil
 
       private String getParameter (ArgumentMalformedException ex, String name)
       {
-         final List<String> parameters = ex.getParameter(name);
+         final List<Serializable> parameters = ex.getParameter(name);
          final String result;
          if (parameters != null)
          {
-            result = parameters.get(0);
+            result = (String) parameters.get(0).toString();
          }
          else
          {

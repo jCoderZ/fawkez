@@ -60,7 +60,7 @@ public final class MessageIdFilter
    private static final String JMS_MESSAGE_IDS_PROPERTY
          = CLASSNAME + "." + "messageids";
 
-   private final Set mMessageIds = new HashSet();
+   private final Set<Integer> mMessageIds = new HashSet<Integer>();
 
    /**
     * Creates and configures a new isntance of this.

@@ -106,7 +106,7 @@ public class ParameterLineFormat
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = new ArrayList();
+      final List<Format> formatList = new ArrayList<Format>();
       if (ignoreOptions || options.displayThreadId())
       {
          // thread id
@@ -144,7 +144,7 @@ public class ParameterLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter)
    {
@@ -238,16 +238,16 @@ public class ParameterLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
-       final java.util.Set/*<String>*/ namesUnsorted
+       final java.util.Set<?> namesUnsorted
            = loggable.getParameterNames();
        final String[] names
            = (String[]) namesUnsorted.toArray(
                new String[namesUnsorted.size()]);
        Arrays.sort(names);
 
-      for (final Iterator nameIter = Arrays.asList(names).iterator();
+      for (final Iterator<String> nameIter = Arrays.asList(names).iterator();
             nameIter.hasNext(); )
       {
          final String name = (String) nameIter.next();
@@ -270,14 +270,14 @@ public class ParameterLineFormat
       return (String) getParameter(PARAMETER_NAME_INDEX);
    }
 
-   private void setParameterValues (final List values)
+   private void setParameterValues (final List<?> values)
    {
       setParameter(PARAMETER_VALUE_INDEX, values);
    }
 
-   private List getParameterValues ()
+   private List<?> getParameterValues ()
    {
-      return (List) getParameter(PARAMETER_VALUE_INDEX);
+      return (List<?>) getParameter(PARAMETER_VALUE_INDEX);
    }
 
    /**

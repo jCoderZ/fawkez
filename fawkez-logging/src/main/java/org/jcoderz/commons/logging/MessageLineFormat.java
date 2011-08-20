@@ -95,7 +95,7 @@ public class MessageLineFormat
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = getBasicFormatList(options, ignoreOptions);
+      final List<Format> formatList = getBasicFormatList(options, ignoreOptions);
       formatList.add(new WhitespaceFormat(new AsItIsFormat("\r\n")));
       return (Format[]) formatList.toArray(EMPTY_FORMATTERS);
    }
@@ -118,7 +118,7 @@ public class MessageLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter)
    {

@@ -133,7 +133,7 @@ public class CollectionFormat
     */
    public Object parseObject (String source, ParsePosition pos)
    {
-      List rc = null;
+      List<Object> rc = null;
       final int len = source.length();
       boolean errorOccurred = false;
 
@@ -146,7 +146,7 @@ public class CollectionFormat
       // set
       if (beginOfList(sourceBuffer, pos))
       {
-         rc = new ArrayList();
+         rc = new ArrayList<Object>();
 
          if (! (mLengthListEnd != 0 && endOfList(sourceBuffer, pos)))
          {
@@ -178,7 +178,7 @@ public class CollectionFormat
          final String source,
          final ParsePosition pos,
          final int len,
-         final List elements)
+         final List<Object> elements)
    {
       boolean rc = false;
 
@@ -229,10 +229,12 @@ public class CollectionFormat
       pos.setBeginIndex(0);
       pos.setEndIndex(0);
 
-      final Collection elements = (Collection) obj;
+      @SuppressWarnings("unchecked")
+      final Collection<Object> elements = (Collection<Object>) obj;
+
       final StringBuffer tempBuffer = new StringBuffer(mListBegin);
       boolean first = true;
-      for (final Iterator iter = elements.iterator(); iter.hasNext(); )
+      for (final Iterator<Object> iter = elements.iterator(); iter.hasNext(); )
       {
          if (first)
          {

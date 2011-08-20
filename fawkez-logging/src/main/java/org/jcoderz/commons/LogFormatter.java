@@ -63,7 +63,7 @@ public class LogFormatter
     public static final String MSG_LOGGER_STACK_TRACE = "msgLoggerStackTrace";
     private static final Logger FWK_TRACE_LOGGER_LOGGER 
         = Logger.getLogger(MSG_LOGGER_STACK_TRACE);
-    private final ThreadLocal mMessageFormatters = new ThreadLocal();
+    private final ThreadLocal<Map<LogLineFormat.LogLineType, LogLineFormat>> mMessageFormatters = new ThreadLocal<Map<LogLineFormat.LogLineType, LogLineFormat>>();
 
    /** {@inheritDoc} */
    public String format (LogRecord record)
@@ -92,7 +92,7 @@ public class LogFormatter
    private LogLineFormat getMessageFormat (
          final LogLineFormat.LogLineType type)
    {
-      Map formatters = (Map) mMessageFormatters.get();
+	   Map<LogLineFormat.LogLineType, LogLineFormat> formatters = mMessageFormatters.get();
       if (formatters == null)
       {
          formatters = createMessageFormats();
@@ -101,9 +101,9 @@ public class LogFormatter
       return (LogLineFormat) formatters.get(type);
    }
 
-   private Map createMessageFormats ()
+   private Map<LogLineFormat.LogLineType, LogLineFormat> createMessageFormats ()
    {
-      final Map rc = new HashMap();
+      final Map<LogLineFormat.LogLineType, LogLineFormat> rc = new HashMap<LogLineFormat.LogLineType, LogLineFormat>();
 
       addMessageFormat(rc, LogLineFormat.TRACE_MESSAGE);
       addMessageFormat(rc, LogLineFormat.EXCEPTION_MESSAGE);
@@ -128,7 +128,7 @@ public class LogFormatter
    private void formatLogRecord (
          final StringBuffer sb,
          final LogRecord record,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       LogLineFormat.LogLineType type;
       if (record.getThrown() != null)
@@ -159,7 +159,7 @@ public class LogFormatter
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       Throwable thrown = getTopLevelThrown(record, loggable);
       Throwable outerTrace = null;
@@ -191,7 +191,7 @@ public class LogFormatter
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       final LogLineFormat.LogLineType type = LogLineFormat.PARAMETER_LINE;
       final LogLineFormat format = getMessageFormat(type);
@@ -212,7 +212,7 @@ public class LogFormatter
          final LogRecord record,
          final Loggable loggable)
    {
-      List trackingIds = initialiseTrackingIds(record, loggable);
+      List<String> trackingIds = initialiseTrackingIds(record, loggable);
       Loggable currentLoggable = loggable;
       boolean isFirst = true;
 
@@ -257,7 +257,7 @@ public class LogFormatter
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       final LogLineFormat.LogLineType type = determineType(loggable);
       final LogLineFormat format = getMessageFormat(type);
@@ -274,7 +274,7 @@ public class LogFormatter
     * @param type The type for which to create the format and add to the map.
     */
    private void addMessageFormat (
-         final Map msgFormats,
+         final Map<LogLineFormat.LogLineType, LogLineFormat> msgFormats,
          final LogLineFormat.LogLineType type)
    {
       final LogLineFormat format = LogLineFormatFactory.create(type);
@@ -330,7 +330,7 @@ public class LogFormatter
          final StringBuffer sb,
          final LogRecord record,
          final Throwable cause,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       final Loggable loggable;
       if (cause instanceof Loggable)
@@ -367,11 +367,11 @@ public class LogFormatter
     *
     * @return List with first tracking id.
     */
-   private List initialiseTrackingIds (
+   private List<String> initialiseTrackingIds (
          final LogRecord record,
          final Loggable loggable)
    {
-      final List rc = new ArrayList();
+      final List<String> rc = new ArrayList<String>();
 
       if (loggable != null)
       {
@@ -392,7 +392,7 @@ public class LogFormatter
     * @param record The record for which to add the sequence number.
     */
    private void addTrackingNumber (
-         final List trackingIds,
+         final List<String> trackingIds,
          final LogRecord record)
    {
       addTrackingNumber(trackingIds,
@@ -407,7 +407,7 @@ public class LogFormatter
     * @param loggable The Loggable for which to add the tracking number.
     */
    private void addTrackingNumber (
-         final List trackingIds,
+         final List<String> trackingIds,
          final Loggable loggable)
    {
       addTrackingNumber(trackingIds, loggable.getTrackingNumber());
@@ -421,7 +421,7 @@ public class LogFormatter
     * @param newId The number to add to the sequence.
     */
    private void addTrackingNumber (
-         final List trackingIds,
+         final List<String> trackingIds,
          final String newId)
    {
       if (! trackingIds.isEmpty())

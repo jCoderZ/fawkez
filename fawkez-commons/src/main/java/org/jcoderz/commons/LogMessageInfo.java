@@ -87,7 +87,7 @@ public interface LogMessageInfo
     * @param buffer the StringBuffer to be filled.
     * @return the buffer argument.
     */
-   StringBuffer formatMessage (Map parameters, StringBuffer buffer);
+   StringBuffer formatMessage (Map<String, List<Serializable>> parameters, StringBuffer buffer);
 
    /**
     * Returns a string describing the <b>possible</b> solution for this
@@ -121,7 +121,7 @@ public interface LogMessageInfo
     * accord to the parameters used in the message pattern.
     * @return list of possible parameter names (Strings).
     */
-   List getParameterList ();
+   List<String> getParameterList ();
 
    /**
     * Returns the application name as string.

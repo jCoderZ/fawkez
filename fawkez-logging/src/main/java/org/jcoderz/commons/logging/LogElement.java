@@ -212,15 +212,15 @@ public class LogElement
    {
       if (mLoggable != null)
       {
-         final Set names = mLoggable.getParameterNames();
+         final Set<?> names = mLoggable.getParameterNames();
          if (names != null && ! names.isEmpty())
          {
-            for (final Iterator iter = names.iterator(); iter.hasNext(); )
+            for (final Iterator<?> iter = names.iterator(); iter.hasNext(); )
             {
                final String name = (String) iter.next();
                if (! name.startsWith(INTERNAL_PARAMETER_PREFIX))
                {
-                  final List parameters = mLoggable.getParameter(name);
+                  final List<?> parameters = mLoggable.getParameter(name);
                   addToParameters(name, parameters);
                }
             }

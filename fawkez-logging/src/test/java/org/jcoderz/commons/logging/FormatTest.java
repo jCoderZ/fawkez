@@ -137,7 +137,7 @@ public class FormatTest
             LogLineFormat.TRACE_MESSAGE);
 
       formatAndParseLogRecord(record, null,
-            Arrays.asList(new Object[]{
+            Arrays.asList(new String[]{
                   String.valueOf(record.getSequenceNumber())}), format);
    }
 
@@ -157,7 +157,7 @@ public class FormatTest
             LogLineFormat.TRACE_MESSAGE);
 
       formatAndParseLogRecord(record, null,
-            Arrays.asList(new Object[]{"1", "2"}), format);
+            Arrays.asList(new String[]{"1", "2"}), format);
    }
 
    /**
@@ -177,7 +177,7 @@ public class FormatTest
       final LogLineFormat format = LogLineFormatFactory.create(
             LogLineFormat.LOG_MESSAGE);
       formatAndParseLogRecord(record, loggable,
-            Arrays.asList(new Object[]{loggable.getTrackingNumber()}), format);
+            Arrays.asList(new String[]{loggable.getTrackingNumber()}), format);
    }
 
    /**
@@ -193,7 +193,7 @@ public class FormatTest
       // this character.
       Format subFormat = new StringEscapeFormat(",.]");
       Format format = new CollectionFormat(subFormat);
-      final List rc = new ArrayList();
+      final List<String> rc = new ArrayList<String>();
 
       formatAndParse(format, rc);
 
@@ -247,7 +247,7 @@ public class FormatTest
    private void formatAndParseLogRecord (
          final LogRecord record,
          final Loggable loggable,
-         final List args,
+         final List<String> args,
          final LogLineFormat format)
    {
       final StringBuffer sb = new StringBuffer();
@@ -266,7 +266,7 @@ public class FormatTest
             // and to the parameters
             entry.setSolution(loggable.getLogMessageInfo().getSolution());
             entry.setSymbol(loggable.getLogMessageInfo().getSymbol());
-            for (final Iterator iter = loggable.getParameterNames().iterator();
+            for (final Iterator<?> iter = loggable.getParameterNames().iterator();
                   iter.hasNext(); )
             {
                final String pName = (String) iter.next();

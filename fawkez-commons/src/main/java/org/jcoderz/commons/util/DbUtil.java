@@ -330,7 +330,7 @@ public final class DbUtil
    {
       private final PreparedStatement mPreparedStatement;
       private final int mMaxBatchSize;
-      private final List mResultList = new ArrayList();
+      private final List<int[]> mResultList = new ArrayList<int[]>();
 
       private int mBatchCount = 0;
 
@@ -900,6 +900,7 @@ public final class DbUtil
       }
 
       /** {@inheritDoc} */
+      @SuppressWarnings("deprecation")
       public void setUnicodeStream (int parameterIndex, InputStream x,
             int length)
             throws SQLException

@@ -47,7 +47,7 @@ import org.jcoderz.commons.Category;
 public class CategoryFilter
       implements Filter
 {
-   private final Set mAllowedCategories;
+   private final Set<Category> mAllowedCategories;
 
    /**
     * Creates a new instance of this and sets the categories, which will
@@ -57,12 +57,12 @@ public class CategoryFilter
     * @param categories The list storing passable categories in their
     * textual representation.
     */
-   public CategoryFilter (final List categories)
+   public CategoryFilter (final List<String> categories)
    {
-      mAllowedCategories = new HashSet();
+      mAllowedCategories = new HashSet<Category>();
       if (categories != null)
       {
-         for (final Iterator iter = categories.iterator(); iter.hasNext(); )
+         for (final Iterator<String> iter = categories.iterator(); iter.hasNext(); )
          {
             final Category cat
                   = Category.fromString((String) iter.next());

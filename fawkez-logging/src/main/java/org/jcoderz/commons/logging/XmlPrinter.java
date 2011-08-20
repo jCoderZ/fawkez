@@ -489,10 +489,10 @@ public final class XmlPrinter
       private void passivateStackTrace (final StacktraceType stacktrace)
             throws LoggingException
       {
-         for (final Iterator iter
+         for (final Iterator<FrameType> iter
                = stacktrace.getStacktraceElement().iterator(); iter.hasNext(); )
          {
-            mPool.returnFrame((FrameType) iter.next());
+            mPool.returnFrame(iter.next());
          }
          stacktrace.getStacktraceElement().clear();
       }
@@ -545,10 +545,10 @@ public final class XmlPrinter
          {
             mPool.returnCause(cause);
          }
-         for (final Iterator iter = logRecord.getParameter().iterator();
+         for (final Iterator<ParameterType> iter = logRecord.getParameter().iterator();
                iter.hasNext(); )
          {
-            mPool.returnParameter((ParameterType) iter.next());
+            mPool.returnParameter(iter.next());
          }
 
          logRecord.getParameter().clear();
@@ -698,19 +698,19 @@ public final class XmlPrinter
 
       logRecord.setMessage(entry.getMessage());
 
-      final Set params = entry.getParameterNames();
-      for (final Iterator iter = params.iterator(); iter.hasNext(); )
+      final Set<String> params = entry.getParameterNames();
+      for (final Iterator<String> iter = params.iterator(); iter.hasNext(); )
       {
-         final String parameterName = (String) iter.next();
+         final String parameterName = iter.next();
          final ParameterType param
                = mXmlObjectsPool.borrowParameter();
 
          param.setName(parameterName);
-         final List values
+         final List<?> values
                = entry.getParameterValues(parameterName);
          if (values != null)
          {
-            for (final Iterator valueIter = values.iterator();
+            for (final Iterator<?> valueIter = values.iterator();
                   valueIter.hasNext(); )
             {
                param.getValue().add(valueIter.next().toString());

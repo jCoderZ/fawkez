@@ -84,7 +84,7 @@ public final class NestedLineFormat
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = new ArrayList();
+      final List<Format> formatList = new ArrayList<Format>();
       formatList.addAll(getBasicFormatList(options, ignoreOptions));
       formatList.add(new WhitespaceFormat(new AsItIsFormat("\r\n")));
       return (Format[]) formatList.toArray(EMPTY_FORMATTERS);
@@ -109,7 +109,7 @@ public final class NestedLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter)
    {

@@ -48,10 +48,10 @@ import java.util.List;
  */
 public class LogReader
 {
-   private final List mBufferedLines = new ArrayList();
+   private final List<StringBuffer> mBufferedLines = new ArrayList<StringBuffer>();
    private final BufferedReader mReader;
    private final File mFile;
-   private final List mFilters = new ArrayList();
+   private final List<Filter> mFilters = new ArrayList<Filter>();
 
    /**
     * Creates a new LogReader for reading from the supplied file.
@@ -219,10 +219,10 @@ public class LogReader
    private boolean passesFilters (final LogFileEntry entry)
    {
       boolean rc = entry.getType() != null;
-      for (final Iterator filterIterator = mFilters.iterator();
+      for (final Iterator<Filter> filterIterator = mFilters.iterator();
             filterIterator.hasNext() && rc; )
       {
-         final Filter filter = (Filter) filterIterator.next();
+         final Filter filter = filterIterator.next();
          rc = filter.isPassable(entry);
       }
       return rc;

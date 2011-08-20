@@ -79,9 +79,9 @@ public abstract class LogItem
    private String mThreadName = null;
    private StringBuffer mMessageBuffer = null;
 
-   private final Map mParameters = new HashMap();
+   private final Map<String, Object> mParameters = new HashMap<String, Object>();
 
-   private final List mStackTraceLines = new ArrayList();
+   private final List<StackTraceInfo> mStackTraceLines = new ArrayList<StackTraceInfo>();
 
    private String mType = null;
 
@@ -339,7 +339,7 @@ public abstract class LogItem
     * @return Set with parameter names, migth be empty, never null.
     */
 
-   public Set getParameterNames ()
+   public Set<String> getParameterNames ()
    {
       return Collections.unmodifiableSet(mParameters.keySet());
    }
@@ -355,10 +355,10 @@ public abstract class LogItem
     * unknown.
     */
 
-   public List getParameterValues (final String parameterName)
+   public List<?> getParameterValues (final String parameterName)
    {
-      final List parameterValues = (List) mParameters.get(parameterName);
-      final List rc = (parameterValues == null)
+      final List<?> parameterValues = (List) mParameters.get(parameterName);
+      final List<?> rc = (parameterValues == null)
             ? null : Collections.unmodifiableList(parameterValues);
       return rc;
    }
@@ -398,7 +398,7 @@ public abstract class LogItem
     *
     * @return List with stack trace lines, might be empty, never null.
     */
-   public List getStackTraceLines ()
+   public List<StackTraceInfo> getStackTraceLines ()
    {
       return mStackTraceLines;
    }

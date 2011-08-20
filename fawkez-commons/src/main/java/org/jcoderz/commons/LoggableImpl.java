@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -178,6 +177,7 @@ public class LoggableImpl
    private static final int GETTER_METHOD_PREFIX_LENGTH
        = GETTER_METHOD_PREFIX.length();
    /** Length of the boolean getter prefix. */
+   @SuppressWarnings("unused")
    private static final int BOOLEAN_GETTER_METHOD_PREFIX_LENGTH
        = BOOLEAN_GETTER_METHOD_PREFIX.length();
    
@@ -185,7 +185,9 @@ public class LoggableImpl
     * Stores the Throwable.getCause() method if this method is available.
     * This should be the case for all JDKs > 1.4.
     */
+   @SuppressWarnings("unused")
    private static final Method GET_CAUSE;
+
    /**
     * Stores the Throwable.initCause(Throwable) method if this method
     * is available.
@@ -593,7 +595,7 @@ public class LoggableImpl
       }
       else
       {
-         result = Collections.EMPTY_LIST;
+         result = Collections.emptyList();
       }
       return result;
    }
@@ -758,10 +760,10 @@ public class LoggableImpl
 
    private final void initThreadContextParameters ()
    {
-       final Iterator i = LogThreadContext.get().entrySet().iterator();
+       final Iterator<Map.Entry<String, String>> i = LogThreadContext.get().entrySet().iterator();
        while (i.hasNext())
        {
-           final Entry entry = (Entry) i.next();
+           final Map.Entry<String, String> entry = (Map.Entry<String, String>) i.next();
            addParameter(
                CONTEXT_PARAMETER_PREFIX + entry.getKey(), 
                String.valueOf(entry.getValue()));
@@ -799,7 +801,7 @@ public class LoggableImpl
              try
              {
                 final String cname = frame.getClassName();
-                final Class clazz = Class.forName(cname);
+                final Class<?> clazz = Class.forName(cname);
                 if (! (Loggable.class.isAssignableFrom(clazz)
                       || LogMessageInfo.class.isAssignableFrom(clazz)))
                 {
@@ -852,7 +854,7 @@ public class LoggableImpl
 
        final Object[] params = loggable.getParameterNames().toArray();
        Arrays.sort(params);
-       final Iterator/*<String>*/ parameterNames
+       final Iterator<Object> parameterNames
            = Arrays.asList(params).iterator();
        while (parameterNames.hasNext())
        {
@@ -886,12 +888,12 @@ public class LoggableImpl
 
 
    private static class ThreadIdHolder
-         extends ThreadLocal
+         extends ThreadLocal<Long>
    {
       private static final long INITIAL_THREAD_ID = 10L;
       private static long sNextThreadId = INITIAL_THREAD_ID;
 
-      protected Object initialValue ()
+      protected Long initialValue ()
       {
          return new Long(sNextThreadId++);
       }

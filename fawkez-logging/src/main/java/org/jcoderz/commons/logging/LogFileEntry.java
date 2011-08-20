@@ -58,7 +58,7 @@ public class LogFileEntry
    private LogFileEntry mEntryCursor;
    private LogFileEntry mRootEntry = null;
 
-   private final Map mFormatMap = new HashMap();
+   private final Map<LogLineFormat.LogLineType, LogLineFormat> mFormatMap = new HashMap<LogLineFormat.LogLineType, LogLineFormat>();
 
    // Flag whether this stack of log file entries has already encountered a
    // stack trace line. This is set for the root element.

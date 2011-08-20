@@ -94,10 +94,6 @@ public abstract class BasicLogLineFormat
 
    private static final String NO_MSG_SYMBOL = "TRACEMSG";
 
-   private final int mNumParameters;
-   private final String mLogFormatPattern;
-
-
    /**
     * Creates a new instance of this and initializes the message format.
     *
@@ -115,8 +111,8 @@ public abstract class BasicLogLineFormat
             + LOGLINE_FORMAT_PATTERN + additionalPattern),
             NUMBER_OF_PARAMETERS + numAdditionalParameters);
 
-      mNumParameters = NUMBER_OF_PARAMETERS + numAdditionalParameters;
-      mLogFormatPattern = LOGLINE_FORMAT_PATTERN + additionalPattern;
+      //UNUSED: mNumParameters = NUMBER_OF_PARAMETERS + numAdditionalParameters;
+      //UNUSED: mLogFormatPattern = LOGLINE_FORMAT_PATTERN + additionalPattern;
    }
 
    /**
@@ -204,7 +200,7 @@ public abstract class BasicLogLineFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence)
+         final List<String> trackingIdSequence)
    {
       setLevel(record.getLevel());
       setTrackingIds(trackingIdSequence);
@@ -277,7 +273,7 @@ public abstract class BasicLogLineFormat
 
          // the last element within the tracking id sequence is the id of the
          // current entry.
-         final List trackingIds = getTrackingIds();
+         final List<String> trackingIds = getTrackingIds();
          entry.setTrackingNumber((String) trackingIds.get(
                trackingIds.size() - 1));
       }
@@ -401,7 +397,7 @@ public abstract class BasicLogLineFormat
     *
     * @param trackingIds The sequence of tracking ids to dump.
     */
-   protected final void setTrackingIds (final List trackingIds)
+   protected final void setTrackingIds (final List<String> trackingIds)
    {
       setParameter(TRACKINGID_INDEX, trackingIds);
    }
@@ -411,9 +407,11 @@ public abstract class BasicLogLineFormat
     *
     * @return Sequence of tracking ids of parsed log line.
     */
-   protected final List getTrackingIds ()
+   protected final List<String> getTrackingIds ()
    {
-      return (List) getParameter(TRACKINGID_INDEX);
+      @SuppressWarnings("unchecked")
+      List<String> result = (List<String>) getParameter(TRACKINGID_INDEX);
+      return result;
    }
 
    /**

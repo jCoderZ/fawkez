@@ -55,12 +55,14 @@ import java.util.NoSuchElementException;
 public final class WhitespaceFormat
       extends Format
 {
+   private static final long serialVersionUID = 1L;
+
    static final char PRESERVED_CHAR = '\u0020';
 
    private final Format mSubFormat;
 
    private static final class WhitespaceIterator
-         implements Iterator
+         implements Iterator<Object>
    {
       private final CharBuffer mBuffer;
 

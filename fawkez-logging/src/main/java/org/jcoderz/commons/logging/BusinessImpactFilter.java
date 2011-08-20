@@ -48,7 +48,7 @@ import org.jcoderz.commons.BusinessImpact;
 public class BusinessImpactFilter
       implements Filter
 {
-   private final Set mAllowedImpacts;
+   private final Set<BusinessImpact> mAllowedImpacts;
 
    /**
     * Creates a new instance of this and sets the business impacts, which will
@@ -58,12 +58,12 @@ public class BusinessImpactFilter
     * @param impacts The list storing passable business impacts in their textual
     * representation.
     */
-   public BusinessImpactFilter (final List impacts)
+   public BusinessImpactFilter (final List<String> impacts)
    {
-      mAllowedImpacts = new HashSet();
+      mAllowedImpacts = new HashSet<BusinessImpact>();
       if (impacts != null)
       {
-         for (final Iterator iter = impacts.iterator(); iter.hasNext(); )
+         for (final Iterator<String> iter = impacts.iterator(); iter.hasNext(); )
          {
             final BusinessImpact impact
                   = BusinessImpact.fromString((String) iter.next());

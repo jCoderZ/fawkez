@@ -140,13 +140,13 @@ public class LogEvent
    }
 
    /** {@inheritDoc} */
-   public List getParameter (String name)
+   public List<Serializable> getParameter (String name)
    {
       return mLoggable.getParameter(name);
    }
 
    /** {@inheritDoc} */
-   public Set getParameterNames ()
+   public Set<String> getParameterNames ()
    {
       return mLoggable.getParameterNames();
    }

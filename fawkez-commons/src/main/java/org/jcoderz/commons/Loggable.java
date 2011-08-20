@@ -78,13 +78,13 @@ public interface Loggable
     * @return a list of serializable objects representing the values
     *       of the parameters with the given name.
     */
-   List getParameter (String name);
+   List<Serializable> getParameter (String name);
 
    /**
     * Returns a set of available parameters.
     * @return a set of available parameters.
     */
-   Set getParameterNames ();
+   Set<String> getParameterNames ();
 
    /**
     * Returns the {@link LogMessageInfo} for this <code>Loggable</code>.

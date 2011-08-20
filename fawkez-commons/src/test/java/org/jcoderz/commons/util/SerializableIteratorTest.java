@@ -39,10 +39,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -62,10 +62,11 @@ public class SerializableIteratorTest
    {
       final String[] testData
             = new String[] {"foo", "bar", "bingo", "bongo", "hallo"};
-      final SerializableIterator si = SerializableIterator.fromArray(testData);
+      final SerializableIterator<Object> si = SerializableIterator.fromArray(testData);
       final byte[] serialized = serialize(si);
-      final SerializableIterator si2
-            = (SerializableIterator) deserialize(serialized);
+      @SuppressWarnings("unchecked")
+      final SerializableIterator<Object> si2
+            = (SerializableIterator<Object>) deserialize(serialized);
       int count = 0;
       while (si2.hasNext())
       {
@@ -79,7 +80,7 @@ public class SerializableIteratorTest
          throws Exception
    {
       final String[] testData = new String[] {"a", "b", "c"};
-      final SerializableIterator si = SerializableIterator.fromArray(testData);
+      final SerializableIterator<Object> si = SerializableIterator.fromArray(testData);
 
       final List<String> testDataAsList = new ArrayList<String>(Arrays.asList(testData));
 
@@ -104,13 +105,13 @@ public class SerializableIteratorTest
 
    public void testWithCollection ()
    {
-      final Set<String> hs = new HashSet<String>();
+      final Collection<Object> hs = new HashSet<Object>();
       hs.add("gandalf");
       hs.add("frodo");
       hs.add("bilbo");
       hs.add("aragorn");
 
-      final SerializableIterator it = SerializableIterator.fromCollection(hs);
+      final SerializableIterator<Object> it = (SerializableIterator<Object>) SerializableIterator.fromCollection(hs);
       while (it.hasNext())
       {
          final String s = (String) it.next();

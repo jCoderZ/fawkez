@@ -94,7 +94,7 @@ public class BasicPrinter
       Assert.notNull(printer, "Printer");
       Assert.notNull(entry, "entry");
       Assert.notNull(entry.getType(), "entry.getType()");
-      final List trackingIds = new ArrayList();
+      final List<String> trackingIds = new ArrayList<String>();
       while (currentEntry != null)
       {
          printEntry(printer, currentEntry, trackingIds);
@@ -124,7 +124,7 @@ public class BasicPrinter
    private void printEntry (
          final PrintWriter printer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       if (! entry.isExceptionItem())
       {
@@ -229,7 +229,7 @@ public class BasicPrinter
    private void printTraceLine (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       int i = 0;
       i = setTimeStamp(i, mTraceLineData, entry);
@@ -252,7 +252,7 @@ public class BasicPrinter
    private void printMessageLine (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       int i = 0;
       i = setTimeStamp(i, mLogMessageData, entry);
@@ -274,9 +274,9 @@ public class BasicPrinter
    private void printParameterLine (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds,
+         final List<String> trackingIds,
          final String parameterName,
-         final List parameterValues)
+         final List<?> parameterValues)
    {
       int i = 0;
       i = setThreadId(i, mParameterLineData, entry);
@@ -293,7 +293,7 @@ public class BasicPrinter
    private void printStackTraceLine (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds,
+         final List<String> trackingIds,
          final StackTraceInfo stacktraceLine)
    {
       int i = 0;
@@ -310,7 +310,7 @@ public class BasicPrinter
    private void printNesting (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       int i = 0;
       i = setThreadId(i, mNestedLineData, entry);
@@ -325,7 +325,7 @@ public class BasicPrinter
    private void printParameters (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
       final StringBuffer source = getPrintableSource(
             entry.getSourceClass(), entry.getSourceMethod());
@@ -349,10 +349,10 @@ public class BasicPrinter
       }
       if (getDisplayOptions().displayParameters())
       {
-         final Set names = entry.getParameterNames();
-         for (final Iterator nameIter = names.iterator(); nameIter.hasNext(); )
+         final Set<String> names = entry.getParameterNames();
+         for (final Iterator<String> nameIter = names.iterator(); nameIter.hasNext(); )
          {
-            final String name = (String) nameIter.next();
+            final String name = nameIter.next();
             printParameterLine(writer, entry, trackingIds,
                   name, entry.getParameterValues(name));
          }
@@ -362,9 +362,9 @@ public class BasicPrinter
    private void printStackTrace (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds)
+         final List<String> trackingIds)
    {
-      for (final Iterator iter = entry.getStackTraceLines().iterator();
+      for (final Iterator<StackTraceInfo> iter = entry.getStackTraceLines().iterator();
             iter.hasNext(); )
       {
          final StackTraceInfo info = (StackTraceInfo) iter.next();
@@ -382,7 +382,7 @@ public class BasicPrinter
    private void printMoreStackTrace (
          final PrintWriter writer,
          final LogItem entry,
-         final List trackingIds,
+         final List<String> trackingIds,
          final StackTraceInfo info)
    {
       final LogItem stackTraceEntry = getEntryForMoreStackTrace(entry, info);
@@ -521,12 +521,12 @@ public class BasicPrinter
    private int setTrackingNumber (
          final int i,
          final Object[] data,
-         final List trackingNumbers)
+         final List<String> trackingIds)
    {
       int rc = i;
       if (getDisplayOptions().displayTrackingNumber())
       {
-         data[rc++] = trackingNumbers;
+         data[rc++] = trackingIds;
       }
       return rc;
    }
@@ -601,7 +601,7 @@ public class BasicPrinter
     * @param newId The number to add to the sequence.
     */
    private void addTrackingNumber (
-         final List trackingIds,
+         final List<String> trackingIds,
          final String newId)
    {
       if (! trackingIds.isEmpty())

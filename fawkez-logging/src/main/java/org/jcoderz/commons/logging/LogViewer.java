@@ -102,21 +102,25 @@ public final class LogViewer
     * The way OptionsBuilder is used is as proposed by the authors
     * of the commonscli package, but cause checkstyle warnings here...
     */
+   @SuppressWarnings("static-access")
    private static final Option LOGFILE_OPTION = OptionBuilder.hasArg()
          .withArgName("logfile").withDescription(
          "open file <logfile> instead of log.out")
          .withValueSeparator().withLongOpt("logFile").create("F");
 
+   @SuppressWarnings("static-access")
    private static final Option LOGDIR_OPTION = OptionBuilder.hasArg()
          .withArgName("logdir").withDescription(
          "find log files within <logdir> instead of ./log")
          .withValueSeparator().withLongOpt("logDir").create("D");
 
-   private static final Option LINES_OPTION = OptionBuilder.hasArg()
-         .withArgName("lines").withDescription(
-         "display <lines> last log records instead of 25")
-         .withValueSeparator().withLongOpt("lines").create("l");
+//   @SuppressWarnings("static-access")
+//   private static final Option LINES_OPTION = OptionBuilder.hasArg()
+//         .withArgName("lines").withDescription(
+//         "display <lines> last log records instead of 25")
+//         .withValueSeparator().withLongOpt("lines").create("l");
 
+   @SuppressWarnings("static-access")
    private static final Option DATE_OPTION = OptionBuilder.hasOptionalArgs()
          .withArgName("dateFrom,dateTo").withDescription(
          "display date [and search for given date/timestamp range. "
@@ -131,10 +135,12 @@ public final class LogViewer
    private static final Option BATCH_OPTION = new Option("b", "batch", false,
          "batch mode, terminate if end of log file reached.");
 
+   @SuppressWarnings("static-access")
    private static final Option OUTFILE_OPTION = OptionBuilder.hasArg()
          .withArgName("file").withDescription("send output to file")
          .withValueSeparator().withLongOpt("outfile").create("o");
 
+   @SuppressWarnings("static-access")
    private static final Option THREADID_OPTION = OptionBuilder.hasOptionalArgs()
          .withArgName("tid1,tid2,...").withDescription(
           "display thread id [and filter for given thread ids")
@@ -143,27 +149,32 @@ public final class LogViewer
    private static final Option XML_OPTION
          = new Option("xml", "output in xml format.");
 
+   @SuppressWarnings("static-access")
    private static final Option STACKTRACE_OPTION = OptionBuilder.hasArgs()
          .withArgName("{0|1|2}").withDescription("display stack trace details; "
          + "0: no stacktrace, 1: only for exceptions (default), "
          + "2: all stack trace")
          .withValueSeparator().create("stack");
 
+   @SuppressWarnings("static-access")
    private static final Option IMPACT_OPTION = OptionBuilder.hasOptionalArgs()
          .withArgName("bi1,bi2,...").withDescription("display business impact "
          + "[and filter for given business impact ids]")
          .withValueSeparator().withLongOpt("impact").create("i");
 
+   @SuppressWarnings("static-access")
    private static final Option CATEGORY_OPTION = OptionBuilder.hasOptionalArgs()
          .withArgName("cat1,cat2,...").withDescription("display category "
          + "[and filter for given categories]")
          .withValueSeparator().withLongOpt("cat").create("c");
 
+   @SuppressWarnings("static-access")
    private static final Option LEVEL_OPTION = OptionBuilder.hasOptionalArgs()
       .withArgName("lev1,lev2,...").withDescription("display log level "
       + "[and filter for given levels]")
       .withValueSeparator().withLongOpt("level").create("L");
 
+   @SuppressWarnings("static-access")
    private static final Option STANDARD_OPTION = OptionBuilder
          .withDescription("set standard mode, same as -t -i -c -L -stack 1")
          .withLongOpt("standard").create("s");
@@ -233,7 +244,7 @@ public final class LogViewer
 
    private CommandLine mCommandLine;
    private DisplayOptions mDisplayOptions;
-   private final List mFilters = new ArrayList();
+   private final List<Filter> mFilters = new ArrayList<Filter>();
    private LogPrinter mDisplay;
 
    private LogReader mLogReader;
@@ -314,7 +325,7 @@ public final class LogViewer
                mCommandLine.getOptionValues(THREADID_OPTION.getOpt()));
          if ((threadIds != null) && (threadIds.length > 0))
          {
-            final List ids = new ArrayList();
+            final List<Long> ids = new ArrayList<Long>();
             for (int i = 0; i < threadIds.length; ++i)
             {
                ids.add(Long.valueOf(threadIds[i]));
@@ -381,10 +392,10 @@ public final class LogViewer
          throws ArgumentMalformedException, java.text.ParseException
    {
       Period [] result = new Period[0];
-      final List vals = new ArrayList();
+      final List<Period> vals = new ArrayList<Period>();
       for (int i = 0; i < optionValues.length; i++)
       {
-         final List values = new ArrayList();
+         final List<String> values = new ArrayList<String>();
          final StringTokenizer tokens = new StringTokenizer(
                optionValues[i], ",");
          while (tokens.hasMoreTokens())
@@ -479,7 +490,7 @@ public final class LogViewer
       String[] rc = null;
       if (optionValues != null)
       {
-         final List values = new ArrayList();
+         final List<String> values = new ArrayList<String>();
          for (int i = 0; i < optionValues.length; ++i)
          {
             final StringTokenizer tokens = new StringTokenizer(
@@ -766,7 +777,7 @@ public final class LogViewer
     */
    private void setFilters (final LogReader logReader)
    {
-      for (final Iterator iter = mFilters.iterator(); iter.hasNext(); )
+      for (final Iterator<Filter> iter = mFilters.iterator(); iter.hasNext(); )
       {
          logReader.addFilter((Filter) iter.next());
       }

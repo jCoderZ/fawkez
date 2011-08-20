@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.logging.LogRecord;
 
 import org.jcoderz.commons.Loggable;
-import org.jcoderz.commons.util.StringUtil;
 
 /**
  * This class is used for formatting the stack trace of a Throwable or for
@@ -92,7 +91,7 @@ public final class StackTraceFormat
          final DisplayOptions options,
          final boolean ignoreOptions)
    {
-      final List formatList = new ArrayList();
+      final List<Format> formatList = new ArrayList<Format>();
       if (ignoreOptions || options.displayThreadId())
       {
          // thread id
@@ -126,7 +125,7 @@ public final class StackTraceFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Object parameter)
    {
@@ -180,7 +179,7 @@ public final class StackTraceFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final boolean topLevel)
    {
@@ -198,7 +197,7 @@ public final class StackTraceFormat
          final StringBuffer sb,
          final LogRecord record,
          final Loggable loggable,
-         final List trackingIdSequence,
+         final List<String> trackingIdSequence,
          final Throwable thrown,
          final Throwable outerTrace)
    {

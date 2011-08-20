@@ -57,8 +57,6 @@ import org.jcoderz.commons.util.StringUtil;
 public class DevelopersLogFormatter
       extends Formatter
 {
-   private final ThreadLocal mMessageFormatters = new ThreadLocal();
-
    private static final String LINE_SEPARATOR
        = System.getProperty("line.separator");
    private static final int LOCATION_LENGTH = 30;
@@ -73,12 +71,11 @@ public class DevelopersLogFormatter
    public String format (LogRecord record)
    {
       final StringBuffer sb = new StringBuffer();
-      Loggable loggable = null;
       if (record.getParameters() != null && record.getParameters().length > 0)
       {
          if (record.getParameters()[0] instanceof Loggable)
          {
-            loggable = (Loggable) record.getParameters()[0];
+            /*TODO: loggable = (Loggable) record.getParameters()[0];*/
          }
       }
 
@@ -204,7 +201,7 @@ public class DevelopersLogFormatter
    private static void formatArgumentsCompact (StringBuffer sb,
        Object[] parameters)
    {
-       final Iterator i = Arrays.asList(parameters).iterator();
+       final Iterator<Object> i = Arrays.asList(parameters).iterator();
        while (i.hasNext())
        {
            Object parameter = i.next();
