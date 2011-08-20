@@ -33,7 +33,7 @@
 package org.jcoderz.commons.taskdefs;
 
 import java.io.File;
-import org.apache.tools.ant.BuildException;
+
 import org.apache.tools.ant.Location;
 import org.apache.tools.ant.Project;
 import org.jcoderz.commons.TestCase;
@@ -48,7 +48,6 @@ import org.jcoderz.commons.TestCase;
 public class LogMessageGeneratorTest
       extends TestCase
 {
-   private LogMessageGenerator mGenerator;
    private File mDestDir;
 
    /** {@inheritDoc} */
@@ -73,9 +72,10 @@ public class LogMessageGeneratorTest
       project.setBaseDir(getBaseDir());
       project.setName("JUnit test");
       g.setProject(project);
-      mGenerator = g;
+      //mGenerator = g;
    }
 /*
+   private LogMessageGenerator mGenerator;
    public void testExecute ()
    {
       mGenerator.execute();
@@ -120,12 +120,7 @@ public class LogMessageGeneratorTest
    {
       mGenerator.setXsl("bogus.xsl"); // -> use default stylesheet 
    }
-*/
 
-   public void testXyz ()
-   {
-	   
-   }
    private void executeAndExpectBuildException (String msg)
    {
       try
@@ -139,6 +134,12 @@ public class LogMessageGeneratorTest
           System.err.println("" + expected);
           expected.printStackTrace();
       }
+   }
+*/
+
+   public void testXyz ()
+   {
+	   
    }
 
    static File mkdir (String relativePath)
