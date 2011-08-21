@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jcoderz.fawkez</groupId>
+    <artifactId>fawkez-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>This is the Maven base project for the FawkeZ modules.</description>
+    <url>http://www.jcoderz.org/fawkez/</url>
+    <modules>
+        <module>fawkez-bootstrap</module>
+        <module>fawkez-commons</module>
+        <module>fawkez-logging</module>
+		<module>fawkez-codegen</module>
+    </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <!-- Restrict execution of source compilation to 
+                            install -->
+                        <phase>install</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <name>fawkez-parent</name>
+    <organization>
+        <name>jCoderZ</name>
+        <url>http://www.jcoderz.org/</url>
+    </organization>
+    <scm>
+        <developerConnection>scm:svn:https://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</developerConnection>
+        <connection>scm:svn:http://www.jcoderz.org/svn/fawkez/trunk-ng/fawkez-parent/</connection>
+        <tag>HEAD</tag>
+        <url>http://www.jcoderz.org/fawkez/browser/trunk-ng/fawkez-parent</url>
+    </scm>
+    <issueManagement>
+        <system>trac</system>
+        <url>http://www.jcoderz.org/fawkez</url>
+    </issueManagement>
+    <repositories>
+        <repository>
+            <id>jcoderz-snapshot</id>
+            <name>jCoderZ Snapshots</name>
+            <url>http://www.jcoderz.org/repos/maven2-snapshot</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>jcoderz-repo</id>
+            <name>jCoderZ Maven Repository</name>
+            <url>http://www.jcoderz.org/repos/maven2</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>jcoderz-repo</id>
+            <name>jCoderZ Maven Repository</name>
+            <url>${secretRepositoryHost}/repos/maven2</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>jcoderz-snapshot</id>
+            <name>jCoderZ Snapshots</name>
+            <url>${secretRepositoryHost}/repos/maven2-snapshot</url>
+            <layout>default</layout>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

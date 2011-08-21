@@ -8,14 +8,13 @@
 	<description>This package contains base classes for the FawkeZ project that do not have dependencies
     to other FawkeZ modules.</description>
 	<url>http://www.jcoderz.org/fawkez/</url>
-<!--  Parent includes child poms policy 	
 	<parent>
 		<groupId>org.jcoderz.fawkez</groupId>
 		<artifactId>fawkez</artifactId>
 		<version>${VERSION_NUMBER}</version>
 		<relativePath>../fawkez-parent</relativePath>
 	</parent>
- -->
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
