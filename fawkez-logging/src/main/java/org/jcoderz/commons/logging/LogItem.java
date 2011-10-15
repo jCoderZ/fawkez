@@ -357,7 +357,7 @@ public abstract class LogItem
 
    public List<?> getParameterValues (final String parameterName)
    {
-      final List<?> parameterValues = (List) mParameters.get(parameterName);
+      final List<?> parameterValues = (List<?>) mParameters.get(parameterName);
       final List<?> rc = (parameterValues == null)
             ? null : Collections.unmodifiableList(parameterValues);
       return rc;

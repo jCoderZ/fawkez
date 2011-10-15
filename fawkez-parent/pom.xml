@@ -6,20 +6,6 @@
 	<name>fawkez</name>
 	<version>${VERSION_NUMBER}</version>
 	<packaging>pom</packaging>
-	<description>This is the Maven base project for the FawkeZ modules.</description>
-	<url>http://www.jcoderz.org/fawkez/</url>
-	<organization>
-		<name>jCoderZ</name>
-		<url>http://www.jcoderz.org/</url>
-	</organization>
-
-	<modules>
-		<module>../fawkez-bootstrap</module>
-		<module>../fawkez-commons</module>
-		<module>../fawkez-logging</module>
-		<module>../fawkez-codegen</module>
-	</modules>
-
 	<properties>
 	    <!-- This mus be overwritten from external to deploy to jcoderz.org -->
 	    <secretRepositoryHost>file:/C:/</secretRepositoryHost>
@@ -33,6 +19,19 @@
 		<isRelease>true</isRelease>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<description>This is the Maven base project for the FawkeZ modules.</description>
+	<url>http://www.jcoderz.org/fawkez/</url>
+	<organization>
+		<name>jCoderZ</name>
+		<url>http://www.jcoderz.org/</url>
+	</organization>
+
+	<modules>
+		<module>../fawkez-bootstrap</module>
+		<module>../fawkez-commons</module>
+		<module>../fawkez-logging</module>
+		<module>../fawkez-codegen</module>
+	</modules>
 
 	<scm>
   		<developerConnection>scm:svn:${svnRepoBase}</developerConnection>
