@@ -106,32 +106,40 @@
                 <artifactId>maven-jaxb-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>jaxb-report</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                          <includeSchemas>
+                            <includeSchema>report.xsd</includeSchema>
+                          </includeSchemas>
+                        </configuration>
                     </execution>
-                </executions>
-                <configuration>
-                    <includeSchemas>
-                      <includeSchema>report.xsd</includeSchema>
-                    </includeSchemas>
-                    <extension>true</extension>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.sun.tools.xjc.maven2</groupId>
-                <artifactId>maven-jaxb-plugin</artifactId>
-                <executions>
                     <execution>
+                        <id>jaxb-findbugs</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                          <includeSchemas>
+                            <includeSchema>findbugs.xsd</includeSchema>
+                          </includeSchemas>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jaxb-checkstyle</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                          <includeSchemas>
+                            <includeSchema>checkstyle.xsd</includeSchema>
+                          </includeSchemas>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
-                   <includeSchemas>
-                      <includeSchema>*.xsd</includeSchema>
-                    </includeSchemas>
                     <extension>true</extension>
                 </configuration>
             </plugin>
