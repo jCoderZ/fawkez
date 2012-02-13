@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: report.xsd 1454 2009-05-10 11:06:43Z amandel $ -->
+
+<!-- XML schema for checkstyle 3.1 XMLLogger output -->
+<xsd:schema
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   xmlns:report="http://www.jcoderz.org/phoenix/report"
+   jxb:extensionBindingPrefixes="xjc"
+   jxb:version="1.0">
+
+   <xsd:import namespace="http://www.jcoderz.org/phoenix/report"
+               schemaLocation="report-types.xsd" />
+
+
+   <!-- copied from JAXB sample schema -->
+   <xsd:annotation>
+      <xsd:appinfo>
+
+         <jxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            collectionType="java.util.ArrayList"
+            typesafeEnumBase="xsd:NCName"
+            choiceContentProperty="true"
+            typesafeEnumMemberName="generateError"
+            enableFailFastCheck="false"
+            generateIsSetMethod="true"
+            underscoreBinding="asCharInWord">
+            <jxb:javaType name="org.jcoderz.commons.types.Date" 
+              xmlType="xsd:dateTime" 
+              printMethod="toString"   
+              parseMethod="org.jcoderz.commons.util.XsdUtil.fromDateTimeString"/>
+            <xjc:serializable uid="106"/>
+         </jxb:globalBindings>
+         <jxb:schemaBindings>
+            <jxb:package name="org.jcoderz.phoenix.report.jaxb"/>
+        <!--
+            <jxb:nameXmlTransform>
+               <jxb:elementName suffix="Element"/>
+            </jxb:nameXmlTransform>
+         -->
+         </jxb:schemaBindings>
+      </xsd:appinfo>
+   </xsd:annotation>
+
+ <xsd:element name='item'>
+  <xsd:complexType>
+   <xsd:attribute name='message' type='xsd:string' use='optional'/>
+   <xsd:attribute name='severity'
+      type='report:Severity' use='optional' default='info'/>
+   <!-- severity-reason should be used if a filter reduces the severity -->
+   <xsd:attribute name='severity-reason' type='xsd:string' use='optional'/>
+   <xsd:attribute name='origin' type='report:Origin' use='required'/>
+   <xsd:attribute name='finding-type' type='xsd:string' use='required'/>
+   <xsd:attribute name='counter' type='xsd:int' use='optional'/>
+   <xsd:attribute name='column' type='xsd:int' use='optional'/>
+   <xsd:attribute name='end-column' type='xsd:int' use='optional'/>
+   <xsd:attribute name='line' type='xsd:int' use='optional'/>
+   <xsd:attribute name='end-line' type='xsd:int' use='optional'/>
+   <xsd:attribute name='new' type='xsd:boolean' use='optional'/>
+   <xsd:attribute name='old' type='xsd:boolean' use='optional'/>
+   <xsd:attribute name='since' type='xsd:dateTime' use='optional'/>
+   <xsd:attribute name='global' type='xsd:boolean' use='optional'/>
+   <!-- The text that caused the finding used to highlight 
+        the right source position. -->
+   <xsd:attribute name='source-text' type='xsd:string' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='file'>
+  <xsd:complexType>
+   <xsd:sequence minOccurs='0' maxOccurs='unbounded'>
+    <xsd:element ref='item'/>
+   </xsd:sequence>
+   <xsd:attribute name='name' type='xsd:string' use='optional'/>
+   <xsd:attribute name='loc' type='xsd:int' use='optional'/>
+   <xsd:attribute name='classname' type='xsd:string' use='optional'/>
+   <xsd:attribute name='package' type='xsd:string' use='optional'/>
+   <xsd:attribute name='src-dir' type='xsd:string' use='optional'/>
+   <!-- level denotes the type of source -->
+   <xsd:attribute name='level' use='required' type='report:ReportLevel'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='report'>
+  <xsd:complexType>
+   <xsd:sequence minOccurs='0' maxOccurs='unbounded'>
+    <xsd:element ref='file'/>
+   </xsd:sequence>
+   <xsd:attribute name='name' type='xsd:string' use='optional'/>
+   <xsd:attribute name='project-home' type='xsd:string' use='optional'/>
+   <xsd:attribute name='cvs-base' type='xsd:string' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>
