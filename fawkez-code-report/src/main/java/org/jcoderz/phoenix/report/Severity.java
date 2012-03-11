@@ -70,7 +70,7 @@ import edu.umd.cs.findbugs.Detector;
  * @author Andreas Mandel
  */
 public final class Severity
-        implements Serializable, Comparable
+        implements Serializable, Comparable<Severity>
 {
     /**
      * Scale of the penalty points. One penalty point marks  
@@ -96,7 +96,8 @@ public final class Severity
     private final transient String mName;
 
     /** Maps a string representation to an enumerated value. */
-    private static final Map FROM_STRING = new HashMap();
+    private static final Map<String, Severity> FROM_STRING 
+    	= new HashMap<String, Severity>();
 
     /** 
      * Severity for filtered findings.
@@ -194,7 +195,7 @@ public final class Severity
     };
 
     /** Immutable list of the severities. */
-    public static final List VALUES =
+    public static final List<Severity> VALUES =
         Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));
 
 
@@ -242,7 +243,7 @@ public final class Severity
     public static Severity fromString (String str)
             throws IllegalArgumentException
     {
-        final Severity result = (Severity) FROM_STRING.get(str);
+        final Severity result = FROM_STRING.get(str);
         if (result == null)
         {
             throw new IllegalArgumentException(
@@ -281,9 +282,9 @@ public final class Severity
     }
 
     /** {@inheritDoc} */
-    public int compareTo (Object o)
+    public int compareTo (Severity o)
     {
-        return mOrdinal - ((Severity) o).mOrdinal;
+        return mOrdinal - o.mOrdinal;
     }
 
     /** {@inheritDoc} */

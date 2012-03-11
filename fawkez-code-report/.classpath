@@ -15,7 +15,7 @@
 	<classpathentry kind="src" path="target/generated-sources/xjc/jcoverage"/>
 	<classpathentry kind="src" path="target/generated-sources/xjc/findbugs-messagecollection"/>
 	<classpathentry kind="src" path="target/generated-sources/xjc/pmd-ruleset"/>
-	<classpathentry kind="src" output="target/classes" path="src/main/resources"/>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
