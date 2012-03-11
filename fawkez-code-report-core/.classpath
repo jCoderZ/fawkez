@@ -6,15 +6,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="target/generated-sources/xjc/pmd-cpd"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/checkstyle"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/pmd"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/findbugs"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/cobertura"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/checkstyle-message"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/jcoverage"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/findbugs-messagecollection"/>
-	<classpathentry kind="src" path="target/generated-sources/xjc/pmd-ruleset"/>
+	<classpathentry kind="src" path="target/generated-sources/xjc-ftf"/>
+	<classpathentry kind="src" path="target/generated-sources/xjc-report"/>
 	<classpathentry excluding="**" including="**/*.java" kind="src" output="target/classes" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
@@ -22,13 +15,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/classes" path="target/generated-fawkez-main">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="target/generated-fawkez-test">
+	<classpathentry kind="src" output="target/classes" path="target/generated-sources/fawkez">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<simpleTypes>
+
+<!-- ===============================================================
+     TYPE-SAFE ENUMERATIONS
+     =============================================================== -->
+   <typeSafeEnumerations>
+      <enumeration
+         classname="RelationType"
+         package="org.jcoderz.phoenix.dependency">
+         <description>
+           Enumeration that describes the kind of dependency
+           that one type has with an other.
+         </description>
+         <value 
+           description="This class is derived from the other class">Derived</value>
+         <value 
+           description="This class implements from the other interface">Implements</value>
+         <value 
+           description="This class uses the other as generic type.">Generic Type</value>
+         <value
+            description="This class has a static member of the other type.">Static Member</value>
+         <value
+            description="Instances of this class have a outer class relation ship to the other type.">Outer Class</value>
+         <value
+            description="Instances of this class have a member of the other type.">Member</value>
+         <value
+            description="The other class is used as a argument in a static method of this class.">Static Argument</value>
+         <value
+            description="The other class is used as a argument in a method of this class.">Argument</value>
+         <value
+            description="The other class is used as field in a static method of this class.">Static Field</value>
+         <value
+            description="The other class is used as field in a method of this class.">Field</value>
+         <value
+            description="The other class is used in a unused import in this class.">Unused Import</value>
+      </enumeration>
+
+      <enumeration
+         classname="ReportInterval"
+         package="org.jcoderz.phoenix.report">
+         <value
+            description="Single builds">Build</value>
+         <value>Day</value>
+         <value>Week</value>
+         <value>Month</value>
+         <value
+            description="Select old findings, not listed before.">Old</value>
+      </enumeration>
+
+      <enumeration
+         jaxb-adapter="true"
+         classname="ReportLevel"
+         package="org.jcoderz.phoenix.report">
+         <value>prod</value>
+         <value>misc</value>
+         <value>test</value>
+      </enumeration>
+
+      <enumeration
+         classname="ReportFormat"
+         package="org.jcoderz.phoenix.report">
+         <value>sourceDirectory</value>
+         <value>jcoderz</value>
+         <value>checkstyle</value>
+         <value>jcoverage</value>
+         <value>findbugs</value>
+         <value>pmd</value>
+         <value>cpd</value>
+         <value>cobertura</value>
+         <value>emma</value>
+         <value>generic</value>
+      </enumeration>
+
+      <enumeration
+         classname="OutputFormat"
+         package="org.jcoderz.phoenix.report">
+         <value>xml</value>
+         <value>html</value>
+      </enumeration>
+
+      <!--enumeration  more methods!
+         classname="Severity"
+         package="org.jcoderz.phoenix.report">
+         <value>filtered</value>
+         <value>false-positive</value>
+         <value>ok</value>
+         <value>info</value>
+         <value>coverage</value>
+         <value>cpd</value>
+         <value>warning</value>
+         <value>error</value>
+      </enumeration-->
+
+   </typeSafeEnumerations>
+
+<!-- ===============================================================
+     RESTRICTED STRINGS
+     =============================================================== -->
+   <restrictedStrings>
+      <restrictedString
+         jaxb-adapter="true"
+         classname="Origin"
+         package="org.jcoderz.phoenix.report"
+         min-length="1"
+         max-length="15"
+         regex="[A-Za-z0-9]*">
+         <constant 
+            name="PMD" value="PMD"
+            comment="PMD findings report http://pmd.sf.net/"/>"
+         <constant 
+            name="CPD" value="CPD"
+            comment="Copy &amp; Paste report http://pmd.sf.net/"/>"
+         <constant 
+            name="CHECKSTYLE" value="Checkstyle"
+            comment="Checkstyle findings report http://checkstyle.sf.net/"/>"
+         <constant 
+            name="FINDBUGS" value="Findbugs"
+            comment="Findbugs findings report http://findbugs.sf.net/"/>"
+         <constant 
+            name="COVERAGE" value="Coverage"
+            comment="Emma http://emma.sf.net or Cobertura http://cobertura.sf.net
+                     coverage report."/>"
+         <constant 
+            name="JAVA_DOC" value="JavaDoc"
+            comment="JavaDoc messages http://java.sun.com/j2se/javadoc/."/>"
+         <constant 
+            name="SYSTEM" value="System"
+            comment="jcoderz report merger system errors."/>"
+      </restrictedString>
+
+   </restrictedStrings>
+
+<!-- ===============================================================
+     RESTRICTED LONGS
+     =============================================================== -->
+   <restricted-longs>
+   </restricted-longs>
+   
+   
+<!-- ===============================================================
+     VALUE OBJECTS
+     =============================================================== -->
+   <valueObjects>
+   </valueObjects>   
+</simpleTypes>

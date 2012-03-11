@@ -252,6 +252,35 @@
             payee of this settlement
          </member>
       </valueObject> -->
+      <valueObject
+         classname="JpaValueObject"
+         package="org.jcoderz.commons.types.samples"
+         serializable="true"
+         final="false">
+         <annotation>
+            @javax.persistence.Entity
+            @javax.persistence.Table(name = "MEDIA_FILES")
+         </annotation>
+         <description>The Bar is documented here!</description>
+         <member
+            name="Id"
+            type="long">
+            <property-annotation>
+                @javax.persistence.Id
+                @javax.persistence.Column(name = "ID", length = 36, nullable = false, columnDefinition = "char(36)")
+            </property-annotation>
+            <decription>unique identifier for Foo</decription>
+         </member>
+         <member
+            name="Creation Date"
+            type="java.util.Date">
+            <property-annotation>
+                @javax.persistence.Column(name = "LAST_MODIFIED")
+                @javax.persistence.Temporal(javax.persistence.TemporalType.TIMESTAMP)
+            </property-annotation>
+            <decription>creation date of Buz</decription>
+         </member>
+      </valueObject>
    </valueObjects>
 
   <fixPointNumbers>

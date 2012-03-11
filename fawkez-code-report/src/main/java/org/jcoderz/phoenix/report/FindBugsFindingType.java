@@ -41,7 +41,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.jcoderz.phoenix.findbugs.message.jaxb.BugPatternType;
-import org.jcoderz.phoenix.findbugs.message.jaxb.MessageCollection;
+import org.jcoderz.phoenix.findbugs.message.jaxb.MessageCollectionType;
 
 
 /**
@@ -117,8 +117,8 @@ public final class FindBugsFindingType extends FindingType
         logger.finest("Try to unmarshalling " + messagesFile);
 
         final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        final MessageCollection messageCollection 
-            = (MessageCollection) unmarshaller.unmarshal(
+        final MessageCollectionType messageCollection 
+            = (MessageCollectionType) unmarshaller.unmarshal(
                     FindBugsFindingType.class.getClassLoader()
                         .getResourceAsStream(messagesFile));
 

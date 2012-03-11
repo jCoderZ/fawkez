@@ -1294,7 +1294,7 @@ public final class Java2Html
       final Iterator<Item> result;
       if (findingsInLine == null)
       {
-         result = EmptyIterator.EMPTY_ITERATOR;
+         result = ((List<Item>) Collections.EMPTY_LIST).iterator();
       }
       else
       {

@@ -35,6 +35,7 @@ package org.jcoderz.phoenix.report;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,13 +46,12 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 
 import org.jcoderz.phoenix.findbugs.jaxb.BugCollection;
-import org.jcoderz.phoenix.findbugs.jaxb.BugInstanceType;
+import org.jcoderz.phoenix.findbugs.jaxb.BugInstance;
 import org.jcoderz.phoenix.findbugs.jaxb.Class;
 import org.jcoderz.phoenix.findbugs.jaxb.Field;
 import org.jcoderz.phoenix.findbugs.jaxb.Int;
 import org.jcoderz.phoenix.findbugs.jaxb.Method;
 import org.jcoderz.phoenix.findbugs.jaxb.SourceLine;
-import org.jcoderz.phoenix.findbugs.jaxb.SourceLineType;
 import org.jcoderz.phoenix.report.jaxb.Item;
 import org.jcoderz.phoenix.report.jaxb.ObjectFactory;
 
@@ -100,27 +100,24 @@ public final class FindBugsReportReader
    {
       final Map itemMap = new HashMap();
 
-      final List bugInstances = mReportDocument.getBugInstance();
+      final List<BugInstance> bugInstances = mReportDocument.getBugInstance();
       logger.fine("Found #" + bugInstances.size() + " FindBugs bug instances!");
 
       final List sourceDirs
          = mReportDocument.getProject().getSrcDir();
       logger.finer("Using source dir '" + sourceDirs + "'");
 
-      for (final Iterator iterator = bugInstances.iterator();
-            iterator.hasNext();)
+      for (BugInstance bugInstance : bugInstances) 
       {
-         final BugInstanceType bugInstance = (BugInstanceType) iterator.next();
 
-         final List list = bugInstance.getClassOrFieldOrMethod();
+         final List<Object> list = bugInstance.getClazzOrFieldOrMethod();
          final Item item = new ObjectFactory().createItem();
          final List objectMessageList = new ArrayList();
 
          item.setMessage(bugInstance.getLongMessage());
          boolean topLevelSourceLineRead = false;
-         for (final Iterator iter = list.iterator(); iter.hasNext();)
+         for (Object element : list) 
          {
-            final Object element = iter.next();
             objectMessageList.add(toString(element));
             if (element instanceof Class)
             {
@@ -193,7 +190,7 @@ public final class FindBugsReportReader
                {
                   logger.finer("Adding source line information for method"
                         + " to item " + item.getFindingType());
-                  final SourceLineType sourceLine
+                  final SourceLine sourceLine
                         = ((Method) element).getSourceLine();
                   if (sourceLine.isSetStart())
                   {

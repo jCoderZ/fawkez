@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: jcoverage.xsd 1011 2008-06-16 17:57:36Z amandel $ -->
+
+
+<xsd:schema
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   jxb:extensionBindingPrefixes="xjc" 
+   jxb:version="1.0">
+
+   <!-- copied from JAXB sample schema -->
+   <xsd:annotation>
+      <xsd:appinfo>
+      
+         <jxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            collectionType="java.util.ArrayList"
+            typesafeEnumBase="xsd:NCName"
+            choiceContentProperty="true"
+            typesafeEnumMemberName="generateError"
+            enableFailFastCheck="false"
+            generateIsSetMethod="true"
+            underscoreBinding="asCharInWord">
+            <xjc:serializable uid="106"/>
+         </jxb:globalBindings>
+         <jxb:schemaBindings>
+            <jxb:package name="org.jcoderz.phoenix.jcoverage.jaxb"/>
+
+        <!--
+            <jxb:nameXmlTransform>
+               <jxb:elementName suffix="Element"/>
+            </jxb:nameXmlTransform>
+         -->
+         </jxb:schemaBindings>
+      </xsd:appinfo>
+   </xsd:annotation>
+
+ <xsd:element name='branch'>
+  <xsd:complexType>
+   <xsd:attribute name='rate' type='xsd:NMTOKEN' use='required'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='class'>
+         <xsd:annotation>
+            <xsd:appinfo>
+               <jxb:class name="clazz"/>
+            </xsd:appinfo>
+         </xsd:annotation>
+  <xsd:complexType>
+       <xsd:sequence>
+        <xsd:element ref='file'/>
+<!-- ????        <xsd:element ref='line'/>  -->
+        <xsd:element ref='branch'/>
+        <xsd:element ref='methods'/>
+        <xsd:element ref='valid' minOccurs='0' maxOccurs='1'/>
+        <xsd:element ref='line' minOccurs='0' maxOccurs='unbounded'>
+         <xsd:annotation>
+            <xsd:appinfo>
+               <jxb:property name="coveredLines"/>
+            </xsd:appinfo>
+         </xsd:annotation>
+        </xsd:element>
+       </xsd:sequence>
+       <xsd:attribute name='name' type='xsd:string' use='required'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='coverage'>
+  <xsd:complexType>
+   <xsd:sequence minOccurs='0' maxOccurs='unbounded'>
+         <xsd:annotation>
+            <xsd:appinfo>
+               <jxb:property name="clazzes"/>
+            </xsd:appinfo>
+         </xsd:annotation>
+      <xsd:element ref="class">
+      </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name='src' type='xsd:string' use='required'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='file'>
+  <xsd:complexType>
+   <xsd:attribute name='name' type='xsd:string' use='required'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='line'>
+  <xsd:complexType>
+   <xsd:attribute name='hits' type='xsd:int' use='optional'/>
+   <xsd:attribute name='number' type='xsd:int' use='optional'/>
+   <xsd:attribute name='rate' type='xsd:float' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='method'>
+  <xsd:complexType mixed='true'>
+   <xsd:choice minOccurs='0' maxOccurs='unbounded'>
+    <xsd:element ref='branch'/>
+    <xsd:element ref='line'/>
+   </xsd:choice>
+   <xsd:attribute name='nameAndSignature' type='xsd:string' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='methods'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='method' minOccurs='0' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='valid'>
+  <xsd:complexType>
+   <xsd:attribute name='lines' type='xsd:string' use='required'/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

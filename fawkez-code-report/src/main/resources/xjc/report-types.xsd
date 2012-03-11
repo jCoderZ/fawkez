@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id$ -->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.jcoderz.org/phoenix/report"
+            xmlns="http://www.jcoderz.org/phoenix/report"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jxb:extensionBindingPrefixes="xjc"
+            jxb:version="1.0">
+
+   <xsd:simpleType name='Severity'>
+      <xsd:annotation>
+         <xsd:appinfo>
+            <xjc:javaType name="org.jcoderz.phoenix.report.Severity"
+                          adapter="org.jcoderz.phoenix.report.SeverityAdapter"
+                          />
+         </xsd:appinfo>
+      </xsd:annotation>
+      <xsd:restriction base='xsd:string'>
+         <xsd:enumeration value='filtered'/>
+         <xsd:enumeration value='ok'/>
+         <xsd:enumeration value='coverage'/>
+         <xsd:enumeration value='info'/>
+         <xsd:enumeration value='code-style'/>
+         <xsd:enumeration value='design'/>
+         <xsd:enumeration value='warning'/>
+         <xsd:enumeration value='cpd'/>
+         <xsd:enumeration value='error'/>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+    <xsd:simpleType name='Origin'>
+       <xsd:annotation>
+          <xsd:appinfo>
+             <xjc:javaType name="org.jcoderz.phoenix.report.Origin"
+              adapter="org.jcoderz.phoenix.report.OriginAdapter"/>
+          </xsd:appinfo>
+       </xsd:annotation>
+        <xsd:restriction base='xsd:string'>
+            <xsd:maxLength value="15"/>
+            <xsd:minLength value="1"/>
+            <xsd:pattern value="[A-Za-z0-9]*"/>
+<!-- 
+           <xsd:enumeration value='PMD'/>
+           <xsd:enumeration value='Checkstyle'/>
+           <xsd:enumeration value='Findbugs'/>
+           <xsd:enumeration value='Coverage'/>
+           <xsd:enumeration value='CPD'/> <!- - cut'n'paste detector - ->
+           <xsd:enumeration value='System'/>
+           <xsd:enumeration value='JavaDoc'/>  -->
+        <!-- Might need to open this up to allow dynamic addition of new
+             bug hunters -->
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name='ReportLevel'>
+       <xsd:annotation>
+          <xsd:appinfo>
+             <xjc:javaType name="org.jcoderz.phoenix.report.ReportLevel"
+                           adapter="org.jcoderz.phoenix.report.ReportLevelAdapter"/>
+          </xsd:appinfo>
+       </xsd:annotation>
+       <xsd:restriction base='xsd:string'>
+      <xsd:enumeration value='prod'/>
+      <xsd:enumeration value='test'/>
+      <xsd:enumeration value='misc'/>
+      <!-- Might need to open this up to allow dynamic addition of new
+           source types -->
+     </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

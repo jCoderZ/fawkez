@@ -57,6 +57,7 @@ import org.jcoderz.commons.types.Date;
 import org.jcoderz.commons.util.Assert;
 import org.jcoderz.commons.util.FileUtils;
 import org.jcoderz.commons.util.IoUtil;
+import org.jcoderz.commons.util.JaxbUtil;
 import org.jcoderz.commons.util.LoggingUtils;
 import org.jcoderz.commons.util.ObjectUtil;
 import org.jcoderz.commons.util.StringUtil;
@@ -117,8 +118,11 @@ public class ReportMerger
         logger.log(Level.FINE, "Report: " + reportFile);
         try
         {
-           final Report report = (Report) new ObjectFactory()
-                 .createUnmarshaller().unmarshal(reportFile);
+     	   final JAXBContext ctx 
+   	   		= JAXBContext.newInstance(new Class[] {Report.class});
+        	
+           final Report report 
+           	= (Report) ctx.createUnmarshaller().unmarshal(reportFile);
            mergedReport.getFile().addAll(report.getFile());
         }
         catch (JAXBException ex)
@@ -170,11 +174,14 @@ public class ReportMerger
        logger.log(Level.FINE, "Searching for NEW findings...");
        try
        {
+    	   final JAXBContext ctx 
+    	   		= JAXBContext.newInstance(new Class[] {Report.class});
+           
            final Report currentReport 
-               = (Report) new ObjectFactory().createUnmarshaller().unmarshal(
+               = (Report) ctx.createUnmarshaller().unmarshal(
                    mOutFile);
            final Report oldReport 
-               = (Report) new ObjectFactory().createUnmarshaller().unmarshal(
+               = (Report) ctx.createUnmarshaller().unmarshal(
                    mOldReport);
            for (org.jcoderz.phoenix.report.jaxb.File newFile 
                : (List<org.jcoderz.phoenix.report.jaxb.File>) 

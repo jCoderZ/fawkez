@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: findbugs-message.xsd 80 2006-01-25 10:06:04Z mgriffel $ -->
+
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<jxb:bindings schemaLocation="messagecollection.xsd" node="/xs:schema">
+		<jxb:globalBindings fixedAttributeAsConstantProperty="true"
+			collectionType="java.util.ArrayList" typesafeEnumBase="xsd:NCName"
+			choiceContentProperty="true" typesafeEnumMemberName="generateError"
+			enableFailFastCheck="false" generateIsSetMethod="true"
+			underscoreBinding="asCharInWord">
+			<xjc:serializable uid="106"/>
+		</jxb:globalBindings>
+		<jxb:schemaBindings>
+			<jxb:package name="org.jcoderz.phoenix.findbugs.message.jaxb"/>
+		</jxb:schemaBindings>
+		<jxb:bindings node="//xs:attribute[@name='class']">
+			<jxb:property name="clazz"/>
+		</jxb:bindings>
+	</jxb:bindings>
+</jxb:bindings>

@@ -46,7 +46,7 @@ import javax.xml.bind.JAXBException;
 
 import org.jcoderz.phoenix.jcoverage.jaxb.Clazz;
 import org.jcoderz.phoenix.jcoverage.jaxb.Coverage;
-import org.jcoderz.phoenix.jcoverage.jaxb.LineType;
+import org.jcoderz.phoenix.jcoverage.jaxb.Line;
 import org.jcoderz.phoenix.report.jaxb.Item;
 import org.jcoderz.phoenix.report.jaxb.ObjectFactory;
 
@@ -107,7 +107,7 @@ public class JCoverageReportReader
          for (final Iterator i = clazz.getCoveredLines().iterator(); 
              i.hasNext(); )
          {
-            final LineType line = (LineType) i.next();
+            final Line line = (Line) i.next();
             final Item item = new ObjectFactory().createItem();
             item.setOrigin(Origin.COVERAGE);
             item.setCounter(line.getHits());

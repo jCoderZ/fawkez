@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pmd-ruleset.xsd 1011 2008-06-16 17:57:36Z amandel $ -->
+
+<xsd:schema
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   xmlns:report="http://www.jcoderz.org/phoenix/report"
+   targetNamespace="http://pmd.sf.net/ruleset/1.0.0"
+   xmlns="http://pmd.sf.net/ruleset/1.0.0"
+   elementFormDefault="qualified"
+   jxb:extensionBindingPrefixes="xjc"
+   jxb:version="1.0">
+
+   <xsd:import namespace="http://www.jcoderz.org/phoenix/report"
+               schemaLocation="../report-types.xsd" />
+
+
+   <!-- copied from JAXB sample schema -->
+   <xsd:annotation>
+      <xsd:appinfo>
+
+         <jxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            collectionType="java.util.ArrayList"
+            typesafeEnumBase="xsd:NCName"
+            choiceContentProperty="true"
+            typesafeEnumMemberName="generateError"
+            enableFailFastCheck="false"
+            generateIsSetMethod="true"
+            underscoreBinding="asCharInWord">
+            <xjc:serializable uid="106"/>
+         </jxb:globalBindings>
+         <jxb:schemaBindings>
+            <jxb:package name="org.jcoderz.phoenix.pmd.ruleset.jaxb"/>
+        <!--
+            <jxb:nameXmlTransform>
+               <jxb:elementName suffix="Element"/>
+            </jxb:nameXmlTransform>
+         -->
+         </jxb:schemaBindings>
+      </xsd:appinfo>
+   </xsd:annotation>
+
+ <xsd:element name='properties'>
+  <xsd:complexType>
+   <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    <xsd:element ref='property' />
+   </xsd:sequence>
+<!--   <xsd:attribute name='name' type='xsd:string'/>
+   <xsd:attribute name='value' type='xsd:string'/> -->
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='property'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name='description' type="xsd:string" minOccurs='0'>
+     <xsd:annotation>
+        <xsd:appinfo>
+           <jxb:property name="descriptionElement"/>
+        </xsd:appinfo>
+     </xsd:annotation>
+    </xsd:element>
+    <xsd:element name='value' type="xsd:string" minOccurs='0'>
+     <xsd:annotation>
+        <xsd:appinfo>
+           <jxb:property name="valueElement"/>
+        </xsd:appinfo>
+     </xsd:annotation>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name='name' type='xsd:NMTOKEN'/>
+   <xsd:attribute name='value' type='xsd:string' use='optional'/>
+   <xsd:attribute name='pluginname' type='xsd:NMTOKEN' use='optional'/>
+   <xsd:attribute name='description' type='xsd:string' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='rule'>
+  <xsd:complexType>
+   <xsd:choice maxOccurs="unbounded">
+    <xsd:element name='description' type="xsd:string"/>
+    <xsd:element name='example' type="xsd:string"/>
+    <xsd:element name='priority' type="xsd:int"/>
+    <xsd:element ref='properties'/>
+   </xsd:choice>
+   <xsd:attribute name='name' type='xsd:ID'/>
+   <xsd:attribute name='ref' type='xsd:string' use="optional"/>
+   <xsd:attribute name='message' type='xsd:string'/>
+   <xsd:attribute name='externalInfoUrl' type='xsd:string' use="optional"/>
+   <xsd:attribute name='class' type='xsd:NMTOKEN'>
+     <xsd:annotation>
+        <xsd:appinfo>
+           <jxb:property name="clazz"/>
+        </xsd:appinfo>
+     </xsd:annotation>
+   </xsd:attribute>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='ruleset'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name='description' type="xsd:string" minOccurs="0"/>
+    <xsd:element ref='rule' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='name' type='xsd:string'/>
+  </xsd:complexType>
+ </xsd:element>
+
+</xsd:schema>

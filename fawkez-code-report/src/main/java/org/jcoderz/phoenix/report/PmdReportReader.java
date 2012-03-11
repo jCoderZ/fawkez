@@ -44,7 +44,6 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 
-import org.jcoderz.phoenix.pmd.jaxb.FileType;
 import org.jcoderz.phoenix.pmd.jaxb.Pmd;
 import org.jcoderz.phoenix.pmd.jaxb.Violation;
 import org.jcoderz.phoenix.report.jaxb.Item;
@@ -102,11 +101,8 @@ public final class PmdReportReader
         final Map<ResourceInfo, List<Item>> result
             = new HashMap<ResourceInfo, List<Item>>();
 
-        for (final Iterator<FileType> iterator = mReportDocument.getFile().iterator();
-                iterator.hasNext();)
+        for (org.jcoderz.phoenix.pmd.jaxb.File file : mReportDocument.getFile()) 
         {
-            final FileType file = iterator.next();
-
             final String key = normalizeFileName(file.getName());
             final List<Item> items = createItemMap(file);
             final ResourceInfo info = ResourceInfo.lookup(key);
@@ -123,7 +119,7 @@ public final class PmdReportReader
         return result;
     }
 
-    private List<Item> createItemMap (org.jcoderz.phoenix.pmd.jaxb.FileType file)
+    private List<Item> createItemMap (org.jcoderz.phoenix.pmd.jaxb.File file)
             throws JAXBException
     {
         final List<Item> items = new ArrayList<Item>();

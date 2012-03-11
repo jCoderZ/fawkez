@@ -25,6 +25,11 @@
             <version>${VERSION_NUMBER}</version>
         </dependency>
         <dependency>
+            <groupId>org.jcoderz.fawkez</groupId>
+            <artifactId>fawkez-code-report-core</artifactId>
+            <version>${VERSION_NUMBER}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
@@ -40,6 +45,33 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.0.5</version>
         </dependency>
+<dependency>
+    <groupId>org.codehaus.sonar</groupId>
+    <artifactId>sonar-ws-client</artifactId>
+    <version>2.13.1</version>
+</dependency>
+<dependency>
+    <groupId>org.codehaus.sonar</groupId>
+    <artifactId>sonar-ws-client</artifactId>
+    <version>2.13.1</version>
+</dependency>
+<dependency>
+    <groupId>com.google.code.findbugs</groupId>
+    <artifactId>findbugs</artifactId>
+    <version>1.3.9</version>
+</dependency>
+<dependency>
+    <groupId>emma</groupId>
+    <artifactId>emma</artifactId>
+    <version>2.1.5320</version>
+</dependency><!--  JEdit  -->
+<dependency>
+    <groupId>org.jedit</groupId>
+    <artifactId>jedit-install</artifactId>
+    <version>2.13.1</version>
+    <scope>system</scope>
+    <systemPath>C:/prj/fawkez/build/jedit-syntax.jar</systemPath>
+</dependency>
     </dependencies>
 
     <build>
@@ -106,38 +138,100 @@
                 <artifactId>maven-jaxb-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>jaxb-report</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                          <includeSchemas>
-                            <includeSchema>report.xsd</includeSchema>
-                          </includeSchemas>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>jaxb-findbugs</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                          <includeSchemas>
-                            <includeSchema>findbugs.xsd</includeSchema>
-                          </includeSchemas>
+                        <schemaDirectory>src/main/resources/xjc/findbugs</schemaDirectory>
+                          <generateDirectory>target\generated-sources\xjc\findbugs</generateDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>jaxb-findbugs-messagecollection</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/findbugs-messagecollection</schemaDirectory>
+                          <generateDirectory>target\generated-sources\xjc\findbugs-messagecollection</generateDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <execution>
+                        <id>jaxb-pmd</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/pmd</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\pmd</generateDirectory>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>jaxb-pmd-ruleset</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/pmd-ruleset</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\pmd-ruleset</generateDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <execution>
+                        <id>jaxb-pmd-cpd</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/pmd-cpd</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\pmd-cpd</generateDirectory>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>jaxb-checkstyle</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                          <includeSchemas>
-                            <includeSchema>checkstyle.xsd</includeSchema>
-                          </includeSchemas>
+                            <schemaDirectory>src/main/resources/xjc/checkstyle</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\checkstyle</generateDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>jaxb-checkstyle-message</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/checkstyle-message</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\checkstyle-message</generateDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jaxb-cobertura</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/cobertura</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\cobertura</generateDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jaxb-jcoverage</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xjc/jcoverage</schemaDirectory>
+                            <generateDirectory>target\generated-sources\xjc\jcoverage</generateDirectory>
+                        </configuration>
+                    </execution>
+                    
                 </executions>
                 <configuration>
                     <extension>true</extension>

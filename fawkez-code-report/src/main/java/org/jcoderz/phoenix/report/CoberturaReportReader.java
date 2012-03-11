@@ -44,11 +44,11 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 
-import org.jcoderz.phoenix.coverage.jaxb.ClassType;
+import org.jcoderz.phoenix.coverage.jaxb.Clazz;
 import org.jcoderz.phoenix.coverage.jaxb.Coverage;
-import org.jcoderz.phoenix.coverage.jaxb.LineType;
-import org.jcoderz.phoenix.coverage.jaxb.MethodType;
-import org.jcoderz.phoenix.coverage.jaxb.PackageType;
+import org.jcoderz.phoenix.coverage.jaxb.Line;
+import org.jcoderz.phoenix.coverage.jaxb.Method;
+import org.jcoderz.phoenix.coverage.jaxb.Package;
 import org.jcoderz.phoenix.report.jaxb.Item;
 import org.jcoderz.phoenix.report.jaxb.ObjectFactory;
 
@@ -101,15 +101,10 @@ public class CoberturaReportReader
         final String baseDir = mReportDocument.getSources().getSource().get(0)
                 + File.separator;
 
-        for (final Iterator pkgIterator = mReportDocument.getPackages()
-                .getPackage().iterator(); pkgIterator.hasNext();)
+        for (Package currentPackage : mReportDocument.getPackages().getPackage()) 
         {
-            final PackageType currentPackage = (PackageType) pkgIterator.next();
-            for (final Iterator clazzIterator
-                    = currentPackage.getClasses().getClazzes().iterator();
-                    clazzIterator.hasNext();)
+            for (Clazz clazz : currentPackage.getClasses().getClazzes()) 
             {
-                final ClassType clazz = (ClassType) clazzIterator.next();
                 processClazz(itemMap, baseDir, clazz);
             }
         }
@@ -117,8 +112,9 @@ public class CoberturaReportReader
         return itemMap;
     }
 
-    private void processClazz (Map itemMap, final String baseDir,
-            final ClassType clazz)
+    private void processClazz (
+    		Map itemMap, final String baseDir,
+            final Clazz clazz)
             throws JAXBException
     {
         logger.finer("Processing class '" + clazz.getName() + "'");
@@ -126,14 +122,12 @@ public class CoberturaReportReader
         final String javaFile = clazzname2Filename(clazz.getName());
         final List itemList = new ArrayList();
 
-        for (final Iterator methodIterator = clazz.getMethods().getMethod()
-                .iterator(); methodIterator.hasNext();)
-        {
-            final MethodType method = (MethodType) methodIterator.next();
+        for (Object element : clazz.getMethods().getMethod()) {
+            final Method method = (Method) element;
             for (final Iterator lineIterator = method.getLines().getLine()
                     .iterator(); lineIterator.hasNext();)
             {
-                final LineType line = (LineType) lineIterator.next();
+                final Line line = (Line) lineIterator.next();
 
                 final Item item = new ObjectFactory().createItem();
                 item.setOrigin(Origin.COVERAGE);

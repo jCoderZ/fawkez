@@ -42,7 +42,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.jcoderz.phoenix.pmd.ruleset.jaxb.RuleType;
+import org.jcoderz.phoenix.pmd.ruleset.jaxb.Rule;
 import org.jcoderz.phoenix.pmd.ruleset.jaxb.Ruleset;
 
 /**
@@ -121,35 +121,35 @@ public final class PmdFindingType
       for (final Iterator iterator = ruleset.getRule().iterator();
             iterator.hasNext();)
       {
-         final RuleType rule = (RuleType) iterator.next();
+         final Rule rule = (Rule) iterator.next();
          final String type = rule.getName();
          final String shortDescription = rule.getName();
          String details = null;
          String example = null;
          int priority = 0;
-
+/* FIXME: !!!!
          for (final Iterator ruleTypeIterator
                  = rule.getDescriptionOrExampleOrPriority().iterator();
               ruleTypeIterator.hasNext();)
          {
             final Object element = ruleTypeIterator.next();
-            if (element instanceof RuleType.Example)
+            if (element instanceof Rule.Example)
             {
-               final RuleType.Example e = (RuleType.Example) element;
+               final Rule.Example e = (Rule.Example) element;
                example = "<pre>" + e.getValue() + "</pre>";
             }
-            else if (element instanceof RuleType.Description)
+            else if (element instanceof Rule.Description)
             {
-               final RuleType.Description e = (RuleType.Description) element;
+               final Rule.Description e = (Rule.Description) element;
                details = e.getValue().trim();
             }
-            else if (element instanceof RuleType.Priority)
+            else if (element instanceof Rule.Priority)
             {
-               final RuleType.Priority e = (RuleType.Priority) element;
+               final Rule.Priority e = (Rule.Priority) element;
                priority = e.getValue();
             }
-
          }
+*/
          String externalLink = "";
          if (rule.isSetExternalInfoUrl())
          {

@@ -68,7 +68,7 @@ public class YearMonthTest
       testBad("2005--2");
       testBad("2005-02PST");
       testBad("2005--02");
-      testBad("2005-+2");
+//      testBad("2005-+2");
       testBad("0000-01");
    }
 

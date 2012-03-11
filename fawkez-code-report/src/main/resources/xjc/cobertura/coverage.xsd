@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jxb:extensionBindingPrefixes="xjc" jxb:version="1.0">
+    <xsd:annotation>
+        <xsd:appinfo>
+            <jxb:globalBindings fixedAttributeAsConstantProperty="true" collectionType="java.util.ArrayList" typesafeEnumBase="xsd:NCName" choiceContentProperty="true" typesafeEnumMemberName="generateError" enableFailFastCheck="false" generateIsSetMethod="true" underscoreBinding="asCharInWord">
+                <xjc:serializable uid="106"/>
+            </jxb:globalBindings>
+            <jxb:schemaBindings>
+                <jxb:package name="org.jcoderz.phoenix.coverage.jaxb"/>
+            </jxb:schemaBindings>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:element name="coverage">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="sources" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="packages"/>
+            </xsd:sequence>
+            <xsd:attribute name="line-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="branch-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="version" type="xsd:string" use="required"/>
+            <xsd:attribute name="timestamp" type="xsd:integer" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="sources">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="source" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="source" type="xsd:string"/>
+    <xsd:element name="packages">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="package" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="package">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="classes"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="line-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="branch-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="complexity" type="xsd:float" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="classes">
+        <xsd:complexType>
+            <xsd:sequence>
+                     <xsd:annotation>
+            <xsd:appinfo>
+               <jxb:property name="clazzes"/>
+            </xsd:appinfo>
+         </xsd:annotation>
+
+                <xsd:element ref="class" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="class">
+         <xsd:annotation>
+            <xsd:appinfo>
+               <jxb:class name="clazz"/>
+            </xsd:appinfo>
+         </xsd:annotation>
+
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="methods"/>
+                <xsd:element ref="lines"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="filename" type="xsd:string" use="required"/>
+            <xsd:attribute name="line-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="branch-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="complexity" type="xsd:float" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="methods">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="method" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="method">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="lines"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="signature" type="xsd:string" use="required"/>
+            <xsd:attribute name="line-rate" type="xsd:float" use="required"/>
+            <xsd:attribute name="branch-rate" type="xsd:float" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="lines">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="line" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="line">
+        <xsd:complexType>
+            <xsd:attribute name="number" type="xsd:int" use="optional"/>
+            <xsd:attribute name="hits" type="xsd:int" use="optional"/>
+            <xsd:attribute name="branch" type="xsd:string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

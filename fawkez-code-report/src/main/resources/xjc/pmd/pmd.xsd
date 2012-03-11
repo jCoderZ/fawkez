@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: pmd.xsd 1011 2008-06-16 17:57:36Z amandel $ -->
+
+<!-- XML schema for checkstyle 3.1 XMLLogger output -->
+<xsd:schema
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+   xmlns:report="http://www.jcoderz.org/phoenix/report"
+   jxb:extensionBindingPrefixes="xjc"
+   jxb:version="1.0">
+
+   <xsd:import namespace="http://www.jcoderz.org/phoenix/report"
+               schemaLocation="../report-types.xsd" />
+
+
+   <!-- copied from JAXB sample schema -->
+   <xsd:annotation>
+      <xsd:appinfo>
+
+         <jxb:globalBindings
+            fixedAttributeAsConstantProperty="true"
+            collectionType="java.util.ArrayList"
+            typesafeEnumBase="xsd:NCName"
+            choiceContentProperty="true"
+            typesafeEnumMemberName="generateError"
+            enableFailFastCheck="false"
+            generateIsSetMethod="true"
+            underscoreBinding="asCharInWord">
+            <xjc:serializable uid="106"/>
+         </jxb:globalBindings>
+         <jxb:schemaBindings>
+            <jxb:package name="org.jcoderz.phoenix.pmd.jaxb"/>
+        <!--
+            <jxb:nameXmlTransform>
+               <jxb:elementName suffix="Element"/>
+            </jxb:nameXmlTransform>
+         -->
+         </jxb:schemaBindings>
+      </xsd:appinfo>
+   </xsd:annotation>
+
+ <xsd:element name='violation'>
+  <xsd:complexType>
+    <xsd:simpleContent>
+     <xsd:extension base="xsd:string">
+       <xsd:attribute name='beginline' type='xsd:int' use='required'/>
+       <xsd:attribute name='endline' type='xsd:int' use='required'/>
+       <xsd:attribute name='begincolumn' type='xsd:int' use='required'/>
+       <xsd:attribute name='endcolumn' type='xsd:int' use='required'/>
+       <xsd:attribute name='rule' type='xsd:string' use='required'/>
+       <xsd:attribute name='ruleset' type='xsd:string' use='required'/>
+       <xsd:attribute name='package' type='xsd:string' use='required'/>
+       <xsd:attribute name='externalInfoUrl' type='xsd:string' use='optional'/>
+       <xsd:attribute name='variable' type='xsd:string' use='optional'/>
+       <xsd:attribute name='class' type='xsd:string' use='optional'>
+           <xsd:annotation>
+                   <xsd:appinfo>
+                  <jxb:property name="clazz"/>
+               </xsd:appinfo>
+            </xsd:annotation>
+       </xsd:attribute>
+       <xsd:attribute name='method' type='xsd:string' use='optional'/>
+       <xsd:attribute name='priority' type='xsd:int' use='required'/>
+     </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='file'>
+  <xsd:complexType>
+   <xsd:sequence minOccurs='1' maxOccurs='unbounded'>
+    <xsd:element ref='violation'/>
+   </xsd:sequence>
+   <xsd:attribute name='name' type='xsd:string'/>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='error'>
+  <xsd:complexType>
+    <xsd:simpleContent>
+     <xsd:extension base="xsd:string">
+       <xsd:attribute name='filename' type='xsd:string' use='required'/>
+       <xsd:attribute name='msg' type='xsd:string' use='required'/>
+     </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+ </xsd:element>
+
+ <xsd:element name='pmd'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='file' minOccurs='0' maxOccurs='unbounded'/>
+    <xsd:element ref='error' minOccurs='0' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='version' type='xsd:string' use='required'/>
+   <xsd:attribute name='timestamp' type='xsd:string' use='required'/>
+   <xsd:attribute name='elapsedTime' type='xsd:string' use='optional'/>
+  </xsd:complexType>
+ </xsd:element>
+
+</xsd:schema>
