@@ -33,10 +33,10 @@
 package org.jcoderz.phoenix.report;
 
 
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
@@ -118,14 +118,12 @@ public final class FindBugsFindingType extends FindingType
 
         final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         final MessageCollectionType messageCollection 
-            = (MessageCollectionType) unmarshaller.unmarshal(
+            = (MessageCollectionType) ((JAXBElement<MessageCollectionType>) unmarshaller.unmarshal(
                     FindBugsFindingType.class.getClassLoader()
-                        .getResourceAsStream(messagesFile));
+                        .getResourceAsStream(messagesFile))).getValue();
 
-        for (final Iterator iter = messageCollection.getContent().iterator(); 
-                iter.hasNext();)
+        for (Object obj : messageCollection.getContent()) 
         {
-            final Object obj = iter.next();
             if (obj instanceof BugPatternType)
             {
                 new FindBugsFindingType((BugPatternType) obj);
