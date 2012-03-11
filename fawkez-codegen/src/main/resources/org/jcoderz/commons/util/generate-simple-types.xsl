@@ -57,6 +57,22 @@
 
    </redirect:write>
 
+   <xsl:if test="@jaxb-adapter = 'true'">
+     <xsl:variable name="user-type-file"><xsl:value-of
+        select="$package.dir"/>/<xsl:value-of
+           select="@classname"/>Adapter.java</xsl:variable>
+
+     <redirect:write file="{$user-type-file}">
+       <xsl:call-template name="restricted-string-jaxb-adapter">
+          <xsl:with-param name="classname"
+            select="concat(@classname, 'Adapter')"/>
+          <xsl:with-param name="type-classname"
+            select="@classname"/>
+          <xsl:with-param name="package" select="@package"/>
+       </xsl:call-template>
+     </redirect:write>
+   </xsl:if>
+
    <xsl:if test="@user-type = 'true' or @user-type = 'string'">
      <xsl:variable name="user-type-file"><xsl:value-of
         select="$package.dir"/>/<xsl:value-of
@@ -129,6 +145,22 @@
           <xsl:with-param name="package" select="@package"/>
           <xsl:with-param name="min-length" select="@min-length"/>
           <xsl:with-param name="max-length" select="@max-length"/>
+       </xsl:call-template>
+     </redirect:write>
+   </xsl:if>
+
+    <xsl:if test="@jaxb-adapter = 'true'">
+     <xsl:variable name="user-type-file"><xsl:value-of
+        select="$package.dir"/>/<xsl:value-of
+           select="@classname"/>Adapter.java</xsl:variable>
+
+     <redirect:write file="{$user-type-file}">
+       <xsl:call-template name="restricted-string-jaxb-adapter">
+          <xsl:with-param name="classname"
+            select="concat(@classname, 'Adapter')"/>
+          <xsl:with-param name="type-classname"
+            select="@classname"/>
+          <xsl:with-param name="package" select="@package"/>
        </xsl:call-template>
      </redirect:write>
    </xsl:if>

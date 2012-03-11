@@ -1205,6 +1205,52 @@ public final class <xsl:value-of select="$classname"/>
 }
 </xsl:template>
 
+<xsl:template name="restricted-string-jaxb-adapter">
+   <xsl:param name="classname"/>
+   <xsl:param name="type-classname"/>
+   <xsl:param name="package"/>
+   <xsl:call-template name="java-copyright-header"/>
+package <xsl:value-of select="$package"/>;
+
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+
+/**
+ * Jaxb Adapter for the  <xsl:value-of select="$type-classname"/>.
+ *
+ * @author generated via stylesheet
+ */
+public final class <xsl:value-of select="$classname"/>
+      extends XmlAdapter&lt;String, <xsl:value-of select="$type-classname"/>&gt;
+{
+  /**
+   * Creates a <xsl:value-of select="$type-classname"/> from its String
+   * representation.
+   * @param value a string holding the database representation of the
+   *    <xsl:value-of select="$type-classname"/>.
+   * @return a <xsl:value-of select="$type-classname"/> representing the
+   *    given string.
+   */
+  public <xsl:value-of select="$type-classname"/> unmarshal(String value)
+  {
+    return <xsl:value-of select="$type-classname"/>.fromString(value);
+  }
+
+  /**
+   * Creates a XML String representation of the given <xsl:value-of select="$type-classname"/>.
+   * @param value a string holding the xml representation of the
+   *    <xsl:value-of select="$type-classname"/>.
+   * @return a String representing the
+   *    given <xsl:value-of select="$type-classname"/>.
+   */
+  public String marshal(<xsl:value-of select="$type-classname"/> value)
+  {
+    return value == null ? null : value.toString();
+  }
+
+}
+</xsl:template>
+
 <xsl:template name="restricted-string-user-type">
    <xsl:param name="classname"/>
    <xsl:param name="type-classname"/>
