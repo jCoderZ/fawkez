@@ -75,25 +75,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jcoderz.fawkez</groupId>
-                <artifactId>fawkez-codegen</artifactId>
-                <version>2.0.0-SNAPSHOT</version>
-                <executions>
-                    <execution>
-                        <id>codegen-main</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>simpletypes</goal>
-                            <goal>appinfo</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirectory>src/main/fawkez</sourceDirectory>
-                            <destinationDirectory>${project.build.directory}/generated-fawkez-main</destinationDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.7</version>
@@ -142,7 +123,7 @@
                         </goals>
                         <configuration>
                             <schemaDirectory>src/main/resources/xjc/findbugs</schemaDirectory>
-                            <generateDirectory>target\generated-sources\xjc\findbugs</generateDirectory>
+                            <generateDirectory>target/generated-sources/xjc/findbugs</generateDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -152,7 +133,7 @@
                         </goals>
                         <configuration>
                             <schemaDirectory>src/main/resources/xjc/findbugs-messagecollection</schemaDirectory>
-                            <generateDirectory>target\generated-sources\xjc\findbugs-messagecollection</generateDirectory>
+                            <generateDirectory>target/generated-sources/xjc/findbugs-messagecollection</generateDirectory>
                         </configuration>
                     </execution>
 
