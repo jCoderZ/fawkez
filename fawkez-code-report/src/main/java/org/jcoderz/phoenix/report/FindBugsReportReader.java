@@ -38,7 +38,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -95,28 +94,28 @@ public final class FindBugsReportReader
    }
 
    /** {@inheritDoc} */
-   public Map getItems ()
+   public Map<ResourceInfo, List<Item>> getItems ()
       throws JAXBException
    {
-      final Map itemMap = new HashMap();
+      final Map<ResourceInfo, List<Item>> itemMap = new HashMap<ResourceInfo, List<Item>>();
 
       final List<BugInstance> bugInstances = mReportDocument.getBugInstance();
       logger.fine("Found #" + bugInstances.size() + " FindBugs bug instances!");
 
-      final List sourceDirs
+      final List<String> sourceDirs
          = mReportDocument.getProject().getSrcDir();
       logger.finer("Using source dir '" + sourceDirs + "'");
 
       for (BugInstance bugInstance : bugInstances) 
       {
 
-         final List<Object> list = bugInstance.getClazzOrFieldOrMethod();
+         final List<Serializable> list = bugInstance.getClazzOrFieldOrMethod();
          final Item item = new ObjectFactory().createItem();
-         final List objectMessageList = new ArrayList();
+         final List<String> objectMessageList = new ArrayList<String>();
 
          item.setMessage(bugInstance.getLongMessage());
          boolean topLevelSourceLineRead = false;
-         for (Object element : list) 
+         for (Serializable element : list) 
          {
             objectMessageList.add(toString(element));
             if (element instanceof Class)
@@ -136,10 +135,10 @@ public final class FindBugsReportReader
 
                if (info != null)
                {
-                  List itemList = (List) itemMap.get(info);
+                  List<Item> itemList = itemMap.get(info);
                   if (itemList == null)
                   {
-                     itemList = new ArrayList();
+                     itemList = new ArrayList<Item>();
                      itemMap.put(info, itemList);
                   }
                   item.setOrigin(Origin.FINDBUGS);
@@ -208,13 +207,11 @@ public final class FindBugsReportReader
       return itemMap;
    }
 
-   private ResourceInfo findResourceInfo (List sourceDirs, String javaFile)
+   private ResourceInfo findResourceInfo (List<String> sourceDirs, String javaFile)
    {
       ResourceInfo info = null;
-      for (final Iterator iterator = sourceDirs.iterator();
-            iterator.hasNext();)
-      {
-         final String srcDir = (String) iterator.next() + File.separator;
+      for (String dir : sourceDirs) {
+         final String srcDir = dir + File.separator;
          final String key = normalizeFileName(srcDir + javaFile);
          logger.finest("Looking for file: " + key);
          info = ResourceInfo.lookup(key);
