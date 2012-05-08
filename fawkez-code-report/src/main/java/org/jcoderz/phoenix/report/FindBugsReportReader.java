@@ -109,13 +109,13 @@ public final class FindBugsReportReader
       for (BugInstance bugInstance : bugInstances) 
       {
 
-         final List<Serializable> list = bugInstance.getClazzOrFieldOrMethod();
+         final List<Object> list = bugInstance.getClazzOrFieldOrMethod();
          final Item item = new ObjectFactory().createItem();
          final List<String> objectMessageList = new ArrayList<String>();
 
          item.setMessage(bugInstance.getLongMessage());
          boolean topLevelSourceLineRead = false;
-         for (Serializable element : list) 
+         for (Object element : list) 
          {
             objectMessageList.add(toString(element));
             if (element instanceof Class)
