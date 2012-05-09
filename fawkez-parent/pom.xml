@@ -12,7 +12,7 @@
         <!-- This must be overwritten from external to do a release build, instead of a snapshot build -->
         <VERSION_NUMBER>2.0.0-SNAPSHOT</VERSION_NUMBER>
 
-        <svnRepoBase>https://www.jcoderz.org/svn/fawkez</svnRepoBase>
+        <scmRepoBase>git@github.com/jCoderZ/fawkez.git</scmRepoBase>
         <releaseRepoUrl>${secretRepositoryHost}/repos/maven2</releaseRepoUrl>
         <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
         <deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
@@ -37,8 +37,8 @@
     </modules>
 
     <scm>
-          <developerConnection>scm:svn:${svnRepoBase}</developerConnection>
-        <connection>scm:svn:${svnRepoBase}/trunk-ng/</connection>
+        <developerConnection>scm:git:${scmRepoBase}</developerConnection>
+        <connection>scm:git:${scmRepoBase}/trunk-ng/</connection>
     </scm>
 
     <issueManagement>
@@ -144,7 +144,8 @@
                 <version>1.4</version>
                 <configuration>
                     <tag>${project.artifactId}-${VERSION_NUMBER}</tag>
-                    <tagBase>${svnRepoBase}/tags</tagBase>
+                    <!-- TODO: do we need tagBase for git anymore? -->
+                    <tagBase>${scmRepoBase}/tags</tagBase>
                 </configuration>
             </plugin>
         </plugins>
