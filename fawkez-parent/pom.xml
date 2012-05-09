@@ -12,7 +12,7 @@
         <!-- This must be overwritten from external to do a release build, instead of a snapshot build -->
         <VERSION_NUMBER>2.0.0-SNAPSHOT</VERSION_NUMBER>
 
-        <scmRepoBase>https://github.com/jCoderZ/fawkez.git</scmRepoBase>
+        <scmRepoBase>git@github.com/jCoderZ/fawkez.git</scmRepoBase>
         <releaseRepoUrl>${secretRepositoryHost}/repos/maven2</releaseRepoUrl>
         <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
         <deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
