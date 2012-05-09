@@ -13,5 +13,9 @@
 R E A D M E
 ===========
 
+
 This file gives a quick introduction into the fawkeZ project setup.
 
+Setup Eclipse Configuration
+
+$ mvn eclipse:clean eclipse:eclipse -DdownloadSources=true
