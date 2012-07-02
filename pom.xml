@@ -166,18 +166,6 @@
             <url>https://raw.github.com/jCoderZ/public.maven.repository/master/</url>
             <layout>default</layout>
         </repository>
-        <repository>
-            <id>jcoderz-snapshot</id>
-            <name>jCoderZ Snapshots</name>
-            <url>http://www.jcoderz.org/repos/maven2-snapshot</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>jcoderz-repo</id>
-            <name>jCoderZ Maven Repository</name>
-            <url>http://www.jcoderz.org/repos/maven2</url>
-            <layout>default</layout>
-        </repository>
     </repositories>
 
     <distributionManagement>
