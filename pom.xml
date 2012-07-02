@@ -6,6 +6,20 @@
     <name>fawkez</name>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>This is the Maven base project for the FawkeZ modules.</description>
+    <url>http://www.jcoderz.org/fawkez/</url>
+    <organization>
+        <name>jCoderZ</name>
+        <url>http://www.jcoderz.org/</url>
+    </organization>
+    <licenses>
+      <license>
+        <name>The Apache Software License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+        <comments>A business-friendly OSS license</comments>
+      </license>
+    </licenses>
     <properties>
         <!-- This mus be overwritten from external to deploy to jcoderz.org -->
         <secretRepositoryHost>file:/C:/</secretRepositoryHost>
@@ -14,14 +28,7 @@
         <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
         <deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
         <isRelease>true</isRelease>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <description>This is the Maven base project for the FawkeZ modules.</description>
-    <url>http://www.jcoderz.org/fawkez/</url>
-    <organization>
-        <name>jCoderZ</name>
-        <url>http://www.jcoderz.org/</url>
-    </organization>
 
     <modules>
         <module>fawkez-bootstrap</module>
@@ -34,13 +41,39 @@
     </modules>
 
     <scm>
-        <developerConnection>scm:git:[fetch=]https://github.com/jCoderZ/fawkez.git</developerConnection>
+        <url>https://github.com/jCoderZ/fawkez</url>
+        <connection>scm:git:://github.com/jCoderZ/fawkez.gitt</connection>
+        <developerConnection>scm:git:://github.com/jCoderZ/fawkez.gitt</developerConnection>
     </scm>
 
     <issueManagement>
-        <system>trac</system>
-        <url>http://www.jcoderz.org/fawkez</url>
+        <system>github</system>
+        <url>https://github.com/jCoderZ/fawkez/issues</url>
     </issueManagement>
+
+    <developers>
+       <developer>
+            <id>amandel</id>
+            <name>Andreas Mandel</name>
+            <email>anmandel@jcoderz.org</email>
+            <organization>jCoderZ</organization>
+            <organizationUrl>https://github.com/jCoderZ</organizationUrl>
+        </developer>
+        <developer>
+            <id>mrumpf</id>
+            <name>Michael Rumpf</name>
+            <email>mrumpf@jcoderz.org</email>
+            <organization>jCoderZ</organization>
+            <organizationUrl>https://github.com/jCoderZ</organizationUrl>
+        </developer>
+        <developer>
+            <id>mgriffell</id>
+            <name>Michael Griffel</name>
+            <email>griffel@jcoderz.org</email>
+            <organization>jCoderZ</organization>
+            <organizationUrl>https://github.com/jCoderZ</organizationUrl>
+        </developer>
+    </developers>
 
     <build>
         <plugins>
@@ -79,8 +112,8 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-        </plugins>
-    </build>
+          </plugins>
+        </build>
 
     <reporting>
         <plugins>
@@ -114,6 +147,34 @@
     </distributionManagement>
 
     <profiles>
+        <profile>
+    <id>release-sign-artifacts</id>
+    <activation>
+      <property>
+        <name>performRelease</name>
+        <value>true</value>
+      </property>
+    </activation>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+        </profile>
+
         <profile>
             <id>snapshot-deploy-url-override</id>
             <activation>
