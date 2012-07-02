@@ -4,15 +4,12 @@
     <groupId>org.jcoderz.fawkez</groupId>
     <artifactId>fawkez</artifactId>
     <name>fawkez</name>
-    <version>${VERSION_NUMBER}</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <!-- This mus be overwritten from external to deploy to jcoderz.org -->
         <secretRepositoryHost>file:/C:/</secretRepositoryHost>
-        <!-- This must be overwritten from external to do a release build, instead of a snapshot build -->
-        <VERSION_NUMBER>2.0.0-SNAPSHOT</VERSION_NUMBER>
 
-        <svnRepoBase>https://www.jcoderz.org/svn/fawkez</svnRepoBase>
         <releaseRepoUrl>${secretRepositoryHost}/repos/maven2</releaseRepoUrl>
         <snapshotRepoUrl>${secretRepositoryHost}/repos/maven2-snapshot</snapshotRepoUrl>
         <deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
@@ -37,8 +34,7 @@
     </modules>
 
     <scm>
-          <developerConnection>scm:svn:${svnRepoBase}</developerConnection>
-        <connection>scm:svn:${svnRepoBase}/trunk-ng/</connection>
+        <developerConnection>scm:git:[fetch=]https://github.com/jCoderZ/fawkez.git</developerConnection>
     </scm>
 
     <issueManagement>
@@ -74,77 +70,13 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
-                <executions>
-                    <execution>
-                        <id>replace-pom-placeholder</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>pom.xml</include>
-                                    </includes>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                            <outputDirectory>${project.build.directory}/pom-install-deploy-fix</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.3.1</version>
-                <executions>
-                    <execution>
-                        <id>overwrite-pom</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <packaging>pom</packaging>
-                            <file>target/pom-install-deploy-fix/pom.xml</file>
-                            <pomFile>target/pom-install-deploy-fix/pom.xml</pomFile>
-                            <version>${project.version}</version>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.5</version>
-                <executions>
-                    <execution>
-                        <id>overwrite-pom</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy-file</goal>
-                        </goals>
-                        <configuration>
-                            <packaging>pom</packaging>
-                            <file>target/pom-install-deploy-fix/pom.xml</file>
-                            <pomFile>target/pom-install-deploy-fix/pom.xml</pomFile>
-                            <url>${deployRepoUrl}</url>
-                            <version>${project.version}</version>
-                            <updateReleaseInfo>${isRelease}</updateReleaseInfo>
-                            <uniqueVersion>false</uniqueVersion>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.4</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                    <tag>${project.artifactId}-${VERSION_NUMBER}</tag>
-                    <tagBase>${svnRepoBase}/tags</tagBase>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>

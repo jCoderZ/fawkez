@@ -3,33 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jcoderz.fawkez</groupId>
 	<artifactId>fawkez-bootstrap</artifactId>
-    <name>fawkez-bootstrap</name>
-	<version>${VERSION_NUMBER}</version>
+	<name>fawkez-bootstrap</name>
 	<description>The bootstrap project is only used for testing the code-generators. It contains
 	classes that exist in dependent packages or will be built by the code-generators.</description>
 	<url>http://www.jcoderz.org/fawkez/</url>
-    <parent>
+	<parent>
         <groupId>org.jcoderz.fawkez</groupId>
         <artifactId>fawkez</artifactId>
-        <version>${VERSION_NUMBER}</version>
-    </parent>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<source>1.5</source>
-						<target>1.5</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+        <version>2.0.0-SNAPSHOT</version>
+	</parent>
 </project>

@@ -8,14 +8,11 @@
     <parent>
         <groupId>org.jcoderz.fawkez</groupId>
         <artifactId>fawkez</artifactId>
-        <version>${VERSION_NUMBER}</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.buildVersion>2.13</sonar.buildVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.min.version>1.5</jdk.min.version>
     </properties>
 
   <dependencies>
@@ -28,7 +25,7 @@
 	<dependency>
 		<groupId>org.jcoderz.fawkez</groupId>
 		<artifactId>fawkez-code-report</artifactId>
-		<version>${VERSION_NUMBER}</version>
+		<version>${project.parent.version}</version>
 	</dependency>
 
     <!-- unit tests -->
@@ -49,15 +46,6 @@
         <extensions>true</extensions>
         <configuration>
           <pluginClass>com.mycompany.sonar.reference.ExamplePlugin</pluginClass>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
-        <configuration>
-          <source>${jdk.min.version}</source>
-          <target>${jdk.min.version}</target>
         </configuration>
       </plugin>
       <plugin>
