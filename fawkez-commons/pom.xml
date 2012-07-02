@@ -12,7 +12,6 @@
 		<groupId>org.jcoderz.fawkez</groupId>
 		<artifactId>fawkez</artifactId>
 		<version>${VERSION_NUMBER}</version>
-		<relativePath>../fawkez-parent</relativePath>
 	</parent>
 
 	<properties>
