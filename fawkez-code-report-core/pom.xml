@@ -38,12 +38,6 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.0.5</version>
         </dependency>
-        <!-- <dependency org="unknown" name="chart2d" rev="1.9.6k"/> -->
-        <dependency>
-            <groupId>org.sourceforge.chart2d</groupId>
-            <artifactId>chart2d</artifactId>
-            <version>1.9.6k</version>
-        </dependency>
     </dependencies>
 
     <build>

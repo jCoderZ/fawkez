@@ -57,11 +57,18 @@
             <groupId>emma</groupId>
             <artifactId>emma</artifactId>
             <version>2.1.5320</version>
-        </dependency><!-- JEdit -->
+        </dependency>
+
+        <!-- Not on Maven central!!! -->
         <dependency>
             <groupId>org.jedit</groupId>
             <artifactId>jedit-syntax</artifactId>
             <version>2.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sourceforge.chart2d</groupId>
+            <artifactId>chart2d</artifactId>
+            <version>1.9.6k</version>
         </dependency>
     </dependencies>
 
@@ -257,4 +264,12 @@
          </resource>
        </resources>
     </build>
+    <repositories>
+        <repository>
+            <id>public.maven.repository</id>
+            <name>public.maven.repository on GitHub</name>
+            <url>https://raw.github.com/jCoderZ/public.maven.repository/master/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>

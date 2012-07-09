@@ -19,7 +19,7 @@
     </organization>
     <licenses>
       <license>
-        <name>The Apache Software License, Version 2.0</name>
+        <name>The BSD 3-Clause License</name>
         <url>http://www.opensource.org/licenses/BSD-3-Clause</url>
         <distribution>repo</distribution>
       </license>
