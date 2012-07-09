@@ -30,15 +30,12 @@
         <module>fawkez-commons</module>
         <module>fawkez-logging</module>
         <module>fawkez-codegen</module>
-        <module>fawkez-code-report-core-base</module>
-        <module>fawkez-code-report-core</module>
-        <module>fawkez-code-report</module>
     </modules>
 
     <scm>
         <url>https://github.com/jCoderZ/fawkez</url>
-        <connection>scm:git:://github.com/jCoderZ/fawkez.gitt</connection>
-        <developerConnection>scm:git:://github.com/jCoderZ/fawkez.gitt</developerConnection>
+        <connection>scm:git:://github.com/jCoderZ/fawkez.git</connection>
+        <developerConnection>scm:git:://github.com/jCoderZ/fawkez.git</developerConnection>
     </scm>
 
     <issueManagement>
