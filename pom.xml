@@ -114,19 +114,6 @@
         </plugins>
     </reporting>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots-repo</id>
-            <name>Snapshots Repo</name>
-            <url>${snapshotRepoUrl}</url>
-        </snapshotRepository>
-        <repository>
-            <id>releases-repo</id>
-            <name>Releases Repo</name>
-            <url>${releaseRepoUrl}</url>
-        </repository>
-    </distributionManagement>
-
     <profiles>
         <profile>
     <id>release-sign-artifacts</id>
