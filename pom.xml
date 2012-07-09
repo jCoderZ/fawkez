@@ -33,9 +33,9 @@
     </modules>
 
     <scm>
-        <url>https://github.com/jCoderZ/fawkez</url>
-        <connection>scm:git:://github.com/jCoderZ/fawkez.git</connection>
-        <developerConnection>scm:git:://github.com/jCoderZ/fawkez.git</developerConnection>
+        <url>scm:git:git@github.com:jCoderZ/fawkez.git</url>
+        <connection>scm:git:git@github.com:jCoderZ/fawkez.git</connection>
+        <developerConnection>scm:git:git@github.com:jCoderZ/fawkez.git</developerConnection>
     </scm>
 
     <issueManagement>
@@ -59,7 +59,7 @@
             <organizationUrl>https://github.com/jCoderZ</organizationUrl>
         </developer>
         <developer>
-            <id>mgriffell</id>
+            <id>mgriffel</id>
             <name>Michael Griffel</name>
             <email>jcoderz@gmail.com</email>
             <organization>jCoderZ</organization>
